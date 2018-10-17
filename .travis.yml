@@ -8,7 +8,6 @@ before_script:
 script:
   - cmake ../381706-1-Denisov-labs
   - make -j
-  - ls
   - ./Vector/Vector
 notifications:
   email: false
