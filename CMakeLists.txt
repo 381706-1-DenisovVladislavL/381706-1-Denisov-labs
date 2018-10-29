@@ -6,6 +6,12 @@ project(${PROJECT_NAME}) # Название проекта
 set(Vector Vector) #Переменная с именем библиотеки
 set(VectorLib VectorLib)
 
+set(Stack Stack)
+set(StackLib StackLib)
+
+set(Queue Queue)
+set(QueueLib QueueLib)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -22,4 +28,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib)
 
 add_subdirectory(Vector)
 add_subdirectory(VectorLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
+add_subdirectory(Stack)
+add_subdirectory(StackLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/QueueLib)
+add_subdirectory(Queue)
+add_subdirectory(QueueLib)
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
