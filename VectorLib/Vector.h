@@ -32,18 +32,16 @@ public:
 
 	T operator*(const TVector<T> &V); //скалярное произведение
 	TVector operator*(T a); //умножение вектора на число
-	template <class T>
+	
 	friend TVector<T> operator*(T a, const TVector<T> &V); //умножение числа на вектор
 	
-	template <class T> 
 	friend istream& operator>>(istream &is, TVector<T> &V); //ввод вектора через консоль	
-	template <class T> 
 	friend ostream& operator<<(ostream &os, const TVector<T> &V); //вывод вектора на консоль
 };
 
 //Конструктор по умолчанию
 template<class T> 
-TVector<T> :: TVector(int n) {
+TVector<T> :: TVector<T>(int n) {
 	if (n < 0)
 		throw 1;
 	else
