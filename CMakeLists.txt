@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 
-set(PROJECT_NAME 381706-1-Denisov-lab-2) #Создаем обычную локальную переменную с именем проекта
+set(PROJECT_NAME 381706-1-Denisov-labs) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 
 set(Vector Vector) #Переменная с именем библиотеки
 set(VectorLib VectorLib)
+set(VectorTest VectorTest)
+
 
 set(Stack Stack)
 set(StackLib StackLib)
@@ -24,10 +26,13 @@ file(GLOB srcs "*.cpp") #Добавляем в переменную srcs все 
 #add_executable(${PROJECT_NAME} ${srcs} ${hdrs}) #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
 
 #${CMAKE_CURRENT_SOURCE_DIR}
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib 
+${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
+add_subdirectory(gtest)
 add_subdirectory(Vector)
 add_subdirectory(VectorLib)
+add_subdirectory(VectorTest)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
 add_subdirectory(Stack)
