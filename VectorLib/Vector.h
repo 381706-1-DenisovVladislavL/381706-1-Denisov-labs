@@ -40,7 +40,7 @@ public:
 
 //Конструктор по умолчанию
 template<class T> 
-TVector<T> :: TVector<T>(int n) {
+TVector<T>::TVector<T>(int n) {
 	if (n < 0)
 		throw 1;
 	else
@@ -58,7 +58,7 @@ TVector<T> :: TVector<T>(int n) {
 
 //Конструктор копирования
 template<class T> 
-TVector<T> :: TVector(const TVector<T> &V) {
+TVector<T>::TVector(const TVector<T> &V) {
 	Size = Size.V;
 	if (Size == 0)
 		Mas = NULL;
@@ -71,7 +71,7 @@ TVector<T> :: TVector(const TVector<T> &V) {
 
 //Деструктор
 template<class T> 
-TVector<T> :: ~TVector() {
+TVector<T>::~TVector() {
 	if (Size > 0) {
 		Size = 0;
 		delete[] Mas;
@@ -81,13 +81,13 @@ TVector<T> :: ~TVector() {
 
 //Получение размерности вектора
 template<class T> 
-int TVector<T> :: getSize() const {
+int TVector<T>::getSize() const {
 	return Size;
 }
 
 //0-based
 template<class T>
-T& TVector<T> :: operator[](int i) {
+T& TVector<T>::operator[](int i) {
 	if ((i < 0) || (i >= Size)) 
 		throw 1;
 	return Mas[i];
@@ -95,7 +95,7 @@ T& TVector<T> :: operator[](int i) {
 
 //Оператор присваивания
 template<class T> 
-TVector<T>& TVector<T> :: operator=(const TVector<T> &V) {
+TVector<T>& TVector<T>::operator=(const TVector<T> &V) {
 	if (this == &V) 
 		return *this;
 	delete[] Mas;
@@ -108,14 +108,14 @@ TVector<T>& TVector<T> :: operator=(const TVector<T> &V) {
 
 //Унарное сложение
 template<class T>
-TVector<T> TVector<T> :: operator+() const {
+TVector<T> TVector<T>::operator+() const {
 	TVector<T> temp(*this);
 	return temp;
 }
 
 //Унарное вычитание
 template<class T> 
-TVector<T> TVector<T> :: operator-() const {
+TVector<T> TVector<T>::operator-() const {
 	TVector<T> temp(Size);
 	for (int i = 0; i < Size; i++)
 		temp[i] = -Mas[i];
@@ -124,7 +124,7 @@ TVector<T> TVector<T> :: operator-() const {
 
 //Сложение векторов
 template<class T>
-TVector<T> TVector<T> :: operator+(const TVector<T> &V) {
+TVector<T> TVector<T>::operator+(const TVector<T> &V) {
 	if (Size != V.Size) 
 		throw 1;
 	TVector<T> temp(N);
@@ -135,7 +135,7 @@ TVector<T> TVector<T> :: operator+(const TVector<T> &V) {
 
 //Вычитание векторов
 template<class T>
-TVector<T> TVector<T> :: operator-(const TVector<T> &V) {
+TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 	if (Size != V.Size)
 		throw 1;
 	vector<T> temp(N);
@@ -146,7 +146,7 @@ TVector<T> TVector<T> :: operator-(const TVector<T> &V) {
 
 //Скалярное произведение векторов
 template<class T> 
-T TVector<T> :: operator*(const TVector <T> &V) {
+T TVector<T>::operator*(const TVector <T> &V) {
 	if (Size != V.Size)
 		throw 1; 
 	T temp = 0;
@@ -157,7 +157,7 @@ T TVector<T> :: operator*(const TVector <T> &V) {
 
 //Умножение вектора на число
 template<class T> 
-TVector<T> TVector<T> :: operator*(T a) {
+TVector<T> TVector<T>::operator*(T a) {
 	TVector<T> temp(Size);
 	for (int i = 0; i < Size; i++)
 		temp[i] = (*this)[i] * a;
@@ -192,7 +192,7 @@ ostream& operator<<(ostream &os, const TVector<FriendT> &V) {
 
 //Проверка на равенство
 template<class T> 
-bool TVector<T> :: operator==(const TVector<T> &V) {
+bool TVector<T>::operator==(const TVector<T> &V) {
 	if (Size != V.Size) //сравниваем размерности
 		return false;
 	else
@@ -205,7 +205,7 @@ bool TVector<T> :: operator==(const TVector<T> &V) {
 
 //Префиксный инкремент
 template<class T> 
-TVector<T> TVector<T> :: operator++() {
+TVector<T> TVector<T>::operator++() {
 	for (int i = 0; i < Size; i++)
 		Mas[i] = Mas[i] + 1;
 	return *this;
@@ -213,7 +213,7 @@ TVector<T> TVector<T> :: operator++() {
 
 //Постфиксный инкремент
 template<class T> 
-TVector<T> TVector<T> :: operator++(int) {
+TVector<T> TVector<T>::operator++(int) {
 	TVector<T> temp(*this);
 	for (int i = 0; i < Size; i++)
 		Mas[i] = Mas[i] + 1;
@@ -222,7 +222,7 @@ TVector<T> TVector<T> :: operator++(int) {
 
 //Префиксный декремент
 template<class T> 
-TVector<T> TVector<T> :: operator--() {
+TVector<T> TVector<T>::operator--() {
 	for (int i = 0; i < Size; i++)
 		Mas[i] = Mas[i] - 1;
 	return *this;
