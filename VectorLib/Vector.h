@@ -9,7 +9,7 @@ private:
 	int Size;
 	T *Mas;
 public:
-	TVector<T>() :Size(0),Mas(NULL) {} //конструктор по умолчанию
+	TVector<T>():Size(0),Mas(NULL) {} //конструктор по умолчанию
 	TVector<T>(int n = 0); //конструктор с одним параметром
 	TVector<T>(const TVector<T> &V); //конструктор копирования
 	virtual ~TVector<T>(); //деструктор
@@ -40,7 +40,7 @@ public:
 
 //Конструктор по умолчанию
 template<class T> 
-TVector<T>::TVector<T>(int n) {
+TVector<T>::TVector(int n) {
 	if (n < 0)
 		throw 1;
 	else
@@ -59,7 +59,7 @@ TVector<T>::TVector<T>(int n) {
 //Конструктор копирования
 template<class T> 
 TVector<T>::TVector(const TVector<T> &V) {
-	Size = Size.V;
+	Size = V.Size;
 	if (Size == 0)
 		Mas = NULL;
 	else {
@@ -167,7 +167,7 @@ TVector<T> TVector<T>::operator*(T a) {
 //Умножение числа на вектор
 template<class FriendT> 
 TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V) {
-	TVector<T> temp(V.Size);
+	TVector<FriendT> temp(V.Size);
 	for (int i = 0; i < V.Size; i++)
 		temp[i] = V.Mas[i] * a;
 	return temp;
