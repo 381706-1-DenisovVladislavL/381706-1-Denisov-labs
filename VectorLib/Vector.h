@@ -165,8 +165,8 @@ TVector<T> TVector<T> :: operator*(T a) {
 }
 
 //Умножение числа на вектор
-template<class T> 
-TVector<T> operator*(T a, const TVector<T> &V) {
+template<class FriendT> 
+TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V) {
 	TVector<T> temp(V.Size);
 	for (int i = 0; i < V.Size; i++)
 		temp[i] = V.Mas[i] * a;
