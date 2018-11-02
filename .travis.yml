@@ -9,6 +9,6 @@ script:
   - cmake ../381706-1-Denisov-labs
   - make -j
   - ./Vector/Vector
-  - ./Vector/VectorTest
+  - ./VectorTest/VectorTest
 notifications:
   email: false
