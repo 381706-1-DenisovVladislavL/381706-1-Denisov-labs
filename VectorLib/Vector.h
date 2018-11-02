@@ -9,10 +9,10 @@ private:
 	int Size;
 	T *Mas;
 public:
-	TVector() :Size(0),Mas(NULL) {} //конструктор по умолчанию
-	TVector(int n = 0); //конструктор с одним параметром
-	TVector(const TVector<T> &V); //конструктор копирования
-	virtual ~TVector(); //деструктор
+	TVector<T>() :Size(0),Mas(NULL) {} //конструктор по умолчанию
+	TVector<T>(int n = 0); //конструктор с одним параметром
+	TVector<T>(const TVector<T> &V); //конструктор копирования
+	virtual ~TVector<T>(); //деструктор
 
 	int getSize() const; //получение размерности вектора
 	T& operator[](int i); //0-based
