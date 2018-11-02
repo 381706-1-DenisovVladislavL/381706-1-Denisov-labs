@@ -138,7 +138,7 @@ template<class T>
 TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 	if (Size != V.Size)
 		throw 1;
-	vector<T> temp(Size);
+	TVector<T> temp(Size);
 	for (int i = 0; i < Size; i++)
 		temp[i] = (*this)[i] - V.Mas[i];
 	return temp;
