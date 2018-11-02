@@ -32,10 +32,10 @@ public:
 
 	T operator*(const TVector<T> &V); //скалярное произведение
 	TVector operator*(T a); //умножение вектора на число
-	template <typedef T> friend TVector<T> operator*(T a, const TVector<T> &V); //умножение числа на вектор
+	template <class FriendT> friend TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V); //умножение числа на вектор
 	
-	template <typedef T> friend istream& operator>>(istream &is, TVector<T> &V); //ввод вектора через консоль	
-	template <typedef T> friend ostream& operator<<(ostream &os, const TVector<T> &V); //вывод вектора на консоль
+	template <class FriendT> friend istream& operator>>(istream &is, TVector<FriendT> &V); //ввод вектора через консоль	
+	template <class FriendT> friend ostream& operator<<(ostream &os, const TVector<FriendT> &V); //вывод вектора на консоль
 };
 
 //Конструктор по умолчанию
@@ -174,8 +174,8 @@ TVector<T> operator*(T a, const TVector<T> &V) {
 }
 
 //Ввод с консоли
-template<class T> 
-istream& operator>>(istream &is, TVector<T> &V) {
+template<class FriendT>
+istream& operator>>(istream &is, TVector<FriendT> &V) {
 	cout << "\nEnter the " << V.Size << " coordinates of the vector through the space: ";
 	for (int i = 0; i < V.Size; i++)
 		is >> V.Mas[i];
@@ -183,8 +183,8 @@ istream& operator>>(istream &is, TVector<T> &V) {
 }
 
 //Вывод на консоль
-template<class T> 
-ostream& operator<<(ostream &os, const TVector<T> &V) {
+template<class FriendT>
+ostream& operator<<(ostream &os, const TVector<FriendT> &V) {
 	for (int i = 0; i < V.Size; i++)
 		os << V.Mas[i] << "\t";
 	return os;
