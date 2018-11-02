@@ -8,7 +8,7 @@ before_script:
 script:
   - cmake ../381706-1-Denisov-labs
   - make -j
-  - ./Vector/Vector
-  - ./Vector/VectorTest
+  - ./Vector
+  - ./VectorTest
 notifications:
   email: false
