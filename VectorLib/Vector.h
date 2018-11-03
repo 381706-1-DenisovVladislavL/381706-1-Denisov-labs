@@ -198,7 +198,7 @@ bool TVector<T>::operator==(const TVector<T> &V) {
 	else {
 		T eps = 0.0001;
 		for (int i = 0; i < Size; i++)
-			if (abs(Mas[i] - V.Mas[i]) < eps) //сравниваем попарно координаты 
+			if (abs(Mas[i] - V.Mas[i]) > eps) //сравниваем попарно координаты 
 				return false;
 	}
 	return true;
