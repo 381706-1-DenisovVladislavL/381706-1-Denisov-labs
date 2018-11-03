@@ -1,6 +1,6 @@
 #pragma once
-template <class T>
 
+template <class T>
 class TStack {
 protected:
 	int Size;
@@ -50,7 +50,7 @@ TStack <T> :: TStack(TStack <T> &S) {
 //Добавление элемента
 template <class T>
 void TStack<T> :: Put(T A) {
-	if (IsFull)
+	if (IsFull == true)
 		throw 1;
 	else {
 		Mas[Top] = A;
@@ -61,7 +61,7 @@ void TStack<T> :: Put(T A) {
 //Удаление элемента
 template <class T>
 T TStack<T> :: Get() {
-	if (IsEmpty) 
+	if (IsEmpty == true) 
 		throw 1;
 	else {
 		Top--;
