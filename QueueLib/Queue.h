@@ -20,7 +20,7 @@ template <class T>
 TQueue<T>::TQueue(int n) : TStack<T>(n) { Start = 0; Count = 0; }
 
 template <class T>
-TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStack<T> Q) { Start = Q.Start; Count = Q.Count; }
+TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStack<T> &Q) { Start = Q.Start; Count = Q.Count; }
 
 template <class T>
 void TQueue<T>::Put(T A) {
