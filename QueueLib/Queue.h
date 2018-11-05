@@ -20,11 +20,12 @@ template <class T>
 TQueue<T>::TQueue(int n) : TStack<T>(n) { Start = 0; Count = 0; }
 
 template <class T>
-TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStacc<T> Q) { Start = Q.Start; Count = Q.Count; }
+TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStack<T> Q) { Start = Q.Start; Count = Q.Count; }
 
 template <class T>
 void TQueue<T>::Put(T A) {
-	if (IsFull()) throw 1;
+	if (IsFull()) 
+		throw 1;
 	else {
 		Mas[Start] = A;
 		Start = (Start + 1) % Size;
@@ -34,7 +35,8 @@ void TQueue<T>::Put(T A) {
 
 template <class T>
 T TQueue<T>::Get() {
-	if (IsEmpty()) throw 1;
+	if (IsEmpty()) 
+		throw 1;
 	else {
 		T temp = Mas[Top];
 		Top = (Top + 1) % Size;
