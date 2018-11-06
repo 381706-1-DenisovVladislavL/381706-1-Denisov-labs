@@ -3,7 +3,7 @@
 #include "Stack.h"
 
 template <class T>
-class TQueue : public TStack<T> {
+class TQueue : public TStack <T> {
 protected:
 	int Start;
 	int Count;
@@ -20,15 +20,15 @@ template <class T>
 TQueue<T>::TQueue(int n) : TStack<T>(n) { Start = 0; Count = 0; }
 
 template <class T>
-TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStack<T> &Q) { Start = Q.Start; Count = Q.Count; }
+TQueue<T>::TQueue(TQueue <T> &Q) : TStack<T>(TStack<T> Q) { Start = Q.Start; Count = Q.Count; }
 
 template <class T>
 void TQueue<T>::Put(T A) {
 	if (IsFull()) 
 		throw 1;
 	else {
-		Mas[Start] = A;
-		Start = (Start + 1) % Size;
+		TStack<T>::Mas[Start] = A;
+		Start = (Start + 1) % TStack<T>::Size;
 		Count++;
 	}	
 }
