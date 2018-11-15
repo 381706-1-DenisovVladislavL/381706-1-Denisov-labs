@@ -15,7 +15,7 @@ public:
 };
 
 template <class T>
-TElem<T>::TElem(T _e = 0, TElem<T>* _n = 0)
+TElem<T>::TElem(T _e, TElem<T>* _n)
 {
 	elem = _e;
 	if (_n == 0)
