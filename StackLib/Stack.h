@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 template <class T>
 class TStack {
@@ -65,7 +66,7 @@ T TStack<T> :: Get() {
 		throw 1;
 	else {
 		Top--;
-		return Mas[Top + 1];
+		return Mas[Top];
 	}
 }
 
