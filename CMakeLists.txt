@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 set(PROJECT_NAME 381706-1-Denisov-labs) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 
+set(ExceptionLib ExceptionLib)
+
 set(Vector Vector) #Переменная с именем библиотеки
 set(VectorLib VectorLib)
 set(VectorTest VectorTest)
@@ -42,6 +44,9 @@ file(GLOB srcs "*.cpp") #Добавляем в переменную srcs все 
 #${CMAKE_CURRENT_SOURCE_DIR}
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(gtest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ExceptionLib)
+add_subdirectory(ExceptionLib)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib)
 add_subdirectory(Vector)
