@@ -5,12 +5,12 @@ using namespace std;
 
 template <class T>
 class TVector {
-private:
+protected:
 	int Size;
 	T *Mas;
 public:
 	TVector<T>():Size(0),Mas(NULL) {} //конструктор по умолчанию
-	TVector<T>(int n = 0); //конструктор с одним параметром
+	TVector<T>(int n = 0); 
 	TVector<T>(const TVector<T> &V); //конструктор копирования
 	virtual ~TVector<T>(); //деструктор
 
@@ -39,7 +39,7 @@ public:
 };
 
 //Конструктор по умолчанию
-template<class T> 
+template<class T>
 TVector<T>::TVector(int n) {
 	if (n < 0)
 		throw 1;
