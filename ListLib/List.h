@@ -7,16 +7,16 @@ class TList {
 protected:
 	TElem <T>* begin;
 public:
-	TList();
-	TList(TList<T> &L);
-	void PutBegin();
-	void PutEnd();
-	//T GetBegin();
-	//T GetEnd();
-	//T GetElem(T* A);
+	TList(); //конструктор по умолчанию
+	TList(TList<T> &L); //конструктор копирования
+	void PutBegin(T A); //положить элемнт в начало списка
+	void PutEnd(T A); //положить элемент в конец списка
+	//T GetBegin(); //взять с удалением из начала
+	//T GetEnd(); //взять с удалением из конца
+	//T GetElem(T* A); 
 	//T* GetInd(T A);
-	//bool IsFull();
-	//bool IsEmpty();
+	bool IsFull();
+	bool IsEmpty();
 };
 
 //конструктор по умолчанию
@@ -30,17 +30,37 @@ TList<T>::TList()
 template <class T>
 TList<T>::TList(TList<T> &L)
 {
-
+	TElem<T>* a = L.Begin, b;
+	if (L.begin == 0)
+		begin = 0;
+	else {
+		begin = new TElem<T>(*L.begin); //отрабатывает конструктор копирования для Telem; обращение по & к тому элементу, что пришел в constr copy для List
+		b = begin;
+		while (a->GetNext() != 0) {
+			b->SetNext(new TElem<T>(*(a->GetNext())); //new return *, Telem - constr copy, *(a->Get) --> &
+			a = a->GetNext(); 
+			b = b->GetNext();
+		}
+	}
 }
 
+//добавление в начало
 template <class T>
-void TList<T>::PutBegin()
+void TList<T>::PutBegin(T A)
 {
-
+	if (begin == 0) {
+		TElem<T>* tmp = new TElem <T>(A, 0);
+		begin = tmp;
+	}
+	else {
+		TElem<T>* tmp = new TElem <T>(A, begin);
+		begin = tmp;
+	}
 }
 
+//добавление в конец
 template <class T>
-void TList<T>::PutEnd()
+void TList<T>::PutEnd(T A)
 {
 
 }
@@ -68,19 +88,30 @@ void TList<T>::PutEnd()
 //{
 //
 //}
-//
-//template <class T>
-//bool TList<T>::IsFull()
-//{
-//
-//}
-//
-//template <class T>
-//bool TList<T>::IsEmpty()
-//{
-//	if (begin == 0)
-//		return true;
-//	else
-//		return false;
-//}
-//
+
+template <class T>
+bool TList<T>::IsFull()
+{
+	try
+	{
+		TElem<T>* A = new TElem();
+		if (A == 0)
+			return false;
+		else {
+			delete A;
+			return true;
+		}
+	}
+	catch ()
+		return false;
+	//return true; Is this line useless? It's never going to be done.
+}
+
+template <class T>
+bool TList<T>::IsEmpty()
+{
+	if (begin == 0)
+		return true;
+	else
+		return false;
+}
