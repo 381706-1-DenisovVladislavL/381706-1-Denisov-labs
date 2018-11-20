@@ -103,7 +103,9 @@ bool TList<T>::IsFull()
 		}
 	}
 	catch (...)
+	{
 		return false;
+	}
 	//return true; Is this line useless? It's never going to be done.
 }
 
