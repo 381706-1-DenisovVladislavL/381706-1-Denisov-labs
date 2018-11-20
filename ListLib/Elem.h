@@ -3,8 +3,8 @@
 template <class T>
 class TElem {
 protected:
-	T elem;
-	TElem <T>* next;
+	T elem; //хранилище данных в списке
+	TElem <T>* next; //указатель на следующий элемент списка
 public:
 	TElem(T _elem = 0, TElem <T>* _n = 0);
 	TElem(TElem<T> &E);
