@@ -46,7 +46,7 @@ TMatrix<T>::TMatrix(int s) : TVector<TVector<T> >(s)
 		throw 1;
 	else
 		for (int i = 0; i < s; i++)
-			Mas[i] = TVector <T>(s-i);
+			this->Mas[i] = TVector <T>(s-i);
 }
 
 // конструктор копирования

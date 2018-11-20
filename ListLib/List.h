@@ -94,7 +94,7 @@ bool TList<T>::IsFull()
 {
 	try
 	{
-		TElem<T>* A = new TElem();
+		TElem<T>* A = new TElem<T>();
 		if (A == 0)
 			return false;
 		else {
@@ -102,7 +102,7 @@ bool TList<T>::IsFull()
 			return true;
 		}
 	}
-	catch ()
+	catch (...)
 		return false;
 	//return true; Is this line useless? It's never going to be done.
 }
