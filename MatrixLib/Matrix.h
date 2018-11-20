@@ -6,11 +6,11 @@
 using namespace std;
 
 template <class T>
-class TMatrix : public TVector<TVector<T>>{
+class TMatrix : public TVector<TVector<T> >{
 public:
 	TMatrix(int s = 10);
 	TMatrix(const TMatrix &MT);                    // копирование
-	TMatrix(const TVector<TVector<T>> &MT);			// преобразование типа
+	TMatrix(const TVector<TVector<T> > &MT);		// преобразование типа
 	virtual ~TMatrix<T>();
 
 	bool operator==(const TMatrix &MT) const;      // сравнение
@@ -46,7 +46,7 @@ TMatrix<T>::TMatrix(int s) : TVector<TVector<T> >(s)
 		throw 1;
 	else
 		for (int i = 0; i < s; i++)
-			Mas[i] = TVector <T>(s-i); 
+			Mas[i] = TVector <T>(s-i);
 }
 
 // конструктор копирования
@@ -87,7 +87,7 @@ TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &MT)
 template <class T> 
 TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &MT)
 {
-	if (Size != MT.Size)
+	if (this->Size != MT.Size)
 		throw 1;
 	else
 		return TVector <TVector<T> > :: operator+(MT);
@@ -97,7 +97,7 @@ TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &MT)
 template <class T> 
 TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &MT)
 {
-	if (TVector<T>::Size != MT.TVector<T>::Size)
+	if (this->Size != MT.Size)
 		throw 1;
 	else
 		return TVector <TVector<T> > :: operator-(MT);
