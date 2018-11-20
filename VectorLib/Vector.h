@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 
+#include "../ExceptionLib/Exception.h"
+
 using namespace std;
 
 template <class T>
@@ -41,7 +43,7 @@ public:
 template<class T>
 TVector<T>::TVector(int n) {
 	if (n < 0)
-		throw 1;
+		throw "Out of range";
 	else
 		if (n == 0) {
 			Size = n;
@@ -88,7 +90,7 @@ int TVector<T>::getSize() const {
 template<class T>
 T& TVector<T>::operator[](int i) {
 	if ((i < 0) || (i >= Size)) 
-		throw 1;
+		throw "Out of range";
 	return Mas[i];
 }
 
@@ -125,7 +127,7 @@ TVector<T> TVector<T>::operator-() const {
 template<class T>
 TVector<T> TVector<T>::operator+(const TVector<T> &V) {
 	if (Size != V.Size) 
-		throw 1;
+		throw "Addition of vectors of different dimensions";
 	TVector<T> temp(Size);
 	for (int i = 0; i < Size; i++)
 		temp[i] = (*this)[i] + V.Mas[i];
@@ -136,7 +138,7 @@ TVector<T> TVector<T>::operator+(const TVector<T> &V) {
 template<class T>
 TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 	if (Size != V.Size)
-		throw 1;
+		throw "Subtracting of vectors of different dimensions";
 	TVector<T> temp(Size);
 	for (int i = 0; i < Size; i++)
 		temp[i] = (*this)[i] - V.Mas[i];
@@ -147,7 +149,7 @@ TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 template<class T> 
 T TVector<T>::operator*(const TVector <T> &V) {
 	if (Size != V.Size)
-		throw 1; 
+		throw "Multiplication of vectors of different dimensions";
 	T temp = 0;
 	for (int i = 0; i < Size; i++)
 		temp += (*this)[i] * V.Mas[i];
