@@ -27,8 +27,11 @@ public:
 	
 	template <class FriendT>  friend ostream & operator<<(ostream &out, const TMatrix<FriendT> &MT)
 	{
-		for (int i = 0; i < MT.Size; i++)
+		for (int i = 0; i < MT.Size; i++) {
+			for (int j = 1; j <= i; j++)
+				out << "\t";
 			out << MT.Mas[i] << endl;
+		}
 		return out;
 	}
 };
@@ -41,7 +44,7 @@ TMatrix<T>::TMatrix(int s) : TVector<TVector<T>>(s)
 		throw 1;
 	else
 		for (int i = 0; i < s; i++)
-			Mas[i] = TVector <T>(s-i); //разобраться
+			Mas[i] = TVector <T>(s-i); 
 }
 
 // конструктор копирования
