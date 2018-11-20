@@ -37,7 +37,7 @@ TList<T>::TList(TList<T> &L)
 		begin = new TElem<T>(*L.begin); //отрабатывает конструктор копирования для Telem; обращение по & к тому элементу, что пришел в constr copy для List
 		b = begin;
 		while (a->GetNext() != 0) {
-			b->SetNext(new TElem<T>(*(a->GetNext())); //new return *, Telem - constr copy, *(a->Get) --> &
+			b->SetNext(new TElem<T>(*(a->GetNext()))); //new return *, Telem - constr copy, *(a->Get) --> &
 			a = a->GetNext(); 
 			b = b->GetNext();
 		}

@@ -9,7 +9,6 @@ protected:
 	int Size;
 	T *Mas;
 public:
-	TVector<T>():Size(0),Mas(NULL) {} //конструктор по умолчанию
 	TVector<T>(int n = 0); 
 	TVector<T>(const TVector<T> &V); //конструктор копирования
 	virtual ~TVector<T>(); //деструктор
