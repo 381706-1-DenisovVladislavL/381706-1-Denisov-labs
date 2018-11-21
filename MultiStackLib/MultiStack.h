@@ -11,9 +11,9 @@ public:
 	TNewStack(int _Size = 0, T* _Mas = 0) {
 		TStack<T>::Size = _Size;
 		TStack<T>::Top = 0;
-		if (_Mas == 0) Mas = 0; 
+		if (_Mas == 0) TStack<T>::Mas = 0; 
 		else {
-			TStack<T>::Mas = new T[Size];
+			TStack<T>::Mas = new T[TStack<T>::Size];
 			for (int i = 0; i < TStack<T>::Size; i++)
 				TStack<T>::Mas[i] = _Mas[i];
 		}
@@ -23,7 +23,7 @@ public:
 		TStack<T>::Top = NS.TStack<T>::Top;
 		if (NS.TStack<T>::Mas == 0) TStack<T>::Mas = 0;
 		else {
-			TStack<T>::Mas = new T[Size];
+			TStack<T>::Mas = new T[TStack<T>::Size];
 			for (int i = 0; i < TStack<T>::Size; i++)
 				TStack<T>::Mas[i] = NS.TStack<T>::Mas[i];
 		}
