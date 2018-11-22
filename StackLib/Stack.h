@@ -10,8 +10,11 @@ protected:
 public:
 	TStack(int n = 0);
 	TStack(TStack<T> &S);
+	virtual ~TStack();
+
 	void Put(T A);
 	T Get();
+
 	bool IsFull();
 	bool IsEmpty();
 };
@@ -46,6 +49,11 @@ TStack <T> :: TStack(TStack <T> &S) {
 		for (int i = 0; i < Size; i++)
 			Mas[i] = S.Mas[i];
 	}
+}
+
+template<class T>
+TStack <T> :: ~TStack() {
+	delete[] Mas;
 }
 
 //Добавление элемента

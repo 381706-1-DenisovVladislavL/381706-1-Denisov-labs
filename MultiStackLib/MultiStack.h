@@ -47,8 +47,8 @@ protected:
 	int GetFreeMem();
 //	void Repack();
 public:
-	TMStack(int _Size = 0, int _N = 0);
-	TMStack(TMStack<T> &MS);
+	TMStack(int _Size, int _N);
+//	TMStack(TMStack<T> &MS);
 //	void Put(int _N, T A);
 //	T Get(int _N);
 //	bool IsFull(int _N);
@@ -67,6 +67,8 @@ TMStack<T>::TMStack(int _Size, int _N) {
 	N = _N; 
 	Size = _Size; 
 	Mas = new T[Size];
+	for (int i = 0; i < N; i++)
+		Mas[i] = 0;
 	NS = new TNewStack<T>*[N];
 	int* p = new int[N]; //массив размеров каждой части мультистека
 	p[0] = (int(double(Size) / N) + (Size % N));
@@ -77,10 +79,10 @@ TMStack<T>::TMStack(int _Size, int _N) {
 		NS[i] = new TNewStack<T>(p[1], &Mas[p[0] + (i - 1) * int(double(Size) / N)]);
 }
 
-template <class T>
-TMStack<T>::TMStack(TMStack<T> &MS) {
-
-}
+//template <class T>
+//TMStack<T>::TMStack(TMStack<T> &MS) {
+//
+//}
 
 template <class T>
 int TMStack<T>::GetFreeMem() {

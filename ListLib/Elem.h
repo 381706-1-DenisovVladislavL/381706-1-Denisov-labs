@@ -8,6 +8,7 @@ protected:
 public:
 	TElem(T _elem = 0, TElem <T>* _n = 0);
 	TElem(TElem<T> &E);
+	virtual ~TElem();
 	TElem* GetNext();
 	T Get();
 	void Set(T e);
@@ -30,6 +31,9 @@ TElem<T>::TElem(TElem<T> &E)
 	elem = E.elem;
 	next = E.next;
 }
+
+template <class T>
+TElem<T>::~TElem() {}
 
 template <class T>
 T TElem<T>::Get()

@@ -9,6 +9,8 @@ protected:
 public:
 	TList(); //конструктор по умолчанию
 	TList(TList<T> &L); //конструктор копирования
+	virtual ~TList();
+
 	void PutBegin(T A); //положить элемнт в начало списка
 	void PutEnd(T A); //положить элемент в конец списка
 	//T GetBegin(); //взять с удалением из начала
@@ -43,6 +45,9 @@ TList<T>::TList(TList<T> &L)
 		}
 	}
 }
+
+template <class T>
+TList<T>::~TList() {}
 
 //добавление в начало
 template <class T>
