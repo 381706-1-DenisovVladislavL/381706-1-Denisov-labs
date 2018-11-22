@@ -47,7 +47,14 @@ TList<T>::TList(TList<T> &L)
 }
 
 template <class T>
-TList<T>::~TList() {}
+TList<T>::~TList() {
+	while (begin != 0)          //Пока по адресу не пусто
+	{
+		TElem *temp = begin->next;   //Временная переменная для хранения адреса следующего элемента
+		delete begin;                //Освобождаем адрес обозначающий начало
+		begin = temp;                  //Меняем адрес на следующий
+	}
+}
 
 //добавление в начало
 template <class T>
