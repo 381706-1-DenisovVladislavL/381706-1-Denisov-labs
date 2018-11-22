@@ -49,12 +49,12 @@ protected:
 public:
 	TMStack(int _Size, int _N);
 //	TMStack(TMStack<T> &MS);
-//	void Put(int _N, T A);
-//	T Get(int _N);
-//	bool IsFull(int _N);
-//	bool ISEmpty(int _N);
+	void Put(int _N, T A);
+	T Get(int _N);
+	bool IsFull(int _N);
+	bool ISEmpty(int _N);
 	
-	
+	//Временный метод
 	int Test() {
 		return GetFreeMem();
 	}
@@ -90,4 +90,39 @@ int TMStack<T>::GetFreeMem() {
 	for (int i = 0; i < N; i++)
 		count += NS[i]->CountFree();
 	return count;
+}
+
+//template <class T>
+//void TMStack<T>::Repack() {
+//
+//}
+//
+template <class T>
+void TMStack<T>::Put(int _N, T A) {
+	if (_N < 0 || _N >= Size)
+		throw "Out-of-range.";
+	//if (IsFull(_N)) Repack();
+	NS[_N]->Put(A);
+}
+
+template <class T>
+T TMStack<T>::Get(int _N) {
+	if (_N >= 0 && _N < N)
+		return (NS[_N]->TStack<T>::Get());
+	else
+		throw "Out-of-range.";
+}
+//
+template <class T>
+bool TMStack<T>::IsFull(int _N) {
+	if (_N < 0 || _N >= Size)
+		throw "Out-of-range.";
+	NS[_N]->TStack<T>::IsFull();
+}
+
+template <class T>
+bool TMStack<T>::ISEmpty(int _N) {
+	if (_N < 0 || _N >= Size)
+		throw "Out-of-range.";
+	NS[_N]->TStack<T>::IsEmpty();
 }
