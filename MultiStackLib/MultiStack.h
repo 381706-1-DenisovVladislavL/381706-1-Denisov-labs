@@ -60,8 +60,8 @@ public:
 
 	void Print() {
 		for (int i = 0; i < Size; i++)
-			cout << i << " " << TMStack<T>::Mas[i] << endl;
-		cout << endl;
+			std::cout << i << " " << TMStack<T>::Mas[i] << std::endl;
+		std::cout << std::endl;
 	}
 };
 
