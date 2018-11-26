@@ -82,9 +82,8 @@ void TList<T>::PutEnd(T A)
 			a = a->GetNext();
 		a->SetNext(new TElem <T>(A, 0));
 	}
-	else {
-		begin = new TElem(A, 0);
-	}
+	else 
+		begin = new TElem<T>(A, 0);
 }
 
 template <class T>
