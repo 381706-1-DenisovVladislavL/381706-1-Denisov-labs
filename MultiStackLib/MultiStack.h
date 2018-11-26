@@ -9,7 +9,7 @@ template <class T>
 class TNewStack :public TStack<T> {
 public:
 	TNewStack(int _size = 0, T* _mas = 0) {
-		TStack<T>::size = _Size;
+		TStack<T>::size = _size;
 		TStack<T>::top = 0;
 		if (_mas == 0) TStack<T>::mas = 0; 
 		else {
@@ -102,7 +102,7 @@ TMStack<T>::TMStack(TMStack<T> &MS) {
 	for (int i = 1; i < N; i++)
 	{
 		NS[i] = new TNewStack<T>(*(MS.NS[i]));
-		NS[i]->TNewStack<T>::SetMas(p[i], &mas[p[0] + SizeCounter]);
+		NS[i]->TNewStack<T>::SetMas(p[i], &mas[p[0] + sizeCounter]);
 		sizeCounter += p[i - 1];
 	}
 }
