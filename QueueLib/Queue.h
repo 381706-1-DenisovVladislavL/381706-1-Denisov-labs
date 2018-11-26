@@ -5,8 +5,8 @@
 template <class T>
 class TQueue : public TStack <T> {
 protected:
-	int Start;
-	int Count;
+	int start;
+	int count;
 public:
 	TQueue(int n = 0);
 	TQueue(TQueue <T> &Q);
@@ -19,10 +19,10 @@ public:
 };
 
 template <class T>
-TQueue<T>::TQueue(int n) : TStack<T>(n) { Start = 0; Count = 0; }
+TQueue<T>::TQueue(int n) : TStack<T>(n) { start = 0; count = 0; }
 
 template <class T>
-TQueue<T>::TQueue(TQueue<T> &Q) : TStack<T>(Q) { Start = Q.Start; Count = Q.Count; }
+TQueue<T>::TQueue(TQueue<T> &Q) : TStack<T>(Q) { start = Q.start; count = Q.count; }
 
 template <class T>
 TQueue<T>::~TQueue() {}
@@ -32,9 +32,9 @@ void TQueue<T>::Put(T A) {
 	if (IsFull()) 
 		throw 1;
 	else {
-		TStack<T>::Mas[Start] = A;
-		Start = (Start + 1) % TStack<T>::Size;
-		Count++;
+		TStack<T>::mas[start] = A;
+		start = (start + 1) % TStack<T>::size;
+		count++;
 	}	
 }
 
@@ -43,16 +43,16 @@ T TQueue<T>::Get() {
 	if (IsEmpty()) 
 		throw 1;
 	else {
-		T temp = TStack<T>::Mas[TStack<T>::Top];
-		TStack<T>::Top = (TStack<T>::Top + 1) % TStack<T>::Size;
-		Count--;
+		T temp = TStack<T>::mas[TStack<T>::top];
+		TStack<T>::top = (TStack<T>::top + 1) % TStack<T>::size;
+		count--;
 		return temp;
 	}
 }
 
 template <class T>
 bool TQueue<T>::IsFull() {
-	if (Count == TStack<T>::Size)
+	if (count == TStack<T>::size)
 		return true;
 	else
 		return false;
@@ -60,7 +60,7 @@ bool TQueue<T>::IsFull() {
 
 template <class T>
 bool TQueue<T>::IsEmpty() {
-	if (Count == 0)
+	if (count == 0)
 		return true;
 	else 
 		return false;

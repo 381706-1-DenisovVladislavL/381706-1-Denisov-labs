@@ -4,9 +4,9 @@
 template <class T>
 class TStack {
 protected:
-	int Size;
-	int Top;
-	T* Mas;
+	int size;
+	int top;
+	T* mas;
 public:
 	TStack(int n = 0);
 	TStack(TStack<T> &S);
@@ -25,35 +25,35 @@ TStack <T> :: TStack(int n) {
 	if (n < 0) throw 1;
 	else 
 		if (n == 0) {
-			Size = Top = 0;
-			Mas = NULL;
+			size = top = 0;
+			mas = NULL;
 		}
 		else {
-			Size = n;
-			Top = 0;
-			Mas = new T[Size];
-			for (int i = 0; i < Size; i++)
-				Mas[i] = 0;
+			size = n;
+			top = 0;
+			mas = new T[size];
+			for (int i = 0; i < size; i++)
+				mas[i] = 0;
 		}
 }
 
 //Конструктор копирования
 template <class T>
 TStack <T> :: TStack(TStack <T> &S) {
-	Size = S.Size;
-	Top = S.Top;
-	if (Size == 0)
-		Mas = NULL;
+	size = S.size;
+	top = S.top;
+	if (size == 0)
+		mas = NULL;
 	else {
-		Mas = new T[Size];
-		for (int i = 0; i < Size; i++)
-			Mas[i] = S.Mas[i];
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = S.mas[i];
 	}
 }
 
 template<class T>
 TStack <T> :: ~TStack() {
-	delete[] Mas;
+	delete[] mas;
 }
 
 //Добавление элемента
@@ -62,8 +62,8 @@ void TStack<T> :: Put(T A) {
 	if (IsFull())
 		throw 1;
 	else {
-		Mas[Top] = A;
-		Top++;
+		mas[top] = A;
+		top++;
 	}
 }
 
@@ -73,15 +73,15 @@ T TStack<T> :: Get() {
 	if (IsEmpty()) 
 		throw 1;
 	else {
-		Top--;
-		return Mas[Top];
+		top--;
+		return mas[top];
 	}
 }
 
 //Проверка на полноту
 template <class T>
 bool TStack<T> :: IsFull() {
-	if (Top >= Size)
+	if (top >= size)
 		return true;
 	else
 		return false;
@@ -90,7 +90,7 @@ bool TStack<T> :: IsFull() {
 //Проверка на пустоту
 template <class T>
 bool TStack<T> :: IsEmpty() {
-	if (Top == 0)
+	if (top == 0)
 		return true;
 	else
 		return false;

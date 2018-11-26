@@ -3,12 +3,13 @@
 template <class T>
 class TElem {
 protected:
-	T elem; //хранилище данных в списке
+	T data; //хранилище данных в списке
 	TElem <T>* next; //указатель на следующий элемент списка
 public:
-	TElem(T _elem = 0, TElem <T>* _n = 0);
+	TElem(T _data = 0, TElem <T>* _next = 0);
 	TElem(TElem<T> &E);
 	virtual ~TElem();
+
 	TElem* GetNext();
 	T GetData();
 	void Set(T e);
@@ -16,16 +17,16 @@ public:
 };
 
 template <class T>
-TElem<T>::TElem(T _e, TElem<T>* _n)
+TElem<T>::TElem(T _data, TElem<T>* _next)
 {
-	elem = _e;
-	next = _n;
+	data = _data;
+	next = _next;
 }
 
 template <class T>
 TElem<T>::TElem(TElem<T> &E)
 {
-	elem = E.elem;
+	data = E.data;
 	next = E.next;
 }
 
@@ -35,7 +36,7 @@ TElem<T>::~TElem() {}
 template <class T>
 T TElem<T>::GetData()
 {
-	return elem;
+	return data;
 }
 
 template <class T>
@@ -46,7 +47,7 @@ TElem<T>* TElem<T>::GetNext()
 template <class T>
 void TElem<T>::Set(T _e)
 {
-	elem = _e;
+	data = _e;
 }
 
 template <class T>

@@ -8,45 +8,45 @@
 template <class T>
 class TNewStack :public TStack<T> {
 public:
-	TNewStack(int _Size = 0, T* _Mas = 0) {
-		TStack<T>::Size = _Size;
-		TStack<T>::Top = 0;
-		if (_Mas == 0) TStack<T>::Mas = 0; 
+	TNewStack(int _size = 0, T* _mas = 0) {
+		TStack<T>::size = _Size;
+		TStack<T>::top = 0;
+		if (_mas == 0) TStack<T>::mas = 0; 
 		else {
-			TStack<T>::Mas = _Mas;
+			TStack<T>::mas = _mas;
 		}
 	}
 	TNewStack(TNewStack <T> &NS) {
-		TStack<T>::Size = NS.TStack<T>::Size;
-		TStack<T>::Top = NS.TStack<T>::Top;
-		if (NS.TStack<T>::Mas == 0) TStack<T>::Mas = 0;
+		TStack<T>::size = NS.TStack<T>::size;
+		TStack<T>::top = NS.TStack<T>::top;
+		if (NS.TStack<T>::mas == 0) TStack<T>::mas = 0;
 		else {
-			TStack<T>::Mas = NS.TStack<T>::Mas;
+			TStack<T>::mas = NS.TStack<T>::mas;
 		}
 	}
 	int CountFree() {
-		return (TStack<T>::Size - TStack<T>::Top);
+		return (TStack<T>::size - TStack<T>::top);
 	}
 	int GetSize() {
-		return TStack<T>::Size;
+		return TStack<T>::size;
 	}
-	void SetMas(int _Size, T* _Mas) {
-		TStack<T>::Size = _Size;
-		TStack<T>::Mas = _Mas;
+	void SetMas(int _size, T* _mas) {
+		TStack<T>::size = _size;
+		TStack<T>::mas = _mas;
 	}
 };
 
 template <class T>
 class TMStack {
 protected:
-	int Size;
-	T* Mas;
+	int size;
+	T* mas;
 	int N;
 	TNewStack<T>** NS;
 	int GetFreeMem();
 //	void Repack();
 public:
-	TMStack(int _Size, int _N);
+	TMStack(int _size, int _N);
 	TMStack(TMStack<T> &MS);
 	void Put(int _N, T A);
 	T Get(int _N);
@@ -59,51 +59,51 @@ public:
 	}
 
 	void Print() {
-		for (int i = 0; i < Size; i++)
-			std::cout << i << " " << TMStack<T>::Mas[i] << std::endl;
+		for (int i = 0; i < size; i++)
+			std::cout << i << " " << TMStack<T>::mas[i] << std::endl;
 		std::cout << std::endl;
 	}
 };
 
 template <class T>
-TMStack<T>::TMStack(int _Size, int _N) {
-	if ((_N <= 0) || (_Size <= 0))
+TMStack<T>::TMStack(int _size, int _N) {
+	if ((_N <= 0) || (_size <= 0))
 		throw "Not positive dimension or number of stacks.";
 	N = _N;
-	Size = _Size;
-	Mas = new T[Size];
+	size = _size;
+	mas = new T[size];
 	NS = new TNewStack<T>*[N];
-	for (int i = 0; i < Size; i++) 
-		Mas[i] = 0;
+	for (int i = 0; i < size; i++) 
+		mas[i] = 0;
 	int* p = new int[N]; //массив размеров каждой части мультистека
-	p[0] = (int(double(Size) / N) + (Size % N));
+	p[0] = (int(double(size) / N) + (size % N));
 	for (int i = 1; i < N; i++)
-		p[i] = int(double(Size) / N);
-	NS[0] = new TNewStack<T>(p[0], &Mas[0]);
+		p[i] = int(double(size) / N);
+	NS[0] = new TNewStack<T>(p[0], &mas[0]);
 	for (int i = 1; i < N; i++)
-		NS[i] = new TNewStack<T>(p[1], &Mas[p[0] + (i - 1) * int(double(Size) / N)]);
+		NS[i] = new TNewStack<T>(p[1], &mas[p[0] + (i - 1) * int(double(size) / N)]);
 }
 
 
 // онструктор копировани€ пока не работает
 template <class T>
 TMStack<T>::TMStack(TMStack<T> &MS) {
-	Size = MS.Size;
+	size = MS.size;
 	N = MS.N;
-	Mas = new T[Size];
+	mas = new T[size];
 	NS = new TNewStack<T>*[N];
-	for (int i = 0; i < Size; i++) 
-		Mas[i] = MS.Mas[i];
+	for (int i = 0; i < size; i++) 
+		mas[i] = MS.mas[i];
 	int* p = new int[N];
 	for (int i = 0; i < N; i++)
 		p[i] = MS.NS[i]->TNewStack<T>::GetSize();
-	int SizeCounter = 0;
+	int sizeCounter = 0;
 	NS[0] = new TNewStack<T>(*(MS.NS[0]));
 	for (int i = 1; i < N; i++)
 	{
 		NS[i] = new TNewStack<T>(*(MS.NS[i]));
-		NS[i]->TNewStack<T>::SetMas(p[i], &Mas[p[0] + SizeCounter]);
-		SizeCounter += p[i - 1];
+		NS[i]->TNewStack<T>::SetMas(p[i], &mas[p[0] + SizeCounter]);
+		sizeCounter += p[i - 1];
 	}
 }
 
@@ -122,7 +122,7 @@ int TMStack<T>::GetFreeMem() {
 
 template <class T>
 void TMStack<T>::Put(int _N, T A) {
-	if (_N < 0 || _N >= Size)
+	if (_N < 0 || _N >= size)
 		throw "Out-of-range.";
 	//if (IsFull(_N)) Repack();
 	NS[_N]->TStack<T>::Put(A);
@@ -138,14 +138,14 @@ T TMStack<T>::Get(int _N) {
 //
 template <class T>
 bool TMStack<T>::IsFull(int _N) {
-	if (_N < 0 || _N >= Size)
+	if (_N < 0 || _N >= size)
 		throw "Out-of-range.";
 	NS[_N]->TStack<T>::IsFull();
 }
 
 template <class T>
 bool TMStack<T>::ISEmpty(int _N) {
-	if (_N < 0 || _N >= Size)
+	if (_N < 0 || _N >= size)
 		throw "Out-of-range.";
 	NS[_N]->TStack<T>::IsEmpty();
 }

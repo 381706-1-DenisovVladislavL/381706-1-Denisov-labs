@@ -8,8 +8,8 @@ using namespace std;
 template <class T>
 class TVector {
 protected:
-	int Size;
-	T *Mas;
+	int size;
+	T *mas;
 public:
 	TVector<T>(int n = 0); 
 	TVector<T>(const TVector<T> &V); //конструктор копирования
@@ -46,52 +46,52 @@ TVector<T>::TVector(int n) {
 		throw "Out of range";
 	else
 		if (n == 0) {
-			Size = n;
-			Mas = NULL;
+			size = n;
+			mas = NULL;
 		}
 		else {
-			Size = n;
-			Mas = new T[Size];
-			for (int i = 0; i < Size; i++)
-				Mas[i] = 0;
+			size = n;
+			mas = new T[size];
+			for (int i = 0; i < size; i++)
+				mas[i] = 0;
 		}
 }
 
 //Конструктор копирования
 template<class T> 
 TVector<T>::TVector(const TVector<T> &V) {
-	Size = V.Size;
-	if (Size == 0)
-		Mas = NULL;
+	size = V.size;
+	if (size == 0)
+		mas = NULL;
 	else {
-		Mas = new T[Size];
-		for (int i = 0; i < Size; i++)
-			Mas[i] = V.Mas[i];
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = V.mas[i];
 	}
 }
 
 //Деструктор
 template<class T> 
 TVector<T>::~TVector() {
-	if (Size > 0) {
-		Size = 0;
-		delete[] Mas;
-		Mas = NULL;
+	if (size > 0) {
+		size = 0;
+		delete[] mas;
+		mas = NULL;
 	}
 }
 
 //Получение размерности вектора
 template<class T> 
 int TVector<T>::getSize() const {
-	return Size;
+	return size;
 }
 
 //0-based
 template<class T>
 T& TVector<T>::operator[](int i) {
-	if ((i < 0) || (i >= Size)) 
+	if ((i < 0) || (i >= size)) 
 		throw "Out of range";
-	return Mas[i];
+	return mas[i];
 }
 
 //Оператор присваивания
@@ -99,11 +99,11 @@ template<class T>
 TVector<T>& TVector<T>::operator=(const TVector<T> &V) {
 	if (this == &V) 
 		return *this;
-	delete[] Mas;
-	Size = V.Size;
-	Mas = new T[Size];
-	for (int i = 0; i < Size; i++)
-		(*this)[i] = V.Mas[i];
+	delete[] mas;
+	size = V.size;
+	mas = new T[size];
+	for (int i = 0; i < size; i++)
+		(*this)[i] = V.mas[i];
 	return *this;
 }
 
@@ -117,50 +117,50 @@ TVector<T> TVector<T>::operator+() const {
 //Унарное вычитание
 template<class T> 
 TVector<T> TVector<T>::operator-() const {
-	TVector<T> temp(Size);
-	for (int i = 0; i < Size; i++)
-		temp[i] = -Mas[i];
+	TVector<T> temp(size);
+	for (int i = 0; i < size; i++)
+		temp[i] = -mas[i];
 	return temp;
 }
 
 //Сложение векторов
 template<class T>
 TVector<T> TVector<T>::operator+(const TVector<T> &V) {
-	if (Size != V.Size) 
+	if (size != V.size) 
 		throw "Addition of vectors of different dimensions";
-	TVector<T> temp(Size);
-	for (int i = 0; i < Size; i++)
-		temp[i] = (*this)[i] + V.Mas[i];
+	TVector<T> temp(size);
+	for (int i = 0; i < size; i++)
+		temp[i] = (*this)[i] + V.mas[i];
 	return temp;
 }
 
 //Вычитание векторов
 template<class T>
 TVector<T> TVector<T>::operator-(const TVector<T> &V) {
-	if (Size != V.Size)
+	if (size != V.size)
 		throw "Subtracting of vectors of different dimensions";
-	TVector<T> temp(Size);
-	for (int i = 0; i < Size; i++)
-		temp[i] = (*this)[i] - V.Mas[i];
+	TVector<T> temp(size);
+	for (int i = 0; i < size; i++)
+		temp[i] = (*this)[i] - V.mas[i];
 	return temp;
 }
 
 //Скалярное произведение векторов
 template<class T> 
 T TVector<T>::operator*(const TVector <T> &V) {
-	if (Size != V.Size)
+	if (size != V.size)
 		throw "Multiplication of vectors of different dimensions";
 	T temp = 0;
-	for (int i = 0; i < Size; i++)
-		temp += (*this)[i] * V.Mas[i];
+	for (int i = 0; i < size; i++)
+		temp += (*this)[i] * V.mas[i];
 	return temp;
 }
 
 //Умножение вектора на число
 template<class T> 
 TVector<T> TVector<T>::operator*(T a) {
-	TVector<T> temp(Size);
-	for (int i = 0; i < Size; i++)
+	TVector<T> temp(size);
+	for (int i = 0; i < size; i++)
 		temp[i] = (*this)[i] * a;
 	return temp;
 }
@@ -168,38 +168,38 @@ TVector<T> TVector<T>::operator*(T a) {
 //Умножение числа на вектор
 template<class FriendT> 
 TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V) {
-	TVector<FriendT> temp(V.Size);
-	for (int i = 0; i < V.Size; i++)
-		temp[i] = V.Mas[i] * a;
+	TVector<FriendT> temp(V.size);
+	for (int i = 0; i < V.size; i++)
+		temp[i] = V.mas[i] * a;
 	return temp;
 }
 
 //Ввод с консоли
 template<class FriendT>
 istream& operator>>(istream &is, TVector<FriendT> &V) {
-	cout << "\nEnter the " << V.Size << " coordinates of the vector through the space: ";
-	for (int i = 0; i < V.Size; i++)
-		is >> V.Mas[i];
+	cout << "\nEnter the " << V.size << " coordinates of the vector through the space: ";
+	for (int i = 0; i < V.size; i++)
+		is >> V.mas[i];
 	return is;
 }
 
 //Вывод на консоль
 template<class FriendT>
 ostream& operator<<(ostream &os, const TVector<FriendT> &V) {
-	for (int i = 0; i < V.Size; i++)
-		os << V.Mas[i] << "\t";
+	for (int i = 0; i < V.size; i++)
+		os << V.mas[i] << "\t";
 	return os;
 }
 
 //Проверка на равенство
 template<class T> 
 bool TVector<T>::operator==(const TVector<T> &V) {
-	if (Size != V.Size) //сравниваем размерности
+	if (size != V.size) //сравниваем размерности
 		return false;
 	else {
 		T eps = 0.0001;
-		for (int i = 0; i < Size; i++)
-			if (((Mas[i] - V.Mas[i]) > eps) || ((V.Mas[i] - Mas[i]) > eps)) //сравниваем попарно координаты 
+		for (int i = 0; i < size; i++)
+			if (((mas[i] - V.mas[i]) > eps) || ((V.mas[i] - mas[i]) > eps)) //сравниваем попарно координаты 
 				return false;
 	}
 	return true;
@@ -208,8 +208,8 @@ bool TVector<T>::operator==(const TVector<T> &V) {
 //Префиксный инкремент
 template<class T> 
 TVector<T> TVector<T>::operator++() {
-	for (int i = 0; i < Size; i++)
-		Mas[i] = Mas[i] + 1;
+	for (int i = 0; i < size; i++)
+		mas[i] = mas[i] + 1;
 	return *this;
 }
 
@@ -217,16 +217,16 @@ TVector<T> TVector<T>::operator++() {
 template<class T> 
 TVector<T> TVector<T>::operator++(int) {
 	TVector<T> temp(*this);
-	for (int i = 0; i < Size; i++)
-		Mas[i] = Mas[i] + 1;
+	for (int i = 0; i < size; i++)
+		mas[i] = mas[i] + 1;
 	return temp;
 }
 
 //Префиксный декремент
 template<class T> 
 TVector<T> TVector<T>::operator--() {
-	for (int i = 0; i < Size; i++)
-		Mas[i] = Mas[i] - 1;
+	for (int i = 0; i < size; i++)
+		mas[i] = mas[i] - 1;
 	return *this;
 }
 
@@ -234,7 +234,7 @@ TVector<T> TVector<T>::operator--() {
 template<class T> 
 TVector<T> TVector<T>::operator--(int) {
 	TVector<T> temp(*this);
-	for (int i = 0; i < Size; i++)
-		Mas[i] = Mas[i] - 1;
+	for (int i = 0; i < size; i++)
+		mas[i] = mas[i] - 1;
 	return temp;
 }

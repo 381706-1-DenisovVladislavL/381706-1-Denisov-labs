@@ -22,17 +22,17 @@ public:
 	// ввод / вывод
 	template <class FriendT> friend istream& operator>>(istream &in, TMatrix<FriendT> &MT)
 	{
-		for (int i = 0; i < MT.Size; i++)
-			in >> MT.Mas[i];
+		for (int i = 0; i < MT.size; i++)
+			in >> MT.mas[i];
 		return in;
 	}
 	
 	template <class FriendT>  friend ostream & operator<<(ostream &out, const TMatrix<FriendT> &MT)
 	{
-		for (int i = 0; i < MT.Size; i++) {
+		for (int i = 0; i < MT.size; i++) {
 			for (int j = 1; j <= i; j++)
 				out << "\t";
-			out << MT.Mas[i] << endl;
+			out << MT.mas[i] << endl;
 		}
 		return out;
 	}
@@ -46,7 +46,7 @@ TMatrix<T>::TMatrix(int s) : TVector<TVector<T> >(s)
 		throw 1;
 	else
 		for (int i = 0; i < s; i++)
-			this->Mas[i] = TVector <T>(s-i);
+			this->mas[i] = TVector <T>(s-i);
 }
 
 // конструктор копирования
@@ -87,7 +87,7 @@ TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &MT)
 template <class T> 
 TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &MT)
 {
-	if (this->Size != MT.Size)
+	if (this->size != MT.size)
 		throw 1;
 	else
 		return TVector <TVector<T> > :: operator+(MT);
@@ -97,7 +97,7 @@ TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &MT)
 template <class T> 
 TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &MT)
 {
-	if (this->Size != MT.Size)
+	if (this->size != MT.size)
 		throw 1;
 	else
 		return TVector <TVector<T> > :: operator-(MT);
