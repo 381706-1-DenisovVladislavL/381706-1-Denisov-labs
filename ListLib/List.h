@@ -13,10 +13,8 @@ public:
 
 	void PutBegin(T A); //положить элемнт в начало списка
 	void PutEnd(T A); //положить элемент в конец списка
-	//T GetBegin(); //вз€ть с удалением из начала
+	T GetBegin(); //вз€ть с удалением из начала
 	//T GetEnd(); //вз€ть с удалением из конца
-	//T GetElem(T* A); 
-	//T* GetInd(T A);
 	bool IsFull();
 	bool IsEmpty();
 };
@@ -50,7 +48,7 @@ template <class T>
 TList<T>::~TList() {
 	while (begin != 0)          //ѕока по адресу не пусто
 	{
-		TElem <T> *temp = begin->next;   //¬ременна€ переменна€ дл€ хранени€ адреса следующего элемента
+		TElem <T> *temp = begin->GetNext();   //¬ременна€ переменна€ дл€ хранени€ адреса следующего элемента
 		delete begin;                //ќсвобождаем адрес обозначающий начало
 		begin = temp;                  //ћен€ем адрес на следующий
 	}
@@ -60,46 +58,48 @@ TList<T>::~TList() {
 template <class T>
 void TList<T>::PutBegin(T A)
 {
+	std::cout << "begin: " << begin;
 	if (begin == 0) {
 		TElem<T>* tmp = new TElem <T>(A, 0);
+		std::cout << " data: " << tmp->GetData() << " next: " << tmp->GetNext();
 		begin = tmp;
+		std::cout << " new begin: " << begin;
 	}
 	else {
 		TElem<T>* tmp = new TElem <T>(A, begin);
 		begin = tmp;
 	}
+	std::cout << " Added... \n";
 }
 
 //добавление в конец
 template <class T>
 void TList<T>::PutEnd(T A)
 {
-
+	if (begin != 0) {
+		TElem <T> *a = begin;
+		while (a->GetNext() != 0)
+			a = a->GetNext();
+		a->SetNext(new TElem <T>(A, 0));
+	}
+	else {
+		begin = new TElem(A, 0);
+	}
 }
 
-//template <class T>
-//T TList<T>::GetBegin()
-//{
-//
-//}
-//
-//template <class T>
-//T TList<T>::GetEnd()
-//{
-//
-//}
-//
-//template <class T>
-//T TList<T>::GetElem(T* A)
-//{
-//
-//}
-//
-//template <class T>
-//T* TList<T>::GetInd(T A)
-//{
-//
-//}
+template <class T>
+T TList<T>::GetBegin()
+{
+	if (IsEmpty()) 
+		throw "List is empty.";
+	else{
+		TElem<T> *a = begin;
+		T tmp = begin->TElem<T>::GetData();
+		begin = begin->TElem<T>::GetNext();
+		delete a;
+		return tmp;
+	}
+}
 
 template <class T>
 bool TList<T>::IsFull()

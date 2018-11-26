@@ -10,7 +10,7 @@ public:
 	TElem(TElem<T> &E);
 	virtual ~TElem();
 	TElem* GetNext();
-	T Get();
+	T GetData();
 	void Set(T e);
 	void SetNext(TElem <T>* n);
 };
@@ -19,10 +19,7 @@ template <class T>
 TElem<T>::TElem(T _e, TElem<T>* _n)
 {
 	elem = _e;
-	if (_n == 0)
-		next = 0;
-	else
-		next = _n;
+	next = _n;
 }
 
 template <class T>
@@ -36,7 +33,7 @@ template <class T>
 TElem<T>::~TElem() {}
 
 template <class T>
-T TElem<T>::Get()
+T TElem<T>::GetData()
 {
 	return elem;
 }
