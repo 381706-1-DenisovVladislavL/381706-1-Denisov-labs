@@ -8,6 +8,6 @@ int main()
 	L1.PutBegin(10);
 	L1.PutBegin(20);
 	L1.PutBegin(30);
-	std::cout << L1.GetBegin() << " " << L1.GetBegin()<<' '<<L1.GetBegin();
+	std::cout << L1.GetBegin();
 	return 0;
 }

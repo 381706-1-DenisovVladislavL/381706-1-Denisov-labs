@@ -58,18 +58,14 @@ TList<T>::~TList() {
 template <class T>
 void TList<T>::PutBegin(T A)
 {
-	std::cout << "begin: " << begin;
 	if (begin == 0) {
 		TElem<T>* tmp = new TElem <T>(A, 0);
-		std::cout << " data: " << tmp->GetData() << " next: " << tmp->GetNext();
 		begin = tmp;
-		std::cout << " new begin: " << begin;
 	}
 	else {
 		TElem<T>* tmp = new TElem <T>(A, begin);
 		begin = tmp;
 	}
-	std::cout << " Added... \n";
 }
 
 //добавление в конец
