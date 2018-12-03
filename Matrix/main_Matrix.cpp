@@ -19,5 +19,11 @@ int main()
 	cout << "R =" << endl << R << endl;
 	R = M1 - M2;
 	cout << "R =" << endl << R << endl;
+
+  cout << "WARNING" << endl;
+  cout << "M1 =" << endl << M1 << endl;
+  cout << "M2 =" << endl << M2 << endl;
+  if (M1 == M1) cout << "Yeeh!";
+  else cout << "Noo!";
 	return 0;
 }
