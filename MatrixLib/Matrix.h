@@ -13,8 +13,8 @@ public:
 	TMatrix(const TVector<TVector<T> > &MT);		// преобразование типа
 	virtual ~TMatrix<T>();
 
-	bool operator==(const TMatrix &MT) const;      // сравнение
-	bool operator!=(const TMatrix &MT) const;      // сравнение
+	bool operator==(const TMatrix &MT);      // сравнение
+	bool operator!=(const TMatrix &MT);      // сравнение
 	TMatrix& operator= (const TMatrix &MT);        // присваивание
 	TMatrix  operator+ (const TMatrix &MT);        // сложение
 	TMatrix  operator- (const TMatrix &MT);        // вычитание
@@ -63,14 +63,14 @@ TMatrix<T>::~TMatrix() {}
 
 //проверка на равенство
 template <class T>
-bool TMatrix<T>::operator==(const TMatrix<T> &MT) const
+bool TMatrix<T>::operator==(const TMatrix<T> &MT) 
 {
 	return TVector<TVector<T> >::operator==(MT);  //вызываем аналогичный оператор для вектора, в качестве правого операнда передаем матрицу - вектор векторов
 }
 
 //проверка на неравенство
 template <class T> 
-bool TMatrix<T>::operator!=(const TMatrix<T> &MT) const
+bool TMatrix<T>::operator!=(const TMatrix<T> &MT)
 {
 	return TVector<TVector<T> >::operator!=(MT); //аналогично равенству
 }

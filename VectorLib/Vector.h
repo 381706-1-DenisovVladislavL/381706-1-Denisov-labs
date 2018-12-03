@@ -19,6 +19,7 @@ public:
 	T& operator[](int i); //0-based
 
 	bool operator==(const TVector<T> &V); //проверка на равенство
+  bool operator!=(const TVector<T> &V);
 	TVector& operator=(const TVector<T> &other); //присваивание
 
 	TVector operator++(); //инкремент
@@ -194,15 +195,27 @@ ostream& operator<<(ostream &os, const TVector<FriendT> &V) {
 //Проверка на равенство
 template<class T> 
 bool TVector<T>::operator==(const TVector<T> &V) {
-	if (size != V.size) //сравниваем размерности
-		return false;
-	else {
-		T eps = 0.0001;
-		for (int i = 0; i < size; i++)
-			if (((mas[i] - V.mas[i]) > eps) || ((V.mas[i] - mas[i]) > eps)) //сравниваем попарно координаты 
-				return false;
-	}
-	return true;
+  if (size == V.size)
+  {
+    for (int i = 0; i < size; i++)
+    {
+      if (this->mas[i] != V.mas[i])
+      {
+        return 0;
+      }
+    }
+  }
+  else
+  {
+    return 0;
+  }
+  return 1;
+}
+
+template <class T>
+bool TVector<T>:: operator!=(const TVector<T> &V)
+{
+  return !(*this == V);
 }
 
 //Префиксный инкремент
