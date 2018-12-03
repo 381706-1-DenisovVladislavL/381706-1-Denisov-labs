@@ -14,5 +14,5 @@ public:
 TException::TException(std::string _str) : str(_str) {}
 
 void TException::Print() {
-	std::cout << "\nError! \nMessage: " << str << std::endl;
+	std::cout << "\nWarning! \nMessage: " << str << std::endl;
 }
