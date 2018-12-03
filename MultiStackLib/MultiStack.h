@@ -134,7 +134,6 @@ void TMStack<T>::Repack(int k)
     TException exp("No free memory for repack");
     throw exp;
   }
-  std::cout << "STARTING REPACK\n";
   int addEvery = int(double(freeMem) / n);
   int addFull = freeMem % n;
   int* newSize = new int[n];
