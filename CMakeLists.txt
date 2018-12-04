@@ -18,6 +18,10 @@ set(Stack Stack)
 set(StackLib StackLib)
 set(StackTest StackTest)
 
+set(StackList StackList)
+set(StackListLib StackListLib)
+set(StackListTest StackListTest)
+
 set(MultiStack MultiStack)
 set(MultiStackLib MultiStackLib)
 set(MultiStackTest MultiStackTest)
@@ -62,6 +66,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
 add_subdirectory(Stack)
 add_subdirectory(StackLib)
 add_subdirectory(StackTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackListLib)
+add_subdirectory(StackList)
+add_subdirectory(StackListLib)
+add_subdirectory(StackListTest)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MultiStackLib)
 add_subdirectory(MultiStack)
