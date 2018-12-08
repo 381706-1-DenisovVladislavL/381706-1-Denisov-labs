@@ -92,11 +92,11 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &MT)
 {
   if (this->size != MT.size)
     throw TException("Multiplication of matrix of different dimensions.");
-  TMatrix <T> temp(size);
-  for (int i = 0; i < size; i++)
-    for (int j = i; j < size; j++) {
+  TMatrix <T> temp(this->size);
+  for (int i = 0; i < this->size; i++)
+    for (int j = i; j < this->size; j++) {
       for (int k = i; k <= j; k++)
-        temp.mas[i][j - i] += mas[i][k - i] * MT.mas[k][j - k];
+        temp.mas[i][j - i] += this->mas[i][k - i] * MT.mas[k][j - k];
     }
   return temp;
 }
