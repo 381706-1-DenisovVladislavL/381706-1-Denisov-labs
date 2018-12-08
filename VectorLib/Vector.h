@@ -1,12 +1,15 @@
 #pragma once
-#include <iostream>
 
+#include <iostream>
 #include "../ExceptionLib/Exception.h"
 
 using namespace std;
 
 template <class T>
 class TVector {
+  template <class FriendT> friend TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V); //умножение числа на вектор
+  template <class FriendT> friend istream& operator>>(istream &is, TVector<FriendT> &V); //ввод вектора через консоль	
+  template <class FriendT> friend ostream& operator<<(ostream &os, const TVector<FriendT> &V); //вывод вектора на консоль
 protected:
 	int size;
 	T *mas;
@@ -34,17 +37,13 @@ public:
 
 	T operator*(const TVector<T> &V); //скалярное произведение
 	TVector operator*(T a); //умножение вектора на число
-	template <class FriendT> friend TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &V); //умножение числа на вектор
-	
-	template <class FriendT> friend istream& operator>>(istream &is, TVector<FriendT> &V); //ввод вектора через консоль	
-	template <class FriendT> friend ostream& operator<<(ostream &os, const TVector<FriendT> &V); //вывод вектора на консоль
 };
 
 //Конструктор по умолчанию
 template<class T>
 TVector<T>::TVector(int n) {
-	if (n < 0)
-		throw "Out of range";
+  if (n < 0)
+		throw TException("Negative vector size.");
 	else
 		if (n == 0) {
 			size = n;
@@ -91,7 +90,7 @@ int TVector<T>::getSize() const {
 template<class T>
 T& TVector<T>::operator[](int i) {
 	if ((i < 0) || (i >= size)) 
-		throw "Out of range";
+    throw TException("Out of range.");
 	return mas[i];
 }
 
@@ -128,7 +127,7 @@ TVector<T> TVector<T>::operator-() const {
 template<class T>
 TVector<T> TVector<T>::operator+(const TVector<T> &V) {
 	if (size != V.size) 
-		throw "Addition of vectors of different dimensions";
+		throw TException("Addition of vectors of different dimensions.");
 	TVector<T> temp(size);
 	for (int i = 0; i < size; i++)
 		temp[i] = (*this)[i] + V.mas[i];
@@ -139,7 +138,7 @@ TVector<T> TVector<T>::operator+(const TVector<T> &V) {
 template<class T>
 TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 	if (size != V.size)
-		throw "Subtracting of vectors of different dimensions";
+		throw TException("Subtracting of vectors of different dimensions.");
 	TVector<T> temp(size);
 	for (int i = 0; i < size; i++)
 		temp[i] = (*this)[i] - V.mas[i];
@@ -150,7 +149,7 @@ TVector<T> TVector<T>::operator-(const TVector<T> &V) {
 template<class T> 
 T TVector<T>::operator*(const TVector <T> &V) {
 	if (size != V.size)
-		throw "Multiplication of vectors of different dimensions";
+		throw TException("Multiplication of vectors of different dimensions.");
 	T temp = 0;
 	for (int i = 0; i < size; i++)
 		temp += (*this)[i] * V.mas[i];
@@ -181,6 +180,7 @@ istream& operator>>(istream &is, TVector<FriendT> &V) {
 	cout << "\nEnter the " << V.size << " coordinates of the vector through the space: ";
 	for (int i = 0; i < V.size; i++)
 		is >> V.mas[i];
+  cout << "Success!";
 	return is;
 }
 
@@ -200,9 +200,7 @@ bool TVector<T>::operator==(const TVector<T> &V) {
     for (int i = 0; i < size; i++)
     {
       if (this->mas[i] != V.mas[i])
-      {
         return 0;
-      }
     }
   }
   else
