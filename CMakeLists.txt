@@ -38,6 +38,10 @@ set(ArrList ArrList)
 set(ArrListLib ArrListLib)
 set(ArrListTest ArrListTest)
 
+set(Polynom Polynom)
+set(PolynomLib PolynomLib)
+set(PolynomTest PolynomTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -95,5 +99,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ArrListLib)
 add_subdirectory(ArrList)
 add_subdirectory(ArrListLib)
 add_subdirectory(ArrListTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolynomLib)
+add_subdirectory(Polynom)
+add_subdirectory(PolynomLib)
+add_subdirectory(PolynomTest)
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
