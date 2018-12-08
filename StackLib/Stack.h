@@ -25,10 +25,7 @@ template <class T>
 TStack <T> :: TStack(int n) 
 {
   if (n < 0) 
-  {
-    TException exp("Negative stack size");
-    throw exp;
-  }
+    throw TException("Negative Stack size.");
   if (n == 0) 
   {
   	size = top = 0;
