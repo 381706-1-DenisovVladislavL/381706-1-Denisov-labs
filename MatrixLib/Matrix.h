@@ -105,8 +105,10 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &MT)
 template <class FriendT> 
 istream& operator>>(istream &in, TMatrix<FriendT> &MT)
 {
+  cout << "\nEnter the " << MT.size << " rows of the matrix. Follow the instructions on your console...";
   for (int i = 0; i < MT.size; i++)
     in >> MT.mas[i];
+  cout << "\nMatrix successfully introduced!";
   return in;
 }
 
