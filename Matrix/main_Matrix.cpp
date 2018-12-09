@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Matrix.h"
 
+//Uncomment to use the vector I/o example.
+//#define __USE_EXAMPLE_IO__
+
 using namespace std;
 
 int main()
@@ -46,10 +49,12 @@ int main()
     exp.Print();
   }
 
+  //IO-example
+#ifdef __USE_EXAMPLE_IO__
   cout << "===============\n" <<"An example of using input / output streams:" << "\n===============";
   TMatrix <int> MT(5);
   cin >> MT;
   cout << "\nMatrix entered by you:"<< endl << MT;
-
+#endif
 	return 0;
 }

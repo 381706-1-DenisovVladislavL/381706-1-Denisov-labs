@@ -3,6 +3,9 @@
 
 using namespace std;
 
+//Uncomment to use the vector IO-example.
+//#define __USE_EXAMPLE_IO__ 
+
 int main()
 {
   cout << "An example of working with Vector."
@@ -46,9 +49,12 @@ int main()
     exp.Print();
   }
 
+  //IO-example
+#ifdef __USE_EXAMPLE_IO__
   cout << "\n===============\n" << "An example of using input / output streams:" << "\n===============";
   TVector <int> V(5);
   cin >> V;
   cout << "\nVector entered by you: " << V << endl;
 	return 0;
+#endif
 }
