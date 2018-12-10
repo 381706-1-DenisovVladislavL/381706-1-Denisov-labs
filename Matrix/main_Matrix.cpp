@@ -2,7 +2,7 @@
 #include "Matrix.h"
 
 //Uncomment to use the vector I/o example.
-#define __USE_EXAMPLE_IO__
+//#define __USE_EXAMPLE_IO__
 
 using namespace std;
 
