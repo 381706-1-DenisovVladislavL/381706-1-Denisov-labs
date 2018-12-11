@@ -95,7 +95,7 @@ template <class T>
 void TStack<T>::Print()
 {
   for (int i = top - 1; i >= 0; i--)
-    cout << "\t|" << mas[i] << "|" << endl;
+    std::cout << "\t|" << mas[i] << "|" << std::endl;
 }
 
 //Проверка на полноту

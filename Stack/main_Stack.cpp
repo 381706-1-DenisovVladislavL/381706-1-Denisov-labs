@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Stack.h"
 
+//Uncomment to use the stack I/O example.
+//#define __USE_EXAMPLE_IO__
+
 using namespace std;
 
 int main()
@@ -11,14 +14,21 @@ int main()
   cout << "\nEnter the number of elements in the stack: ";
   try 
   {
-    int n;
-    cin >> n;
+    int n = 3;
+    #ifdef __USE_EXAMPLE_IO__
+      cin >> n;
+    #endif
     TStack <int> stack(n);
-    cout << "Enter the elements of the stack: ";
+    cout << "Enter the elements of the stack: \n";
     for (int i = 0; i < n; i++)
     {
       int k;
-      cin >> k;
+      #ifdef __USE_EXAMPLE_IO__
+        cin >> k;
+      #endif
+      #ifndef __USE_EXAMPLE_IO__
+        k = rand()%10;
+      #endif
       stack.Put(k); //Добавляем элементы в стек
     }
     stack.Print(); // печать стека
