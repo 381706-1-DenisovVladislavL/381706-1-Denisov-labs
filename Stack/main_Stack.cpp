@@ -27,7 +27,7 @@ int main()
         cin >> k;
       #endif
       #ifndef __USE_EXAMPLE_IO__
-        k = rand()%10;
+        k = i;
       #endif
       stack.Put(k); //Добавляем элементы в стек
     }
