@@ -61,7 +61,7 @@ void TMonom::SetNext(TMonom* _next)
   next = _next;
 }
 
-void TMonom::SetpPower(unsigned* _power)
+void TMonom::SetPower(unsigned* _power)
 {
   try {
     for (int i = 0; i < n; i++)
@@ -99,7 +99,7 @@ TMonom& TMonom::operator =(TMonom& monom)
 
 TMonom TMonom::operator +(TMonom& monom)
 {
-  if (n != monom.n || !(*this == monom))
+  if ((n != monom.n) || !(*this == monom))
     throw 1;
   TMonom temp(monom);
   temp.c = c + monom.c;
@@ -113,6 +113,18 @@ TMonom TMonom::operator -(TMonom& monom)
   temp.c = c - monom.c;
   return temp;
 }
+
+TMonom TMonom::operator*(TMonom& monom)
+{
+  if (n != monom.n)
+    throw 1;
+  TMonom temp(n,0,0);
+  temp.c = c * monom.c;
+  for (int i = 0; i < n; i++)
+    temp.power[i] = this->power[i] + monom.power[i];
+  return temp;
+}
+
 bool TMonom::operator ==(TMonom& monom)
 {
   if (n != monom.n)

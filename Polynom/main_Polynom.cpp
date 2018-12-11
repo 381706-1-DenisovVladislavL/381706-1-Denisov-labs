@@ -10,7 +10,10 @@ int main()
     std::cout << A;
     TMonom B(3, 0, 1);
     std::cin >> B;
-    std::cout << B;
+    std::cout << B << std::endl;
+    TMonom C(3, 0, 0);
+    C = A * B;
+    std::cout << "Res: " << C << std::endl;
   //  TMonom C(3, 0, 0);
    // C = A + B;
    // std::cout << C << "\n";
