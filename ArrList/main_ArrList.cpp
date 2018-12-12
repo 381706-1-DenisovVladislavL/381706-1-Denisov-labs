@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "An example of using the ArrList will be implemented here" << std::endl;
+  std::cout << "An example of using the ArrList will be implemented here" << std::endl;
   TArrList <int> aList(3);
   aList.PushStart(1);
   aList.PushStart(2);
@@ -27,5 +27,5 @@ int main()
   {
     exp.Print();
   }
-	return 0;
+  return 0;
 }

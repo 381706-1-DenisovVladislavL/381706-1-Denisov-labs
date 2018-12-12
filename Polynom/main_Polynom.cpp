@@ -4,7 +4,7 @@
 
 int main()
 {
-	std::cout << "An example of using the Polynom will be implemented here" << std::endl;
+  std::cout << "An example of using the Polynom will be implemented here" << std::endl;
    /* TMonom A(3, 0, 2);
     std::cin >> A; 
     std::cout << A;

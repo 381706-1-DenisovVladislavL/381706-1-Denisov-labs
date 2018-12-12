@@ -7,86 +7,75 @@ using namespace std;
 
 template <class T>
 class TMatrix : public TVector<TVector<T> > {
-  //ввод / вывод
   template <class FriendT> friend istream& operator>>(istream &in, TMatrix<FriendT> &MT);
   template <class FriendT> friend ostream& operator<<(ostream &out, const TMatrix<FriendT> &MT);
 public:
-	TMatrix(int s = 10);
-	TMatrix(const TMatrix &MT);               // копирование
-	TMatrix(const TVector<TVector<T> > &MT);  // преобразование типа
-	virtual ~TMatrix<T>();                    // деструктор
+  TMatrix(int s = 10);
+  TMatrix(const TMatrix &MT);
+  TMatrix(const TVector<TVector<T> > &MT);
+  virtual ~TMatrix<T>();
 
-	bool operator==(const TMatrix &MT);       // сравнение
-	bool operator!=(const TMatrix &MT);       // сравнение
-	TMatrix& operator= (const TMatrix &MT);   // присваивание
-	TMatrix  operator+ (const TMatrix &MT);   // сложение
-	TMatrix  operator- (const TMatrix &MT);   // вычитание
-  TMatrix operator* (const TMatrix &MT);    // умножение
+  bool operator==(const TMatrix &MT);
+  bool operator!=(const TMatrix &MT);
+  TMatrix& operator= (const TMatrix &MT);
+  TMatrix  operator+ (const TMatrix &MT);
+  TMatrix  operator- (const TMatrix &MT);
+  TMatrix operator* (const TMatrix &MT);
 };
 
-// онструктор по умолчанию
 template <class T>
 TMatrix<T>::TMatrix(int s) : TVector<TVector<T> >(s)
 {
-	if ((s <= 0) || (s > 10000))
-		throw TException("Negative or too large size of Matrix.");
+  if ((s <= 0) || (s > 10000))
+    throw TException("Negative or too large size of Matrix.");
   for (int i = 0; i < s; i++)
-		this->mas[i] = TVector <T>(s-i);
+    this->mas[i] = TVector <T>(s-i);
 }
 
-// онструктор копировани€
 template <class T> 
 TMatrix<T>::TMatrix(const TMatrix<T> &MT) : TVector<TVector<T> >(MT) {}
 
-// онструктор преобразовани€ типа
 template <class T> 
 TMatrix<T>::TMatrix(const TVector<TVector<T> > &MT) : TVector<TVector<T> >(MT) {}
 
-//деструктор
 template <class T>
 TMatrix<T>::~TMatrix() {}
 
-//ѕроверка на равенство
 template <class T>
 bool TMatrix<T>::operator==(const TMatrix<T> &MT) 
 {
-	return TVector<TVector<T> >::operator==(MT);  //вызываем аналогичный оператор дл€ вектора, в качестве правого операнда передаем матрицу - вектор векторов
+  return TVector<TVector<T> >::operator==(MT);
 }
 
-//ѕроверка на неравенство
 template <class T> 
 bool TMatrix<T>::operator!=(const TMatrix<T> &MT)
 {
-	return TVector<TVector<T> >::operator!=(MT); //аналогично равенству
+  return TVector<TVector<T> >::operator!=(MT);
 }
 
-//ѕрисваивание
 template <class T>
 TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &MT)
 {
-	TVector<TVector<T> >::operator=(MT); //аналогично
-	return *this;
+  TVector<TVector<T> >::operator=(MT);
+  return *this;
 }
 
-//—ложение
 template <class T> 
 TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &MT)
 {
-	if (this->size != MT.size)
-		throw TException("Addition of matrix of different dimensions.");
-	return TVector <TVector<T> > :: operator+(MT);
+  if (this->size != MT.size)
+    throw TException("Addition of matrix of different dimensions.");
+  return TVector <TVector<T> > :: operator+(MT);
 }
 
-//¬ычитание
 template <class T> 
 TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &MT)
 {
-	if (this->size != MT.size)
-		throw TException("Subtracting of matrix of different dimensions.");
-	return TVector <TVector<T> > :: operator-(MT);
+  if (this->size != MT.size)
+    throw TException("Subtracting of matrix of different dimensions.");
+  return TVector <TVector<T> > :: operator-(MT);
 }
 
-//”множение
 template <class T>
 TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &MT)
 {
@@ -101,7 +90,6 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &MT)
   return temp;
 }
 
-//¬вод через консоль
 template <class FriendT> 
 istream& operator>>(istream &in, TMatrix<FriendT> &MT)
 {
@@ -112,7 +100,6 @@ istream& operator>>(istream &in, TMatrix<FriendT> &MT)
   return in;
 }
 
-//¬ывод через консоль
 template <class FriendT> 
 ostream & operator<<(ostream &out, const TMatrix<FriendT> &MT)
 {
