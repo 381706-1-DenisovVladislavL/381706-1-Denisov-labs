@@ -217,7 +217,7 @@ TVector<T> TVector<T>::operator--(int) {
 template<class FriendT>
 istream& operator>>(istream &is, TVector<FriendT> &v) {
   cout << "\nEnter the " << v.size << " coordinates of the vector through the space: ";
-  for (int i = 0; i < V.size; i++)
+  for (int i = 0; i < v.size; i++)
     is >> v.mas[i];
   cout << "Success!";
   return is;
