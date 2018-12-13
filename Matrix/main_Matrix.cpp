@@ -12,7 +12,7 @@ int main()
     << endl << "Denisov Vladislav L. Group 381706-1" << endl;
 
   cout << "\n===============\n" << "Creating matrix..." << "\n===============\n";
-  TMatrix <int> M1(5), M2(5), R(5);
+  TMatrix <double> M1(5), M2(5), R(5);
   for (int i = 0; i < 5; i++)
     for (int j = 0; j < 5 - i; j++) {
       M1[i][j] = (i + 1) * (j + 1);
@@ -43,6 +43,8 @@ int main()
   try {
     R = M1 * M2;
     cout << "Result M1 * M2:" << endl << R << endl;
+    R = M2 / M1;
+    cout << "Result M2 / M1:" << endl << R << endl;
   }
   catch (TException exp)
   {
