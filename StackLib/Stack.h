@@ -10,10 +10,10 @@ protected:
   T* mas;
 public:
   TStack(int n = 0);
-  TStack(TStack<T> &S);
+  TStack(TStack<T> &s);
   virtual ~TStack();
 
-  void Put(T A);
+  void Put(T a);
   T Get();
 
   void Print();
@@ -22,7 +22,6 @@ public:
   bool IsEmpty();
 };
 
-//Конструктор по умолчанию
 template <class T>
 TStack <T> :: TStack(int n) 
 {
@@ -43,19 +42,18 @@ TStack <T> :: TStack(int n)
   }
 }
 
-//Конструктор копирования
 template <class T>
-TStack <T> :: TStack(TStack <T> &S) 
+TStack <T> :: TStack(TStack <T> &s) 
 {
-  size = S.size;
-  top = S.top;
+  size = s.size;
+  top = s.top;
   if (size == 0)
     mas = NULL;
   else 
   {
     mas = new T[size];
     for (int i = 0; i < size; i++)
-      mas[i] = S.mas[i];
+      mas[i] = s.mas[i];
   }
 }
 
@@ -65,20 +63,18 @@ TStack <T> :: ~TStack()
   delete[] mas;
 }
 
-//Добавление элемента
 template <class T>
-void TStack<T> :: Put(T A) 
+void TStack<T> :: Put(T a) 
 {
   if (IsFull()) 
   {
     TException exp("Stack is full!");
     throw exp;
   }
-  mas[top] = A;
+  mas[top] = a;
   top++;
 }
 
-//Удаление элемента
 template <class T>
 T TStack<T> :: Get()
 {
@@ -98,7 +94,6 @@ void TStack<T>::Print()
     std::cout << "\t|" << mas[i] << "|" << std::endl;
 }
 
-//Проверка на полноту
 template <class T>
 bool TStack<T> :: IsFull() 
 {
@@ -108,7 +103,6 @@ bool TStack<T> :: IsFull()
     return false;
 }
 
-//Проверка на пустоту
 template <class T>
 bool TStack<T> :: IsEmpty() 
 {
