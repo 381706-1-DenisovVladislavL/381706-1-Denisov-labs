@@ -22,11 +22,6 @@ TEST(Matrix, throws_when_create_matrix_with_negative_size)
   ASSERT_ANY_THROW(TMatrix <int> M(-1));
 }
 
-TEST(Matrix, throws_when_create_matrix_with_too_large_size)
-{
-  ASSERT_ANY_THROW(TMatrix <int> M(10001));
-}
-
 TEST(Matrix, can_equality_matrix_true)
 {
   TMatrix <int> M1(3), M2(3);

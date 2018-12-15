@@ -51,6 +51,32 @@ int main()
     exp.Print();
   }
 
+  TMatrix <double> T1(3500), T2(3500), TR(3500);
+  try
+  {
+    for (int i = 0; i < 3500; i++)
+      for (int j = 0; j < 3500-i; j++)
+      {
+        T1[i][j] = rand() % 100;
+        T2[i][j] = rand() % 100;
+      }
+    clock_t start = clock();
+    TR = T1 + T2;
+    clock_t end = clock();
+    double seconds = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("The time of add: %f seconds\n", seconds);
+
+    start = clock();
+    TR = T1 * T2;
+    end = clock();
+    seconds = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("The time of multi: %f seconds\n", seconds);
+  }
+  catch (TException exp) 
+  {
+    exp.Print();
+  }
+
   //IO-example
 #ifdef __USE_EXAMPLE_IO__
   cout << "===============\n" << "An example of using input / output streams:" << "\n===============";

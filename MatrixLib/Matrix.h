@@ -28,8 +28,8 @@ public:
 template <class T>
 TMatrix<T>::TMatrix(int s) : TVector<TVector<T> >(s)
 {
-  if ((s <= 0) || (s > 10000))
-    throw TException("Negative or too large size of Matrix.");
+  if ((s <= 0))
+    throw TException("Negative size of Matrix.");
   for (int i = 0; i < s; i++)
     this->mas[i] = TVector <T>(s-i);
 }
