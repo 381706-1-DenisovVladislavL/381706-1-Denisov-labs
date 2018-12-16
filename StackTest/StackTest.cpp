@@ -14,6 +14,17 @@ TEST(Stack, can_put_and_get)
   ASSERT_EQ(3,S.Get());
 }
 
+TEST(Stack, check_ñorrect_order_of_return_values)
+{
+  TStack <int> S(3);
+  S.Put(1);
+  S.Put(2);
+  S.Put(3);
+  ASSERT_EQ(3, S.Get());
+  ASSERT_EQ(2, S.Get());
+  ASSERT_EQ(1, S.Get());
+}
+
 TEST(Stack, can_use_full_check_false)
 {
   TStack <int> S(1);
