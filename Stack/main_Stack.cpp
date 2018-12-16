@@ -29,13 +29,13 @@ int main()
       #ifndef __USE_EXAMPLE_IO__
         k = i;
       #endif
-      stack.Put(k); //Добавляем элементы в стек
+      stack.Put(k);
     }
-    stack.Print(); // печать стека
+    stack.Print();
    
-    cout << "\n\nGet the element of the stack: " << stack.Get() << endl; //возьмем элемент с удалением
+    cout << "\n\nGet the element of the stack: " << stack.Get() << endl;
  
-    stack.Print(); // печать стека
+    stack.Print();
 
     TStack <int> stackOther(stack);
     cout << "\n\nCopy constructor (adress of oldStack: " << &stack << ", adress of newStack: " << &stackOther << "): " << endl;

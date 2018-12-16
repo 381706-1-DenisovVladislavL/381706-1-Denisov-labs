@@ -67,10 +67,7 @@ template <class T>
 void TStack<T> :: Put(T a) 
 {
   if (IsFull()) 
-  {
-    TException exp("Stack is full!");
-    throw exp;
-  }
+    throw TException("Stack is full.");
   mas[top] = a;
   top++;
 }
@@ -78,11 +75,8 @@ void TStack<T> :: Put(T a)
 template <class T>
 T TStack<T> :: Get()
 {
-  if (IsEmpty()) 
-  {
-    TException exp("Stack is empty!");
-    throw exp;
-  }
+  if (IsEmpty())
+    throw TException("Stack is empty.");
   top--;
   return mas[top];
 }
