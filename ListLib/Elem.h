@@ -7,7 +7,7 @@ protected:
   TElem <T>* next; //указатель на следующий элемент списка
 public:
   TElem(T _data = 0, TElem <T>* _next = 0);
-  TElem(TElem<T> &E);
+  TElem(TElem<T> &e);
   virtual ~TElem();
 
   TElem* GetNext();
@@ -24,10 +24,10 @@ TElem<T>::TElem(T _data, TElem<T>* _next)
 }
 
 template <class T>
-TElem<T>::TElem(TElem<T> &E)
+TElem<T>::TElem(TElem<T> &e)
 {
-  data = E.data;
-  next = E.next;
+  data = e.data;
+  next = e.next;
 }
 
 template <class T>

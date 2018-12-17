@@ -16,7 +16,6 @@ public:
   void PutEnd(T a); //положить элемент в конец списка
   T GetBegin(); //взять с удалением из начала
   T GetEnd(); //взять с удалением из конца
-  bool IsFull();
   bool IsEmpty();
 
   void Print();
@@ -59,22 +58,13 @@ TList<T>::~TList() {
   }
 }
 
-//добавление в начало
 template <class T>
 void TList<T>::PutBegin(T A)
 {
-  if (begin == 0) 
-  {
-    TElem<T>* tmp = new TElem <T>(A, 0);
-    begin = tmp;
-  }
-  else {
-    TElem<T>* tmp = new TElem <T>(A, begin);
-    begin = tmp;
-  }
+  TElem<T>* tmp = new TElem <T>(A, begin);
+  begin = tmp;
 }
 
-//добавление в конец
 template <class T>
 void TList<T>::PutEnd(T A)
 {
@@ -94,14 +84,11 @@ T TList<T>::GetBegin()
 {
   if (IsEmpty()) 
     throw TException("List is empty.");
-  else
-  {
-    TElem<T> *temp = begin;
-    T tmp = begin->TElem<T>::GetData();
-    begin = begin->TElem<T>::GetNext();
-    delete temp;
-    return tmp;
-  }
+  TElem<T> *temp = begin;
+  T tmp = begin->TElem<T>::GetData();
+  begin = begin->TElem<T>::GetNext();
+  delete temp;
+  return tmp;
 }
 
 template <class T>
@@ -125,26 +112,6 @@ T TList<T>::GetEnd()
     delete temp1;
     temp->SetNext(0);
     return res;
-  }
-}
-
-template <class T>
-bool TList<T>::IsFull()
-{
-  try
-  {
-    TElem<T>* temp = new TElem<T>();
-    if (temp == 0)
-      return false;
-    else 
-    {
-      delete temp;
-      return true;
-    }
-  }
-  catch (...)
-  {
-    return false;
   }
 }
 
