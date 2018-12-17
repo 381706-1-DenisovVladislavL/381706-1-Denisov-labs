@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../ExceptionLib/Exception.h"
 #include "Elem.h"
 
 template <class T>
@@ -11,12 +12,14 @@ public:
   TList(TList<T> &L); //конструктор копирования
   virtual ~TList();
 
-  void PutBegin(T A); //положить элемнт в начало списка
-  void PutEnd(T A); //положить элемент в конец списка
+  void PutBegin(T a); //положить элемнт в начало списка
+  void PutEnd(T a); //положить элемент в конец списка
   T GetBegin(); //взять с удалением из начала
-  //T GetEnd(); //взять с удалением из конца
+  T GetEnd(); //взять с удалением из конца
   bool IsFull();
   bool IsEmpty();
+
+  void Print();
 };
 
 //конструктор по умолчанию
@@ -30,16 +33,18 @@ TList<T>::TList()
 template <class T>
 TList<T>::TList(TList<T> &L)
 {
-  TElem<T>* a = L.Begin, b;
+  TElem<T> *a = L.begin, *b;
   if (L.begin == 0)
     begin = 0;
-  else {
+  else 
+  {
     begin = new TElem<T>(*L.begin); //отрабатывает конструктор копирования для Telem; обращение по & к тому элементу, что пришел в constr copy для List
     b = begin;
-    while (a->GetNext() != 0) {
-      b->SetNext(new TElem<T>(*(a->GetNext()))); //new return *, Telem - constr copy, *(a->Get) --> &
-      a = a->GetNext(); 
-      b = b->GetNext();
+    while (a->TElem<T>::GetNext() != 0)
+    {
+      b->TElem<T>::SetNext(new TElem<T>(*(a->TElem<T>::GetNext()))); //new return *, Telem - constr copy, *(a->Get) --> &
+      a = a->TElem<T>::GetNext();
+      b = b->TElem<T>::GetNext();
     }
   }
 }
@@ -58,7 +63,8 @@ TList<T>::~TList() {
 template <class T>
 void TList<T>::PutBegin(T A)
 {
-  if (begin == 0) {
+  if (begin == 0) 
+  {
     TElem<T>* tmp = new TElem <T>(A, 0);
     begin = tmp;
   }
@@ -72,7 +78,8 @@ void TList<T>::PutBegin(T A)
 template <class T>
 void TList<T>::PutEnd(T A)
 {
-  if (begin != 0) {
+  if (begin != 0) 
+  {
     TElem <T> *a = begin;
     while (a->GetNext() != 0)
       a = a->GetNext();
@@ -86,47 +93,52 @@ template <class T>
 T TList<T>::GetBegin()
 {
   if (IsEmpty()) 
-    throw "List is empty.";
-  else{
-    TElem<T> *a = begin;
+    throw TException("List is empty.");
+  else
+  {
+    TElem<T> *temp = begin;
     T tmp = begin->TElem<T>::GetData();
     begin = begin->TElem<T>::GetNext();
-    delete a;
+    delete temp;
     return tmp;
   }
 }
 
-//template <class T>
-//T TList<T>::GetEnd()
-//{
-//  TElem<T> *a, *b;
-//  a = b = begin;
-//  while (a->GetNext() != 0){
-//    b = a;
-//    a = a->GetNext();
-//  }
-//  T tmp = a->GetData();
-//  if (a->GetNext() == 0)
-//    begin = 0;
-//  else
-//  {
-//    b->SetNext(0); 
-//  //  delete b;
-//  }
-//  delete a;
-//  return tmp;
-//}
+template <class T>
+T TList<T>::GetEnd()
+{
+  if (IsEmpty())
+    throw TException("List is empty.");
+  if (begin->TElem<T>::GetNext() == 0)
+  {
+    T res = begin->TElem<T>::GetData();
+    begin = begin->TElem<T>::GetNext();
+    return res;
+  }
+  else
+  {
+    TElem<T> *temp = begin;
+    while (temp->GetNext()->GetNext() != 0)
+      temp = temp->GetNext();
+    TElem<T> *temp1 = temp->GetNext();
+    T res = temp1->GetData();
+    delete temp1;
+    temp->SetNext(0);
+    return res;
+  }
+}
 
 template <class T>
 bool TList<T>::IsFull()
 {
   try
   {
-    TElem<T>* A = new TElem<T>();
-    if (A == 0)
+    TElem<T>* temp = new TElem<T>();
+    if (temp == 0)
       return false;
-    else {
-      delete A;
+    else 
+    {
+      delete temp;
       return true;
     }
   }
@@ -134,7 +146,6 @@ bool TList<T>::IsFull()
   {
     return false;
   }
-  //return true; Is this line useless? It's never going to be done.
 }
 
 template <class T>
@@ -144,4 +155,18 @@ bool TList<T>::IsEmpty()
     return true;
   else
     return false;
+}
+
+template <class T>
+void TList<T>::Print()
+{
+  if (IsEmpty())
+    throw TException("List is empty.");
+  TElem<T> *temp = begin;
+  do
+  {
+    std::cout << "|" << temp->TElem<T>::GetData() << "| ";
+    temp = temp->GetNext();
+  } while (temp != 0);
+  std::cout << std::endl << std::endl;
 }
