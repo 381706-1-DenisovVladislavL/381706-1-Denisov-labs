@@ -16,6 +16,8 @@ script:
   - ./StackTest/StackTest
   - ./Queue/Queue
   - ./QueueTest/QueueTest
+  - ./List/List
+  - ./ListTest/ListTest
   - ./StackList/StackList
   - ./StackListTest/StackListTest
 notifications:
