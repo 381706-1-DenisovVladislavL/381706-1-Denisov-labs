@@ -83,7 +83,7 @@ void TStackList<T>::Print()
 {
   if (TStackList<T>::IsEmpty())
     throw TException("Stack is empty.");
-  TElem<T> *temp = begin;
+  TElem<T> *temp = TList<T>::begin;
   do
   {
     std::cout << "\t|" << temp->TElem<T>::GetData() << "| " << std::endl;
