@@ -97,6 +97,14 @@ int main()
   list.PutEnd(992);
   list.Print();
 
+  cout << "To put in pos [1]: 10" << endl;
+  list.Put(1, 10);
+  list.Print();
+
+  cout << "To get in pos [1]: " << endl;
+  list.Get(1);
+  list.Print();
+
   cout << "Get end: " << list.GetEnd() << endl;
   list.Print();
 
@@ -122,6 +130,7 @@ int main()
   cout << "To put [begin]: 634" << endl;
   list.PutBegin(634);
   list.Print();
+
 #endif
   TList <int> listOther(list);
   cout << "\n\nCopy constructor (adress of oldList: " << &list << ", adress of newList: " << &listOther << "): " << endl;

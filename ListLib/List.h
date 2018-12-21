@@ -6,6 +6,7 @@
 template <class T>
 class TList {
 protected:
+  int count;
   TElem <T>* begin;
 public:
   TList(); //конструктор по умолчанию
@@ -13,9 +14,12 @@ public:
   virtual ~TList();
 
   void PutBegin(T a); //положить элемнт в начало списка
+  void Put(int _n, T elem); //положить элемент в указанную позицию
   void PutEnd(T a); //положить элемент в конец списка
   T GetBegin(); //взять с удалением из начала
+  T Get(int _n); //взять из указаной позиции с удалением
   T GetEnd(); //взять с удалением из конца
+  bool IsFull();
   bool IsEmpty();
 
   void Print();
@@ -26,12 +30,14 @@ template <class T>
 TList<T>::TList()
 {
   begin = 0;
+  count = 0;
 }
 
 //констуктор копирования
 template <class T>
 TList<T>::TList(TList<T> &L)
 {
+  count = L.count;
   TElem<T> *a = L.begin, *b;
   if (L.begin == 0)
     begin = 0;
@@ -61,13 +67,40 @@ TList<T>::~TList() {
 template <class T>
 void TList<T>::PutBegin(T A)
 {
+  if (IsFull())
+    throw TException("List is full.");
   TElem<T>* tmp = new TElem <T>(A, begin);
   begin = tmp;
+  count++;
+}
+
+template<class T>
+void TList<T>::Put(int _n, T elem)
+{
+  if (_n < 1 || _n > count - 1)
+    throw TException("Out-of-range.");
+  if (IsFull())
+    throw TException("List is full");
+  else
+  {
+    int i = 0;
+    TElem<T>* a = begin;
+    while (i != _n - 1)
+    {
+      a = a->GetNext();
+      i++;
+    }
+    TElem<T>* temp = new TElem<T>(elem, a->GetNext());
+    a->SetNext(temp);
+    count++;
+  }
 }
 
 template <class T>
 void TList<T>::PutEnd(T A)
 {
+  if (IsFull())
+    throw TException("List is full.");
   if (begin != 0) 
   {
     TElem <T> *a = begin;
@@ -77,6 +110,7 @@ void TList<T>::PutEnd(T A)
   }
   else 
     begin = new TElem<T>(A, 0);
+  count++;
 }
 
 template <class T>
@@ -88,7 +122,31 @@ T TList<T>::GetBegin()
   T tmp = begin->TElem<T>::GetData();
   begin = begin->TElem<T>::GetNext();
   delete temp;
+  count--;
   return tmp;
+}
+
+template <class T>
+T TList<T>::Get(int _n)
+{
+  if (_n < 1 || _n > count - 1)
+    throw TException("Out-of-range");
+  if (IsEmpty())
+    throw TException("List is empty");
+  int i = 0;
+  count--;
+  TElem<T>* a = begin;
+  TElem<T>* b = begin->GetNext();
+  while (i != _n - 1)
+  {
+    a = b;
+    b = b->GetNext();
+    i++;
+  }
+  T temp = b->GetData();
+  a->SetNext(b->GetNext());
+  delete b;
+  return temp;
 }
 
 template <class T>
@@ -100,6 +158,7 @@ T TList<T>::GetEnd()
   {
     T res = begin->TElem<T>::GetData();
     begin = begin->TElem<T>::GetNext();
+    count--;
     return res;
   }
   else
@@ -111,6 +170,7 @@ T TList<T>::GetEnd()
     T res = temp1->GetData();
     delete temp1;
     temp->SetNext(0);
+    count--;
     return res;
   }
 }
@@ -122,6 +182,27 @@ bool TList<T>::IsEmpty()
     return true;
   else
     return false;
+}
+
+template <class T>
+bool TList<T>::IsFull()
+{
+  try
+  {
+    TElem<T>* a = new TElem<T>();
+    if (a == NULL)
+      return 1;
+    else
+    {
+      delete a;
+      return 0;
+    }
+  }
+  catch (...)
+  {
+    return 0;
+  }
+  return true;
 }
 
 template <class T>
