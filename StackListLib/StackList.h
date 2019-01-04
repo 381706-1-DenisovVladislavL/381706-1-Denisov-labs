@@ -5,8 +5,6 @@
 
 template <class T>
 class TStackList: protected TList <T> {
-protected:
-  int count;
 public:
   TStackList();
   TStackList(TStackList<T> &s);
@@ -19,22 +17,13 @@ public:
 };
 
 template<class T>
-TStackList<T>::TStackList() : TList<T>()
-{
-  count = 0;
-}
+TStackList<T>::TStackList() : TList<T>() {}
 
 template<class T>
-TStackList<T>::TStackList(TStackList<T> &s) : TList<T>(s)
-{
-  count = s.count;
-}
+TStackList<T>::TStackList(TStackList<T> &s) : TList<T>(s) {}
 
 template<class T>
-TStackList<T>::~TStackList()
-{
-  count = 0;
-}
+TStackList<T>::~TStackList() {}
 
 template<class T>
 void TStackList<T>::Put(T a) 
@@ -42,7 +31,6 @@ void TStackList<T>::Put(T a)
   if (TList<T>::IsFull())
     throw TException("Stack is full.");
   TList<T>::PutBegin(a);
-  count++;
 }
 
 template<class T>
@@ -50,7 +38,6 @@ T TStackList<T>::Get()
 {
   if (TList<T>::IsEmpty())
     throw TException("Stack is empty.");
-  count--;
   return TList<T>::GetBegin();
 }
 

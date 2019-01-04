@@ -21,7 +21,7 @@ int main()
 #ifndef __USE_EXAMPLE_IO__
     cout << n << endl;
 #endif
-    TStackList <int> stack(n);
+    TStackList <int> stack;
     cout << "Enter the elements of the stack (use the gap): ";
     for (int i = 0; i < n; i++)
     {
