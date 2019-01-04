@@ -21,7 +21,7 @@ TEST(StackList, correct_order_return_value)
   ASSERT_EQ(1, S.Get());
 }
 
-TEST(StackList, throws_when_in_full_stack_put_elem)
+/*TEST(StackList, throws_when_in_full_stack_put_elem)
 {
   TStackList <int> s;
   try
@@ -33,7 +33,7 @@ TEST(StackList, throws_when_in_full_stack_put_elem)
   {
     ASSERT_ANY_THROW(s.Put(1));
   }
-}
+} */
 
 TEST(StackList, throws_when_from_empty_stack_get_elem)
 {
