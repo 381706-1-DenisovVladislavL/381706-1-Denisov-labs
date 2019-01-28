@@ -6,7 +6,7 @@
 template <class T>
 class TArrList {
 private:
-  T* mas;
+  T* mas; //Содержательный массив
   int *nextInd; //Массив индексов, указывающих на следюущий элемент списка
   int *prevInd; //Массив индексов, указывающих на предыдущий элемент списка
   int size; //Максимальный размер списка
@@ -17,7 +17,8 @@ private:
                          //оставшихся после удаления элемента
 public:
   TArrList(int _size = 10); //Конструктор с параметром
-  TArrList(TArrList<T> &A); //Конструктор копирования
+  TArrList(TArrList<T> &a); //Конструктор копирования
+  virtual ~TArrList();
   void PushStart(T elem); //Положить в начало списка
   void PushFinish(T elem);  //Положить в конец списка 
   T PullStart();  //Забрать из начала списка с удалением
@@ -49,22 +50,29 @@ TArrList<T>::TArrList(int _size) : freeElem(_size)
 
 //Конструктор копирования
 template <class T>
-TArrList<T>::TArrList(TArrList<T> &A)
+TArrList<T>::TArrList(TArrList<T> &a) : freeElem(a.freeElem)
 {
-  start = A.start;
-  finish = A.finish;
-  size = A.size;
-  count = A.count;
+  start = a.start;
+  finish = a.finish;
+  size = a.size;
+  count = a.count;
   mas = new T[size];
   nextInd = new int[size];
   prevInd = new int[size];
-  freeElem = A.freeElem;
   for (int i = 0; i < size; i++)
   {
-    mas[i] = A.mas[i];
-    nextInd[i] = A.nextInd[i];
-    prevInd[i] = A.prevInd[i];
+    mas[i] = a.mas[i];
+    nextInd[i] = a.nextInd[i];
+    prevInd[i] = a.prevInd[i];
   }
+}
+
+template <class T>
+TArrList<T>::~TArrList() 
+{
+  delete[] TArrList<T>::mas;
+  delete[] TArrList<T>::nextInd;
+  delete[] TArrList<T>::prevInd;
 }
 
 //Положить в начало списка
@@ -76,6 +84,7 @@ void TArrList<T>::PushStart(T elem)
   int ifree = freeElem.Get();
   mas[ifree] = elem;
   nextInd[ifree] = start;
+  prevInd[ifree] = -1;
   if (start != -1)
     prevInd[start] = ifree;
   else
@@ -99,6 +108,7 @@ void TArrList<T>::PushFinish(T elem)
     start = ifree;
     prevInd[ifree] = -1;
   }
+  nextInd[ifree] = -1;
   prevInd[ifree] = finish;
   finish = ifree;
   count++;
@@ -110,15 +120,26 @@ T TArrList<T>::PullStart()
 {
   if (IsEmpty())
     throw TException("List is empty.");
-  T elem = mas[start];
-  int newstart = nextInd[start];
-  freeElem.Put(start);
-  nextInd[start] = prevInd[start] = -2;
-  if (newstart != -1)
-    prevInd[newstart] = -1;
-  count--;
-  start = newstart;
-  return elem;
+  if (count == 1) {
+    count--;
+    int tmp = start;
+    freeElem.Put(start);
+    nextInd[start] = prevInd[start] = -2;
+    start = finish = -1;
+    return mas[tmp];
+  }
+  else
+  {
+    T elem = mas[start];
+    int newstart = nextInd[start];
+    freeElem.Put(start);
+    nextInd[start] = prevInd[start] = -2;
+    if (newstart != -1)
+      prevInd[newstart] = -1;
+    count--;
+    start = newstart;
+    return elem;
+  }
 }
 
 //Взять из конца списка с удалением
