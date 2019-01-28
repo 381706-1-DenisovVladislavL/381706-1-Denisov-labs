@@ -20,5 +20,7 @@ script:
   - ./ListTest/ListTest
   - ./StackList/StackList
   - ./StackListTest/StackListTest
+  - ./ArrList/ArrList
+  - ./ArrListTest/ArrListTest
 notifications:
   email: false
