@@ -22,5 +22,7 @@ script:
   - ./StackListTest/StackListTest
   - ./ArrList/ArrList
   - ./ArrListTest/ArrListTest
+  - ./MultiStack/MultiStack
+  - ./MultiStackTest/MultiStackTest
 notifications:
   email: false

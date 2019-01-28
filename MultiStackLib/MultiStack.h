@@ -10,6 +10,8 @@ class TNewStack :public TStack<T> {
 public:
   TNewStack(int _size = 0, T* _mas = 0)
   {
+    if (_size <= 0)
+      throw TException("Negative size.");
     TStack<T>::size = _size;
     TStack<T>::top = 0;
     if (_mas == 0) TStack<T>::mas = 0; 
@@ -38,6 +40,8 @@ public:
   }
   void SetMas(int _size, T* _mas) 
   {
+    if (_size <= 0)
+      throw TException("Negative size.");
     TStack<T>::size = _size;
     TStack<T>::mas = _mas;
   }
@@ -59,14 +63,7 @@ public:
   T Get(int _n);
   bool IsFull(int _n);
   bool IsEmpty(int _n);
-  
-  //Временный метод
-  void Print() 
-  {
-    for (int i = 0; i < size; i++)
-        std::cout << i << " " << TMStack<T>::mas[i] << std::endl;
-    std::cout << std::endl;
-  }
+  void Print();
 };
 
 template <class T>
@@ -91,8 +88,6 @@ TMStack<T>::TMStack(int _size, int _n)
     ns[i] = new TNewStack<T>(p[i], &mas[p[0] + (i - 1) * p[i]]);
 }
 
-
-//Конструктор копирования
 template <class T>
 TMStack<T>::TMStack(TMStack<T> &MS) 
 {
@@ -160,7 +155,7 @@ void TMStack<T>::Repack(int k)
         if (newStart[s] <= oldStart[s])
           break;
       for (int j = s - 1; j >= i; j--)
-        for (int r = ns[i]->TNewStack<T>::GetTop() - 1; r >= 0; r--)
+        for (int r = ns[j]->TNewStack<T>::GetTop() - 1; r >= 0; r--)
           newStart[j][r] = oldStart[j][r];
       i = s - 1; //точка перед i++ в основном for
     }
@@ -195,11 +190,11 @@ T TMStack<T>::Get(int _n)
     throw exp;
   }
 }
-//
+
 template <class T>
 bool TMStack<T>::IsFull(int _n) 
 {
-  if (_n < 0 || _n >= size) 
+  if (_n < 0 || _n >= n) 
   {
     TException exp("Out-of-range");
     throw exp;
@@ -210,10 +205,21 @@ bool TMStack<T>::IsFull(int _n)
 template <class T>
 bool TMStack<T>::IsEmpty(int _n) 
 {
-  if (_n < 0 || _n >= size) 
+  if (_n < 0 || _n >= n) 
   {
     TException exp("Out-of-range");
     throw exp;
   }
   return ns[_n]->TStack<T>::IsEmpty();
+}
+
+template <class T>
+void TMStack<T>::Print()
+{
+  std::cout << "\nPrint MultiStack... " << std::endl;
+  for (int i = 0; i < n; i++) {
+    std::cout << i << " stack: " << std::endl;
+    ns[i]->Print();
+  }
+  std::cout << std::endl;
 }
