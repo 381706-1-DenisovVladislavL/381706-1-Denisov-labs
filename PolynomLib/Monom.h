@@ -21,13 +21,13 @@ public:
   void SetPower(unsigned* _power); //Изменить степени
   void SetC(double _c); //Изменить коэффициент
 
-  TMonom& operator =(TMonom& monom);
-  TMonom operator +(TMonom& monom);
-  TMonom operator -(TMonom& monom);
-  TMonom operator *(TMonom& monom);
-  bool operator ==(TMonom& monom);
-  bool operator >(TMonom& monom);
-  bool operator <(TMonom& monom);
+  TMonom& operator=(TMonom& monom);
+  TMonom operator+(TMonom& monom);
+  TMonom operator-(TMonom& monom);
+  TMonom operator*(TMonom& monom);
+  bool operator==(TMonom& monom);
+  bool operator>(TMonom& monom);
+  bool operator<(TMonom& monom);
 
   friend std::istream& operator >> (std::istream& _s, TMonom& Tm);
   friend std::ostream& operator << (std::ostream& _s, TMonom& Tm);
