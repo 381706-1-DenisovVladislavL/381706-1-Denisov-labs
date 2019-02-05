@@ -82,7 +82,7 @@ TPolynom& TPolynom::operator+=(TMonom &m)
     else 
       if (*start == m)
       {
-        *start = m + (*start);
+        *start += m;
         if (start->GetC() == 0)
         {
           TMonom *temp = start->GetNext();
@@ -96,7 +96,7 @@ TPolynom& TPolynom::operator+=(TMonom &m)
         {
           if (*_end == m)
           {
-            *_end = *_end + m;
+            *_end += m;
             if (_end->GetC() == 0)
             {
               start->SetNext(_end->GetNext());

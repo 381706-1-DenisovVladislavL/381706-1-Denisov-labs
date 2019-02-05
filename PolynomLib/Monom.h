@@ -23,7 +23,9 @@ public:
 
   TMonom& operator=(TMonom &monom);
   TMonom operator+(TMonom &monom);
+  TMonom operator+=(TMonom &monom);
   TMonom operator-(TMonom &monom);
+  TMonom operator-=(TMonom &monom);
   TMonom operator*(TMonom &monom);
   bool operator==(TMonom &monom);
   bool operator>(TMonom &monom);

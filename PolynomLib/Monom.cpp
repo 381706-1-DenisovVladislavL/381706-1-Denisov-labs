@@ -186,3 +186,23 @@ std::ostream& operator<<(std::ostream &_s, TMonom &Tm)
   }
   return _s;
 }
+
+TMonom TMonom::operator+=(TMonom &monom)
+{
+  if (n != monom.n)
+    throw TException("Different n");
+  if (!(*this == monom))
+    throw TException("Different power");
+  c += monom.c;
+  return *this;
+}
+
+TMonom TMonom::operator-=(TMonom &monom)
+{
+  if (n != monom.n)
+    throw TException("Different n");
+  if (!(*this == monom))
+    throw TException("Different power");
+  c -= monom.c;
+  return *this;
+}
