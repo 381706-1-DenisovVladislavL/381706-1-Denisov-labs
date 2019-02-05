@@ -1,4 +1,3 @@
-#pragma once 
 #include "Polynom.h"
 #include "../ExceptionLib/Exception.h"
 
