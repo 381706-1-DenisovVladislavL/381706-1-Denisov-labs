@@ -113,7 +113,7 @@ TMonom TMonom::operator-(TMonom &monom)
   return temp;
 }
 
-TMonom TMonom::operator*(TMonom &monom)
+TMonom TMonom::operator*(TMonom &monom) const
 {
   if (n != monom.n)
     throw TException("Different number of variables.");
