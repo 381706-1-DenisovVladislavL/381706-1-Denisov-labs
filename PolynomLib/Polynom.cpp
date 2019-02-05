@@ -131,7 +131,9 @@ TPolynom TPolynom::operator+(TPolynom &p)
     TMonom *_monom;
     if ((*_start) == (*_pstart))
     {
-      _monom = new TMonom((*_start) + (*_pstart));
+      TMonom tmp = (*_start);
+      tmp += (*_pstart);
+      _monom = new TMonom(tmp);
       _start = _start->GetNext();
       _pstart = _pstart->GetNext();
     }
