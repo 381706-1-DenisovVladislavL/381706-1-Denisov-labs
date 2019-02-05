@@ -72,28 +72,28 @@ TPolynom& TPolynom::operator+=(TMonom &m)
     _start = start;
     _end = start->GetNext();
     //выполняем поиск подходящей позиции для монома, который хотим добавить к полиному. Должен соблюдться лексикографический порядок
-    if (*start < m)
+    if (*start < m) //если моном больше первого монома в полиноме, то вставляем перед ним
     {
       TMonom *tmp = new TMonom(m);
       tmp->SetNext(start);
       start = tmp;
     }
     else 
-      if (*start == m)
+      if (*start == m) //если совпадает с первым
       {
-        *start += m;
-        if (start->GetC() == 0)
+        *start += m; //суммируем добавляемый и первый
+        if (start->GetC() == 0) //если коэф 0, то удаляем его, перебрасываем начало на второй
         {
           TMonom *temp = start->GetNext();
           delete[] start;
           start = temp;
         }
       }
-      else
+      else //если меньше первого
       {
-        while (_end != 0)
+        while (_end != 0) //рассматриваем пары мономов от первого к предпоследнему
         {
-          if (*_end == m)
+          if (*_end == m) //если совпал с следующим за начальным из рассматриваемых
           {
             *_end += m;
             if (_end->GetC() == 0)
@@ -103,14 +103,14 @@ TPolynom& TPolynom::operator+=(TMonom &m)
             }
             return *this;
           }
-          if (*_end < m)
+          if (*_end < m) //если оказался между каждым из мономов в паре
           {
             TMonom *tmp = new TMonom(m);
             _start->SetNext(tmp);
             tmp->SetNext(_end);
             return *this;
           }
-          _start = _end;
+          _start = _end; //если добавляемый моном, все еще меньше каждого из рассматриваемой пары, то сдвигаем итераторы
           _end = _end->GetNext();
         }
         _start->SetNext(new TMonom(m));
