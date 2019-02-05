@@ -91,6 +91,8 @@ TMonom& TMonom::operator=(TMonom &monom)
     throw TException("Different number of variables.");
   c = monom.c;
   next = monom.next;
+  delete[] power;
+  power = new unsigned[n];
   for (int i = 0; i < n; i++)
     power[i] = monom.power[i];
   return *this;
