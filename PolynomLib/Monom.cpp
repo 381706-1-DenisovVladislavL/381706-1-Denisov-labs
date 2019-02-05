@@ -81,7 +81,7 @@ void TMonom::SetC(double _c)
 }
 
 
-TMonom& TMonom::operator=(TMonom &monom)
+TMonom& TMonom::operator=(const TMonom &monom)
 {
   if (this == &monom)
     return *this;

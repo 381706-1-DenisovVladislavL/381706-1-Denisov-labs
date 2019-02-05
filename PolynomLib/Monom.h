@@ -21,7 +21,7 @@ public:
   void SetPower(unsigned *_power); //Изменить степени
   void SetC(double _c); //Изменить коэффициент
 
-  TMonom& operator=(TMonom &monom);
+  TMonom& operator=(const TMonom &monom);
   TMonom operator+(TMonom &monom);
   TMonom operator+=(TMonom &monom);
   TMonom operator-(TMonom &monom);
