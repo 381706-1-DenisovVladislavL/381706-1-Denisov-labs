@@ -1,5 +1,4 @@
 #include "Polynom.h"
-#include "../ExceptionLib/Exception.h"
 
 TPolynom::TPolynom(int _n) 
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "../ExceptionLib/Exception.h"
 
 class TMonom {
 protected:

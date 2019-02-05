@@ -1,5 +1,4 @@
 #include "Monom.h"
-#include "../ExceptionLib/Exception.h"
 
 TMonom::~TMonom()
 {
