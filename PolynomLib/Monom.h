@@ -9,7 +9,7 @@ protected:
   const int n;//Кол-во переменных
 public:
   TMonom(int _n, unsigned *_power, double c);
-  TMonom(TMonom& monom); 
+  TMonom(const TMonom &monom); 
   virtual ~TMonom(); 
 
   TMonom* GetNext(); //Получить указатель на следующий моном

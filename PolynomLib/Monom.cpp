@@ -24,7 +24,7 @@ TMonom::TMonom(int _n, unsigned *_power, double _c):n(_n)
   next = 0;
 }
 
-TMonom::TMonom(TMonom &monom) : n(monom.n)
+TMonom::TMonom(const TMonom &monom) : n(monom.n)
 {
   c = monom.c;
   next = monom.next;
