@@ -24,5 +24,7 @@ script:
   - ./ArrListTest/ArrListTest
   - ./MultiStack/MultiStack
   - ./MultiStackTest/MultiStackTest
+  - ./Polynom/Polynom
+  - ./PolynomTest/PolynomTest
 notifications:
   email: false

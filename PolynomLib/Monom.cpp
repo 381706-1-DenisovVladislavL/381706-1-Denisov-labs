@@ -1,7 +1,6 @@
 #pragma once
-
-#include "../ExceptionLib/Exception.h"
 #include "Monom.h"
+#include "../ExceptionLib/Exception.h"
 
 TMonom::~TMonom()
 {
@@ -17,7 +16,7 @@ TMonom::TMonom(int _n, unsigned* _power, double _c):n(_n)
   power = new unsigned[_n];
   if (_power != 0) {
     for (int i = 0; i < _n; i++)
-      power[i] = _power[i];
+        power[i] = _power[i];
   }
   else {
     for (int i = 0; i < _n; i++)
@@ -27,7 +26,7 @@ TMonom::TMonom(int _n, unsigned* _power, double _c):n(_n)
   next = 0;
 }
 
-TMonom::TMonom(TMonom& monom) : n(monom.n)
+TMonom::TMonom(TMonom &monom) : n(monom.n)
 {
   c = monom.c;
   next = monom.next;
@@ -70,11 +69,11 @@ void TMonom::SetPower(unsigned* _power)
         power[i] = _power[i];
       }
       else
-        throw 1;
+        throw TException("Negative power is not allowed.");
   }
   catch (...)
   {
-    throw 2;
+    throw TException("Failed to change power.");
   }
 }
 
@@ -86,21 +85,21 @@ void TMonom::SetC(double _c)
 
 TMonom& TMonom::operator =(TMonom& monom)
 {
-  if (this != &monom)
-  {
-    c = monom.c;
-    if (n != monom.n)
-      throw 1;
-    for (int i = 0; i < n; i++)
-      power[i] = monom.power[i];
-    next = monom.next;
-  }
+  if (this == &monom)
+    return *this;
+  if (n != monom.n)
+    throw TException("Different number of variables.");
+  c = monom.c;
+  next = monom.next;
+  for (int i = 0; i < n; i++)
+    power[i] = monom.power[i];
+  return *this;
 }
 
 TMonom TMonom::operator +(TMonom& monom)
 {
   if ((n != monom.n) || !(*this == monom))
-    throw 1;
+    throw TException("Different number of variables or different power.");
   TMonom temp(monom);
   temp.c = c + monom.c;
   return temp;
@@ -108,17 +107,17 @@ TMonom TMonom::operator +(TMonom& monom)
 TMonom TMonom::operator -(TMonom& monom)
 {
   if ((n != monom.n) || !(*this == monom))
-    throw 1;
+    throw TException("Different number of variables or different power.");
   TMonom temp(monom);
   temp.c = c - monom.c;
   return temp;
 }
 
-TMonom TMonom::operator*(TMonom& monom)
+TMonom TMonom::operator *(TMonom& monom)
 {
   if (n != monom.n)
-    throw 1;
-  TMonom temp(n,0,0);
+    throw TException("Different number of variables.");
+  TMonom temp(monom);
   temp.c = c * monom.c;
   for (int i = 0; i < n; i++)
     temp.power[i] = this->power[i] + monom.power[i];
@@ -128,7 +127,7 @@ TMonom TMonom::operator*(TMonom& monom)
 bool TMonom::operator ==(TMonom& monom)
 {
   if (n != monom.n)
-    throw 1;
+    throw TException("Different number of variables or different power.");
   for (int i = 0; i < n; i++) {
     if (power[i] != monom.power[i])
       return false;
@@ -138,8 +137,7 @@ bool TMonom::operator ==(TMonom& monom)
 bool TMonom::operator >(TMonom& monom)
 {
   if (n != monom.n)
-    throw 1;
-
+    throw TException("Different number of variables or different power.");
   for (int i = 0; i < n; i++) {
     if (power[i] < monom.power[i])
       return false;
@@ -150,7 +148,7 @@ bool TMonom::operator >(TMonom& monom)
 bool TMonom::operator <(TMonom& monom)
 {
   if (n != monom.n)
-    throw 1;
+    throw TException("Different number of variables or different power.");
   for (int i = 0; i < n; i++) {
     if (power[i] > monom.power[i])
       return false;
@@ -178,9 +176,11 @@ std::ostream& operator << (std::ostream& _s, TMonom& Tm)
     for (int i = 0; i < Tm.n; i++)
       if (Tm.power[i] != 0)
       {
-        _s << "X" << i;
+        _s << "(X" << i;
         if (Tm.power[i] != 1)
-          _s << "^" << Tm.power[i] << " ";
+          _s << "^" << Tm.power[i] << ")";
+        else
+          _s << ")";
       }
   }
   return _s;

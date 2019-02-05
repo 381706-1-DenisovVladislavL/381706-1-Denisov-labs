@@ -1,26 +1,25 @@
 #pragma once
-
 #include <iostream>
 
 class TMonom {
 protected:
-  TMonom* next;//Указатель на следующий
+  TMonom* next;//Указатель на следующий моном
   unsigned* power;//Степени
-  double c;// Коэффициент
+  double c;//Коэффициент
   const int n;//Кол-во переменных
 public:
-  TMonom(int _n, unsigned* _power, double c); //Конструктор с параметрами
-  TMonom(TMonom& monom); //Конструктор копирования
-  ~TMonom(); //Деструктор
+  TMonom(int _n, unsigned* _power, double c);
+  TMonom(TMonom& monom); 
+  virtual ~TMonom(); 
 
-  TMonom* GetNext(); //Указатель на следующий
-  unsigned* GetPower(); //Степени
-  double GetC(); // Коэффициент
-  const int GetN(); //Кол-во переменных
+  TMonom* GetNext(); //Получить указатель на следующий моном
+  unsigned* GetPower(); //Получить степени
+  double GetC(); //Получить коэффициент
+  const int GetN(); //Получить кол-во переменных
 
-  void SetNext(TMonom* _next); //Установить указатель на следующий
+  void SetNext(TMonom* _next); //Установить указатель на следующий моном
   void SetPower(unsigned* _power); //Изменить степени
-  void SetC(double _c); //Коэффициент
+  void SetC(double _c); //Изменить коэффициент
 
   TMonom& operator =(TMonom& monom);
   TMonom operator +(TMonom& monom);
