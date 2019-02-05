@@ -29,7 +29,7 @@ public:
   bool operator>(TMonom& monom);
   bool operator<(TMonom& monom);
 
-  friend std::istream& operator >> (std::istream& _s, TMonom& Tm);
-  friend std::ostream& operator << (std::ostream& _s, TMonom& Tm);
+  friend std::istream& operator>>(std::istream& _s, TMonom& Tm);
+  friend std::ostream& operator<<(std::ostream& _s, TMonom& Tm);
 
 };

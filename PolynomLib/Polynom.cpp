@@ -76,17 +76,17 @@ TPolynom& TPolynom::operator+=(TMonom &m)
     //выполн€ем поиск подход€щей позиции дл€ монома, который хотим добавить к полиному. ƒолжен соблюдтьс€ лексикографический пор€док
     if (*start < m)
     {
-      TMonom* tmp = new TMonom(m);
+      TMonom *tmp = new TMonom(m);
       tmp->SetNext(start);
       start = tmp;
     }
     else 
       if (*start == m)
       {
-        *start = *start + m;
+        *start = m + (*start);
         if (start->GetC() == 0)
         {
-          TMonom* temp = start->GetNext();
+          TMonom *temp = start->GetNext();
           delete[] start;
           start = temp;
         }
@@ -107,7 +107,7 @@ TPolynom& TPolynom::operator+=(TMonom &m)
           }
           if (*_end < m)
           {
-            TMonom* tmp = new TMonom(m);
+            TMonom *tmp = new TMonom(m);
             _start->SetNext(tmp);
             tmp->SetNext(_end);
             return *this;
@@ -140,7 +140,7 @@ TPolynom TPolynom::operator+(TPolynom &p)
     {
       if ((*_start) < (*_pstart))
       {
-        _monom = new TMonom((*_pstart));
+        _monom = new TMonom(*_pstart);
         _pstart = _pstart->GetNext();
       }
       else
@@ -217,7 +217,7 @@ bool TPolynom::operator==(TPolynom &p)
   return true;
 }
  
-std::ostream& operator<<(std::ostream& _s, TPolynom &poly)
+std::ostream& operator<<(std::ostream &_s, TPolynom &poly)
 {
   TMonom *_start = poly.start;
   if (_start != 0)
