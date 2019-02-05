@@ -36,9 +36,9 @@ TMonom* TPolynom::GetStart()
   return start;
 }
 
-TPolynom& TPolynom::operator=(TPolynom &p) 
+TPolynom& TPolynom::operator=(const TPolynom &p) 
 {
-  if (this == &p)
+  if (*this == p)
     return *this;
   TMonom *_start1 = start, *_start2 = start;
   while (_start1 != 0) //очищаем полином, в который будем производить присваивание
@@ -200,7 +200,7 @@ TPolynom TPolynom::operator*(TPolynom &p)
   return temp;
 }
 
-bool TPolynom::operator==(TPolynom &p) 
+bool TPolynom::operator==(const TPolynom &p) 
 {
   if (this->n != p.n)
     throw TException("Different number of variables.");
@@ -215,6 +215,8 @@ bool TPolynom::operator==(TPolynom &p)
     _start = _start->GetNext();
     _pstart = _pstart->GetNext();
   }
+  if (_pstart != 0) 
+    return false;
   return true;
 }
  

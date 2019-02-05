@@ -12,12 +12,12 @@ public:
   
   TMonom* GetStart();
 
-  TPolynom& operator=(TPolynom &p);
+  TPolynom& operator=(const TPolynom &p);
   TPolynom& operator+=(TMonom &m);
   TPolynom operator+(TPolynom &p);
   TPolynom operator*(TPolynom &p);
   
-  bool operator==(TPolynom &p);  
+  bool operator==(const TPolynom &p);  
   
   friend std::ostream& operator<<(std::ostream& _s, TPolynom& Tm);
 };
