@@ -49,10 +49,10 @@ int main()
   std::cout << "\nCopy constructor (adress of poly1: " << &poly1 << ", adress of poly1Copy: " << &poly1Copy << "): ";
   std::cout << "\nPolynom poly1Copy: " << poly1Copy << std::endl;
 
-  std::cout << "\nDemonstration of monomial input using the console.";
-  TMonom consoleMonom(3, 0, 0);
-  std::cin >> consoleMonom; 
-  std::cout << "consoleMonom: " << consoleMonom << std::endl;
+  //std::cout << "\nDemonstration of monomial input using the console.";
+  //TMonom consoleMonom(3, 0, 0);
+  //std::cin >> consoleMonom; 
+  //std::cout << "consoleMonom: " << consoleMonom << std::endl;
 
   return 0;
 }

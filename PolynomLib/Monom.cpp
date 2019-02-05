@@ -83,7 +83,7 @@ void TMonom::SetC(double _c)
 }
 
 
-TMonom& TMonom::operator =(TMonom& monom)
+TMonom& TMonom::operator=(TMonom& monom)
 {
   if (this == &monom)
     return *this;
@@ -96,7 +96,7 @@ TMonom& TMonom::operator =(TMonom& monom)
   return *this;
 }
 
-TMonom TMonom::operator +(TMonom& monom)
+TMonom TMonom::operator+(TMonom& monom)
 {
   if ((n != monom.n) || !(*this == monom))
     throw TException("Different number of variables or different power.");
@@ -104,7 +104,7 @@ TMonom TMonom::operator +(TMonom& monom)
   temp.c = c + monom.c;
   return temp;
 }
-TMonom TMonom::operator -(TMonom& monom)
+TMonom TMonom::operator-(TMonom& monom)
 {
   if ((n != monom.n) || !(*this == monom))
     throw TException("Different number of variables or different power.");
@@ -113,7 +113,7 @@ TMonom TMonom::operator -(TMonom& monom)
   return temp;
 }
 
-TMonom TMonom::operator *(TMonom& monom)
+TMonom TMonom::operator*(TMonom& monom)
 {
   if (n != monom.n)
     throw TException("Different number of variables.");
@@ -124,7 +124,7 @@ TMonom TMonom::operator *(TMonom& monom)
   return temp;
 }
 
-bool TMonom::operator ==(TMonom& monom)
+bool TMonom::operator==(TMonom& monom)
 {
   if (n != monom.n)
     throw TException("Different number of variables or different power.");
@@ -134,7 +134,7 @@ bool TMonom::operator ==(TMonom& monom)
   }
   return true;
 }
-bool TMonom::operator >(TMonom& monom)
+bool TMonom::operator>(TMonom& monom)
 {
   if (n != monom.n)
     throw TException("Different number of variables or different power.");
@@ -145,7 +145,7 @@ bool TMonom::operator >(TMonom& monom)
   return true;
 
 }
-bool TMonom::operator <(TMonom& monom)
+bool TMonom::operator<(TMonom& monom)
 {
   if (n != monom.n)
     throw TException("Different number of variables or different power.");
@@ -157,7 +157,7 @@ bool TMonom::operator <(TMonom& monom)
 
 }
 
-std::istream& operator >> (std::istream& _s, TMonom& Tm)
+std::istream& operator>>(std::istream& _s, TMonom& Tm)
 {
   std::cout << "\nEnter c: ";
   _s >> Tm.c;
@@ -168,7 +168,7 @@ std::istream& operator >> (std::istream& _s, TMonom& Tm)
   return _s;
 }
 
-std::ostream& operator << (std::ostream& _s, TMonom& Tm)
+std::ostream& operator<<(std::ostream& _s, TMonom& Tm)
 {
   _s << Tm.c;
   if (Tm.c != 0)

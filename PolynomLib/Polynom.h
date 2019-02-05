@@ -10,7 +10,7 @@ public:
   TPolynom(TPolynom &p);
   virtual ~TPolynom();    
   
-  TMonom* TPolynom::GetStart();
+  TMonom* GetStart();
 
   TPolynom& operator=(TPolynom &p);
   TPolynom& operator+=(TMonom &m);
