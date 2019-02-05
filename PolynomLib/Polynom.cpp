@@ -21,7 +21,7 @@ TPolynom::TPolynom(TPolynom &p)
     TMonom *_pstart = start;
     while (_start->GetNext() != 0)
     {
-      _pstart->SetNext(new TMonom(*(_start->GetNext())));
+      _pstart->SetNext(new TMonom(*_start->GetNext()));
       _pstart = _pstart->GetNext();
       _start = _start->GetNext();
     }
@@ -188,7 +188,7 @@ TPolynom TPolynom::operator*(TPolynom &p)
       if (_pstart->GetC() == 0)
         continue;
       TMonom k = (*_start);
-      k = k * (*_pstart);
+      k *= *_pstart;
       TMonom *_k = new TMonom(k);
       _k->SetNext(0);
       temp += *_k;
