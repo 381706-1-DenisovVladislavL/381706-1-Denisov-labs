@@ -32,13 +32,13 @@ TEST(Polish, can_convert_to_polish)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  ASSERT_EQ(rpn.Get(), '[');
-  ASSERT_EQ(rpn.Get(), '2');
-  ASSERT_EQ(rpn.Get(), ']');
-  ASSERT_EQ(rpn.Get(), '[');
-  ASSERT_EQ(rpn.Get(), '3');
-  ASSERT_EQ(rpn.Get(), ']');
-  ASSERT_EQ(rpn.Get(), '+');
+  ASSERT_EQ('[', rpn.Get());
+  ASSERT_EQ('2', rpn.Get());
+  ASSERT_EQ(']', rpn.Get());
+  ASSERT_EQ('[', rpn.Get());
+  ASSERT_EQ('3', rpn.Get());
+  ASSERT_EQ(']', rpn.Get());
+  ASSERT_EQ('+', rpn.Get());
 }
 
 TEST(Polish, can_calculate_expression_of_one_positive_member)
@@ -47,7 +47,7 @@ TEST(Polish, can_calculate_expression_of_one_positive_member)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(5, Calculate(rpn));
+  ASSERT_EQ(5, Calculate(rpn));
 }
 
 TEST(Polish, can_calculate_expression_of_one_negative_member)
@@ -56,7 +56,7 @@ TEST(Polish, can_calculate_expression_of_one_negative_member)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(-5, Calculate(rpn));
+  ASSERT_EQ(-5, Calculate(rpn));
 }
 
 
@@ -66,7 +66,7 @@ TEST(Polish, can_add)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(3, Calculate(rpn));
+  ASSERT_EQ(3, Calculate(rpn));
 }
 
 TEST(Polish, can_subtraction)
@@ -75,7 +75,7 @@ TEST(Polish, can_subtraction)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(1, Calculate(rpn));
+  ASSERT_EQ(1, Calculate(rpn));
 }
 
 TEST(Polish, can_multiplication)
@@ -84,7 +84,7 @@ TEST(Polish, can_multiplication)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(12, Calculate(rpn));
+  ASSERT_EQ(12, Calculate(rpn));
 }
 
 TEST(Polish, can_division)
@@ -93,7 +93,7 @@ TEST(Polish, can_division)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(2, Calculate(rpn));
+  ASSERT_EQ(2, Calculate(rpn));
 }
 
 TEST(Polish, can_perform_an_action_with_negative_first_number)
@@ -102,7 +102,7 @@ TEST(Polish, can_perform_an_action_with_negative_first_number)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(15, Calculate(rpn));
+  ASSERT_EQ(15, Calculate(rpn));
 }
 
 
@@ -112,7 +112,7 @@ TEST(Polish, can_perform_an_action_with_two_digit_numbers)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(50, Calculate(rpn));
+  ASSERT_EQ(50, Calculate(rpn));
 }
 
 TEST(Polish, can_perform_an_action_with_more_than_two_members)
@@ -121,7 +121,7 @@ TEST(Polish, can_perform_an_action_with_more_than_two_members)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(24, Calculate(rpn));
+  ASSERT_EQ(24, Calculate(rpn));
 }
 
 TEST(Polish, can_follow_the_order_of_operations_without_brackets)
@@ -130,7 +130,7 @@ TEST(Polish, can_follow_the_order_of_operations_without_brackets)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(14, Calculate(rpn));
+  ASSERT_EQ(14, Calculate(rpn));
 }
 
 TEST(Polish, can_follow_the_order_of_operations_with_brackets)
@@ -139,7 +139,7 @@ TEST(Polish, can_follow_the_order_of_operations_with_brackets)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(20, Calculate(rpn));
+  ASSERT_EQ(20, Calculate(rpn));
 }
 
 TEST(Polish, can_follow_the_order_of_operations_with_nested_brackets)
@@ -148,7 +148,7 @@ TEST(Polish, can_follow_the_order_of_operations_with_nested_brackets)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(-8, Calculate(rpn));
+  ASSERT_EQ(-8, Calculate(rpn));
 }
 
 TEST(Polish, can_follow_the_order_of_operations_with_several_brackets)
@@ -157,7 +157,7 @@ TEST(Polish, can_follow_the_order_of_operations_with_several_brackets)
   TString str(arr);
   TQueue<char> rpn;
   rpn = ConvertToPol(str);
-  EXPECT_EQ(11, Calculate(rpn));
+  ASSERT_EQ(11, Calculate(rpn));
 }
 
 TEST(Polish, throw_when_expression_contains_an_invalid_character)
