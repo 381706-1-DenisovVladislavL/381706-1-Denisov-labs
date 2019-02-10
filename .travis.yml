@@ -26,5 +26,7 @@ script:
   - ./MultiStackTest/MultiStackTest
   - ./Polynom/Polynom
   - ./PolynomTest/PolynomTest
+  - ./Polish/Polish
+  - ./PolishTest/PolishTest
 notifications:
   email: false

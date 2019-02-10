@@ -14,6 +14,8 @@ public:
 
   void Put(T a);
   T Get();
+  T TopView();
+
   bool IsFull();
   bool IsEmpty();
 
@@ -44,8 +46,8 @@ void TQueue<T>::Put(T a)
     throw TException("Queue is full.");
   else 
   {
-    TStack<T>::mas[start] = a;
-    start = (start + 1) % TStack<T>::size;
+    TStack<T>::Put(a);
+    TStack<T>::top = TStack<T>::top % TStack<T>::size;
     count++;
   }  
 }
@@ -57,11 +59,17 @@ T TQueue<T>::Get()
     throw TException("Queue is empty.");
   else 
   {
-    T temp = TStack<T>::mas[TStack<T>::top];
-    TStack<T>::top = (TStack<T>::top + 1) % TStack<T>::size;
+    T temp = TStack<T>::mas[start];
+    start = (start + 1) % TStack<T>::size;
     count--;
     return temp;
   }
+}
+
+template<class T>
+inline T TQueue<T>::TopView()
+{
+  return TStack<T>::mas[start];
 }
 
 template <class T>
@@ -82,13 +90,23 @@ bool TQueue<T>::IsEmpty()
     return false;
 }
 
-template <class T>
+//template <class T>
+//void TQueue<T>::Print()
+//{
+//  if (TQueue<T>::IsEmpty())
+//    throw TException("Queue is empty.");
+//  std::cout << "\nExit <-";
+//  for (int i = TStack<T>::top, j = 1; j <= count; i = (i + 1) % TStack<T>::size, j++)
+//    std::cout << "\t|" << TStack<T>::mas[i] << "| <-";
+//  std::cout << " Enter"<< std::endl;
+//}
+
+template<class T>
 void TQueue<T>::Print()
 {
   if (TQueue<T>::IsEmpty())
     throw TException("Queue is empty.");
-  std::cout << "\nExit <-";
-  for (int i = TStack<T>::top, j = 1; j <= count; i = (i + 1) % TStack<T>::size, j++)
-    std::cout << "\t|" << TStack<T>::mas[i] << "| <-";
-  std::cout << " Enter"<< std::endl;
+  for (int i = start; i < TStack<T>::top; i = (i + 1) % TStack<T>::size)
+    std::cout << TStack<T>::mas[i];
+  std::cout << std::endl;
 }

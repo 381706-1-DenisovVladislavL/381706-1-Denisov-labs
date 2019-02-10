@@ -10,16 +10,21 @@ protected:
   T* mas;
 public:
   TStack(int n = 0);
-  TStack(TStack<T> &s);
+  TStack(TStack<T> &stack);
   virtual ~TStack();
 
   void Put(T a);
   T Get();
+  T TopView();
+
+  int GetSize();
 
   void Print();
 
   bool IsFull();
   bool IsEmpty();
+
+  TStack& operator=(const TStack<T> &stack);
 };
 
 template <class T>
@@ -43,23 +48,24 @@ TStack <T> :: TStack(int n)
 }
 
 template <class T>
-TStack <T> :: TStack(TStack <T> &s) 
+TStack <T> :: TStack(TStack <T> &stack) 
 {
-  size = s.size;
-  top = s.top;
+  size = stack.size;
+  top = stack.top;
   if (size == 0)
     mas = NULL;
   else 
   {
     mas = new T[size];
     for (int i = 0; i < size; i++)
-      mas[i] = s.mas[i];
+      mas[i] = stack.mas[i];
   }
 }
 
 template<class T>
 TStack <T> :: ~TStack() 
 {
+  top = size = 0;
   delete[] mas;
 }
 
@@ -79,6 +85,23 @@ T TStack<T> :: Get()
     throw TException("Stack is empty.");
   top--;
   return mas[top];
+}
+
+template<class T>
+T TStack<T>::TopView()
+{
+  if (IsEmpty())
+    throw TException("Stack is empty.");
+  else
+  {
+    return mas[top - 1];
+  }
+}
+
+template <class T>
+int TStack<T>::GetSize()
+{
+  return size;
 }
 
 template <class T>
@@ -104,4 +127,19 @@ bool TStack<T> :: IsEmpty()
     return true;
   else
     return false;
+}
+
+template <class T>
+TStack<T>& TStack<T>::operator=(const TStack<T> &stack)
+{
+  if (this != &stack)
+  {
+    delete[] mas;
+    top = stack.top;
+    size = stack.size;
+    mas = new T[size];
+    for (int i = 0; i < size; i++)
+      mas[i] = stack.mas[i];
+  }
+  return *this;
 }
