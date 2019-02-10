@@ -1,4 +1,5 @@
 #include <gtest.h>
+
 #include "Polish.h"
 
 TEST(Polish, can_get_priority)

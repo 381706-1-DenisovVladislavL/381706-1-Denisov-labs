@@ -4,7 +4,7 @@
 
 TEST(Matrix, can_create_matrix_with_not_specified_size)
 {
-  ASSERT_NO_THROW(TMatrix <int> M());
+  ASSERT_NO_THROW(TMatrix <int> M);
 }
 
 TEST(Matrix, can_create_matrix_with_specified_size)
