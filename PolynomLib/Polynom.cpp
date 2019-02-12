@@ -98,7 +98,7 @@ TPolynom& TPolynom::operator+=(TMonom &m)
             *_end += m;
             if (_end->GetC() == 0)
             {
-              start->SetNext(_end->GetNext());
+              _start->SetNext(_end->GetNext());
               delete[] _end;
             }
             return *this;
@@ -113,7 +113,7 @@ TPolynom& TPolynom::operator+=(TMonom &m)
           _start = _end; //если добавляемый моном, все еще меньше каждого из рассматриваемой пары, то сдвигаем итераторы
           _end = _end->GetNext();
         }
-        _start->SetNext(new TMonom(m));
+        _start->SetNext(new TMonom(m)); //если добавляемый моном меньше всех в полиноме
       }
   }
   return *this;
