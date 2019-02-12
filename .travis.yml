@@ -10,5 +10,23 @@ script:
   - make -j
   - ./Vector/Vector
   - ./VectorTest/VectorTest
+  - ./Matrix/Matrix
+  - ./MatrixTest/MatrixTest
+  - ./Stack/Stack
+  - ./StackTest/StackTest
+  - ./Queue/Queue
+  - ./QueueTest/QueueTest
+  - ./List/List
+  - ./ListTest/ListTest
+  - ./StackList/StackList
+  - ./StackListTest/StackListTest
+  - ./ArrList/ArrList
+  - ./ArrListTest/ArrListTest
+  - ./MultiStack/MultiStack
+  - ./MultiStackTest/MultiStackTest
+  - ./Polynom/Polynom
+  - ./PolynomTest/PolynomTest
+  - ./Polish/Polish
+  - ./PolishTest/PolishTest
 notifications:
   email: false

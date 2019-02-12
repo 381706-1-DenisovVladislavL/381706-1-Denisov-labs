@@ -5,58 +5,108 @@
 template <class T>
 class TQueue : public TStack <T> {
 protected:
-	int Start;
-	int Count;
+  int start;
+  int count;
 public:
-	TQueue(int n = 0);
-	TQueue(TQueue <T> &Q);
-	void Put(T A);
-	T Get();
-	bool IsFull();
-	bool IsEmpty();
+  TQueue(int n = 0);
+  TQueue(TQueue <T> &q);
+  virtual ~TQueue();
+
+  void Put(T a);
+  T Get();
+  T TopView();
+
+  bool IsFull();
+  bool IsEmpty();
+
+  void Print();
 };
 
 template <class T>
-TQueue<T>::TQueue(int n) : TStack<T>(n) { Start = 0; Count = 0; }
-
-template <class T>
-TQueue<T>::TQueue(TQueue<T> &Q) : TStack<T>(Q) { Start = Q.Start; Count = Q.Count; }
-
-template <class T>
-void TQueue<T>::Put(T A) {
-	if (IsFull()) 
-		throw 1;
-	else {
-		TStack<T>::Mas[Start] = A;
-		Start = (Start + 1) % TStack<T>::Size;
-		Count++;
-	}	
+TQueue<T>::TQueue(int n) : TStack<T>(n) 
+{ 
+  start = 0; 
+  count = 0; 
 }
 
 template <class T>
-T TQueue<T>::Get() {
-	if (IsEmpty()) 
-		throw 1;
-	else {
-		T temp = TStack<T>::Mas[TStack<T>::Top];
-		TStack<T>::Top = (TStack<T>::Top + 1) % TStack<T>::Size;
-		Count--;
-		return temp;
-	}
+TQueue<T>::TQueue(TQueue<T> &q) : TStack<T>(q) 
+{ 
+  start = q.start; 
+  count = q.count; 
 }
 
 template <class T>
-bool TQueue<T>::IsFull() {
-	if (Count == TStack<T>::Size)
-		return true;
-	else
-		return false;
+TQueue<T>::~TQueue() {}
+
+template <class T>
+void TQueue<T>::Put(T a) 
+{
+  if (IsFull()) 
+    throw TException("Queue is full.");
+  else 
+  {
+    TStack<T>::Put(a);
+    TStack<T>::top = TStack<T>::top % TStack<T>::size;
+    count++;
+  }  
 }
 
 template <class T>
-bool TQueue<T>::IsEmpty() {
-	if (Count == 0)
-		return true;
-	else 
-		return false;
+T TQueue<T>::Get() 
+{
+  if (IsEmpty()) 
+    throw TException("Queue is empty.");
+  else 
+  {
+    T temp = TStack<T>::mas[start];
+    start = (start + 1) % TStack<T>::size;
+    count--;
+    return temp;
+  }
+}
+
+template<class T>
+inline T TQueue<T>::TopView()
+{
+  return TStack<T>::mas[start];
+}
+
+template <class T>
+bool TQueue<T>::IsFull() 
+{
+  if (count == TStack<T>::size)
+    return true;
+  else
+    return false;
+}
+
+template <class T>
+bool TQueue<T>::IsEmpty() 
+{
+  if (count == 0)
+    return true;
+  else 
+    return false;
+}
+
+//template <class T>
+//void TQueue<T>::Print()
+//{
+//  if (TQueue<T>::IsEmpty())
+//    throw TException("Queue is empty.");
+//  std::cout << "\nExit <-";
+//  for (int i = TStack<T>::top, j = 1; j <= count; i = (i + 1) % TStack<T>::size, j++)
+//    std::cout << "\t|" << TStack<T>::mas[i] << "| <-";
+//  std::cout << " Enter"<< std::endl;
+//}
+
+template<class T>
+void TQueue<T>::Print()
+{
+  if (TQueue<T>::IsEmpty())
+    throw TException("Queue is empty.");
+  for (int i = start; i < TStack<T>::top; i = (i + 1) % TStack<T>::size)
+    std::cout << TStack<T>::mas[i];
+  std::cout << std::endl;
 }

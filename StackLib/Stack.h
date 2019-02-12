@@ -1,88 +1,145 @@
 #pragma once
+#include <iostream>
+#include "../ExceptionLib/Exception.h"
 
 template <class T>
 class TStack {
 protected:
-	int Size;
-	int Top;
-	T* Mas;
+  int size;
+  int top;
+  T* mas;
 public:
-	TStack(int n = 0);
-	TStack(TStack<T> &S);
-	void Put(T A);
-	T Get();
-	bool IsFull();
-	bool IsEmpty();
+  TStack(int n = 0);
+  TStack(TStack<T> &stack);
+  virtual ~TStack();
+
+  void Put(T a);
+  T Get();
+  T TopView();
+
+  int GetSize();
+
+  void Print();
+
+  bool IsFull();
+  bool IsEmpty();
+
+  TStack& operator=(const TStack<T> &stack);
 };
 
-//Конструктор по умолчанию
 template <class T>
-TStack <T> :: TStack(int n) {
-	if (n < 0) throw 1;
-	else 
-		if (n == 0) {
-			Size = Top = 0;
-			Mas = NULL;
-		}
-		else {
-			Size = n;
-			Top = 0;
-			Mas = new T[Size];
-			for (int i = 0; i < Size; i++)
-				Mas[i] = 0;
-		}
+TStack <T> :: TStack(int n) 
+{
+  if (n < 0) 
+    throw TException("Negative Stack size.");
+  if (n == 0) 
+  {
+    size = top = 0;
+    mas = NULL;
+  }
+  else 
+  {
+    size = n;
+    top = 0;
+    mas = new T[size];
+    for (int i = 0; i < size; i++)
+      mas[i] = 0;
+  }
 }
 
-//Конструктор копирования
 template <class T>
-TStack <T> :: TStack(TStack <T> &S) {
-	Size = S.Size;
-	Top = S.Top;
-	if (Size == 0)
-		Mas = NULL;
-	else {
-		Mas = new T[Size];
-		for (int i = 0; i < Size; i++)
-			Mas[i] = S.Mas[i];
-	}
+TStack <T> :: TStack(TStack <T> &stack) 
+{
+  size = stack.size;
+  top = stack.top;
+  if (size == 0)
+    mas = NULL;
+  else 
+  {
+    mas = new T[size];
+    for (int i = 0; i < size; i++)
+      mas[i] = stack.mas[i];
+  }
 }
 
-//Добавление элемента
-template <class T>
-void TStack<T> :: Put(T A) {
-	if (IsFull())
-		throw 1;
-	else {
-		Mas[Top] = A;
-		Top++;
-	}
+template<class T>
+TStack <T> :: ~TStack() 
+{
+  top = size = 0;
+  delete[] mas;
 }
 
-//Удаление элемента
 template <class T>
-T TStack<T> :: Get() {
-	if (IsEmpty()) 
-		throw 1;
-	else {
-		Top--;
-		return Mas[Top + 1];
-	}
+void TStack<T> :: Put(T a) 
+{
+  if (IsFull()) 
+    throw TException("Stack is full.");
+  mas[top] = a;
+  top++;
 }
 
-//Проверка на полноту
 template <class T>
-bool TStack<T> :: IsFull() {
-	if (Top >= Size)
-		return true;
-	else
-		return false;
+T TStack<T> :: Get()
+{
+  if (IsEmpty())
+    throw TException("Stack is empty.");
+  top--;
+  return mas[top];
 }
 
-//Проверка на пустоту
+template<class T>
+T TStack<T>::TopView()
+{
+  if (IsEmpty())
+    throw TException("Stack is empty.");
+  else
+  {
+    return mas[top - 1];
+  }
+}
+
 template <class T>
-bool TStack<T> :: IsEmpty() {
-	if (Top == 0)
-		return true;
-	else
-		return false;
+int TStack<T>::GetSize()
+{
+  return size;
+}
+
+template <class T>
+void TStack<T>::Print()
+{
+  for (int i = top - 1; i >= 0; i--)
+    std::cout << "\t|" << mas[i] << "|" << std::endl;
+}
+
+template <class T>
+bool TStack<T> :: IsFull() 
+{
+  if (top >= size)
+    return true;
+  else
+    return false;
+}
+
+template <class T>
+bool TStack<T> :: IsEmpty() 
+{
+  if (top == 0)
+    return true;
+  else
+    return false;
+}
+
+template <class T>
+TStack<T>& TStack<T>::operator=(const TStack<T> &stack)
+{
+  if (this != &stack)
+  {
+    delete[] mas;
+    top = stack.top;
+    size = stack.size;
+    mas = new T[size];
+    for (int i = 0; i < size; i++)
+      mas[i] = stack.mas[i];
+  }
+  return *this;
 }
