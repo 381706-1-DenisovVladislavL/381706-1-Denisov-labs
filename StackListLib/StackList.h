@@ -13,6 +13,8 @@ public:
   void Put(T a);
   T Get();
 
+  bool IsEmpty();
+
   void Print();
 };
 
@@ -39,6 +41,12 @@ T TStackList<T>::Get()
   if (TList<T>::IsEmpty())
     throw TException("Stack is empty.");
   return TList<T>::GetBegin();
+}
+
+template<class T>
+bool TStackList<T>::IsEmpty()
+{
+	return TList<T>::IsEmpty();
 }
 
 template <class T>
