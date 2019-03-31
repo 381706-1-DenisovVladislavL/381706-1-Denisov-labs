@@ -11,7 +11,7 @@ int TNode::sizeMas = 0;
 
 TNode::TNode(char c)
 {
-	Init(50);
+	Init(10);
 	nextLevel = NULL;
 	sosed = NULL;
 	level = 3; 
@@ -22,7 +22,7 @@ TNode::TNode(TString s)
 {
 	if (s.GetLength() == 0)
 		throw TException("Inccorrect string");
-	Init(50);
+	Init(10);
 	data = 0;
 	nextLevel = new TNode(s[0]);
 	level = 2;
@@ -39,7 +39,7 @@ TNode::TNode(int _level)
 {
 	if ((_level < 0) || (_level > 3))
 		throw TException("Incorrect level");
-	Init(50);
+	Init(10);
 	nextLevel = 0;
 	sosed = 0;
 	level = _level;
@@ -48,7 +48,7 @@ TNode::TNode(int _level)
 
 TNode::TNode(TNode& other) 
 {
-	Init(50);
+	Init(10);
 	data = other.data;
 	nextLevel = other.nextLevel;
 	sosed = other.sosed;
@@ -217,18 +217,20 @@ void TNode::Init(int size)
 		for (int i = 1; i < size; i++)
 		{
 			int j = i * sizeof(TNode);
-			end->nextLevel = (TNode*)(&mas[j]);
+			end->sosed = (TNode*)(&mas[j]);
+			end = end->sosed;
 		}
-		end->nextLevel = 0;
+		end->sosed = 0;
 	}
 }
 
-void * TNode::operator new(size_t n)
+void* TNode::operator new(size_t n)
 {
 	if (_free != 0)
 	{
-		TNode* a = _free; // берем первую свободную ячейку и возвращаем ее пользователю
-		_free = _free->nextLevel; // а во фри кладет указатель на следующий
+		TNode* a;
+		a = _free; // берем первую свободную ячейку и возвращаем ее пользователю
+		_free = _free->sosed; // а во фри кладет указатель на следующий
 		return a;
 	}
 	return NULL;

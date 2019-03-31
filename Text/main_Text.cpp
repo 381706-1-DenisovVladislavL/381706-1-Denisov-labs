@@ -11,8 +11,9 @@ int main()
   cout << "An example of working with Text."
     << endl << "Denisov Vladislav L. Group 381706-1" << endl;
   
-  TNode node('a');
-
+  //TNode node('a');
+  TString mystr("This");
+  TNode nodestr(mystr);
   //TText mytext();
 	
   return 0;
