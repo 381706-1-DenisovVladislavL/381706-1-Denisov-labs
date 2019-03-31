@@ -11,6 +11,7 @@ int TNode::sizeMas = 0;
 
 TNode::TNode(char c)
 {
+	Init(50);
 	nextLevel = NULL;
 	sosed = NULL;
 	level = 3; 
@@ -21,6 +22,7 @@ TNode::TNode(TString s)
 {
 	if (s.GetLength() == 0)
 		throw TException("Inccorrect string");
+	Init(50);
 	data = 0;
 	nextLevel = new TNode(s[0]);
 	level = 2;
@@ -37,6 +39,7 @@ TNode::TNode(int _level)
 {
 	if ((_level < 0) || (_level > 3))
 		throw TException("Incorrect level");
+	Init(50);
 	nextLevel = 0;
 	sosed = 0;
 	level = _level;
@@ -45,6 +48,7 @@ TNode::TNode(int _level)
 
 TNode::TNode(TNode& other) 
 {
+	Init(50);
 	data = other.data;
 	nextLevel = other.nextLevel;
 	sosed = other.sosed;
@@ -238,7 +242,7 @@ void TNode::operator delete(void * a)
 	t->data = -1;
 }
 
-void TNode::Gc()
+void TNode::GarbageCollector()
 {
 	_free = 0; // мы сбрасываем свободную память
 	for (int i = 0; i < sizeMas; i++)

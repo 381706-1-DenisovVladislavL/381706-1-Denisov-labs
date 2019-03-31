@@ -45,6 +45,6 @@ public:
 
 	void* operator new (size_t n);
 	void operator delete (void* a);
-	static void Gc(); //сборщик мусора
+	static void GarbageCollector(); //сборщик мусора
 };
 
