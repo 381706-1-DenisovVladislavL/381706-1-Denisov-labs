@@ -9,12 +9,12 @@ TText::TText()
 char * TText::Copy(int start, int n)
 {
 
-	return nullptr;
+	return 0;
 }
 
 char * TText::Del(int start, int n)
 {
-	return nullptr;
+	return 0;
 }
 
 void TText::Ins(TNode* start, TNode* d)
@@ -44,7 +44,7 @@ TNode* TText::Find(char* a)
 				return i();
 		}
 	}
-	return nullptr;
+	return 0;
 }
 
 int TText::FindIndex(char * a)

@@ -176,9 +176,9 @@ TNode* TNode::GetNextLevel()
 	return nextLevel;
 }
 
-void TNode::SetNextLevel(TNode* nl)
+void TNode::SetNextLevel(TNode* _nextLevel)
 {
-	nextLevel = nl;
+	nextLevel = _nextLevel;
 }
 
 TNode* TNode::GetSosed()
@@ -186,9 +186,9 @@ TNode* TNode::GetSosed()
 	return sosed;
 }
 
-void TNode::SetSosed(TNode* S)
+void TNode::SetSosed(TNode* _sosed)
 {
-	sosed = S;
+	sosed = _sosed;
 }
 
 char TNode::GetData()
@@ -227,7 +227,7 @@ void * TNode::operator new(size_t n)
 		_free = _free->nextLevel; // а во фри кладет указатель на следующий
 		return a;
 	}
-	return nullptr;
+	return 0;
 }
 
 void TNode::operator delete(void * a)
