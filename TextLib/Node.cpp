@@ -227,7 +227,7 @@ void * TNode::operator new(size_t n)
 		_free = _free->nextLevel; // а во фри кладет указатель на следующий
 		return a;
 	}
-	return 0;
+	return NULL;
 }
 
 void TNode::operator delete(void * a)

@@ -11,8 +11,8 @@ public:
   friend std::ostream& operator<<(std::ostream &os, const TString &string);
   
   TString();
-  TString(TString &string);
-  TString(char* _str);
+  TString(const TString &string);
+  TString(const char* _str);
   ~TString();
 
   int GetLength();

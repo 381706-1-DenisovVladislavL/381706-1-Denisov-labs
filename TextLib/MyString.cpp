@@ -6,7 +6,7 @@ TString::TString()
 	length = 0;
 }
 
-TString::TString(TString &string)
+TString::TString(const TString &string)
 {
 	length = string.length;
 	if (length != 0)
@@ -19,7 +19,7 @@ TString::TString(TString &string)
 		str = 0;
 }
 
-TString::TString(char* _str) 
+TString::TString(const char* _str) 
 {
   if (_str == 0)
     throw TException("Empty string.");
