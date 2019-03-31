@@ -239,7 +239,7 @@ void* TNode::operator new(size_t n)
 void TNode::operator delete(void * a)
 {
 	TNode* t = (TNode*)(a);
-	t->nextLevel = _free; // слово в начало списка вводим еще один элемент
+	t->sosed = _free; // слово в начало списка вводим еще один элемент
 	_free = t;
 	t->data = -1;
 }
@@ -252,7 +252,7 @@ void TNode::GarbageCollector()
 		int j = i * sizeof(TNode);
 		if (((TNode*)(&mas[j]))->data == '-1')
 		{
-			((TNode*)(&mas[j]))->nextLevel = _free;
+			((TNode*)(&mas[j]))->sosed = _free;
 			_free = (TNode*)(&mas[j]);
 		}
 	}
