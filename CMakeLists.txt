@@ -46,6 +46,9 @@ set(Polish Polish)
 set(PolishLib PolishLib)
 set(PolishTest PolishTest)
 
+set(Plex Plex)
+set(PlexLib PlexLib)
+set(PlexTest PlexTest)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
@@ -114,5 +117,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolishLib)
 add_subdirectory(Polish)
 add_subdirectory(PolishLib)
 add_subdirectory(PolishTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PlexLib)
+add_subdirectory(Plex)
+add_subdirectory(PlexLib)
+add_subdirectory(PlexTest)
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
