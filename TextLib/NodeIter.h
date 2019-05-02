@@ -8,13 +8,14 @@ class TNodeIter
 {
 protected:
 	TNode* root;
-	TNode* cur;
-	TStackList<TNode*> st;
+	TNode* current;
+	TStackList<TNode*> stack;
 public:
-	TNodeIter(TNode*r); //конструктор по умолчанию
-	TNodeIter& GoNext(); //перейти на следующий элемент
-	void Reset(); //сбросить текущую позицию и установить указатель на начало
-	bool IsEnd(); //если просмотр завершен, то вернет истину
+	TNodeIter(TNode* _root);
+	TNode* GoNext(); //перейти к следующему
+	void Reset(); //вернуться к корню
+	void PutInStack(TNode* node);
+	bool IsEnd();
 	TNode* operator()();
 	TNodeIter& operator++();
 };

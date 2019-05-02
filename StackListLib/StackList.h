@@ -15,6 +15,7 @@ public:
 
   bool IsEmpty();
 
+  void Clear();
   void Print();
 };
 
@@ -61,4 +62,17 @@ void TStackList<T>::Print()
     temp = temp->GetNext();
   } while (temp != 0);
   std::cout << std::endl;
+}
+
+template <class T>
+void TStackList<T>::Clear()
+{
+	while (IsEmpty() == false)
+	{
+		Get();
+		/*TElem<T>* tmp = TList<T>::begin;
+		TList<T>::begin = tmp->GetNext();
+		delete tmp;
+		TList<T>count--;*/
+	}
 }

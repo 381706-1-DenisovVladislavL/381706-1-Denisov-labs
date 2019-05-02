@@ -1,50 +1,59 @@
 #pragma once
-#include "../TextLib/MyString.h"
+#include "../StackListLib/StackList.h"
+#include <cstring>
+#include <iostream>
 
-class TNode {
+using namespace std;
 
+class TNode
+{
 protected:
-	TNode* nextLevel; // указатель на следующий уровень
-	TNode* sosed; //указатель на соседа
-	int level; //уровень листочка 0 - текст, 1 - строка, 2 - слово, 3 - символ.
-	char data; // данное листочка
-	
-	static TNode* start; // начало
-	static TNode* end; // конец
-	static TNode* _free; // пустое место
-	static char* mas; // память под текст
-	static int sizeMas; // размер массива, где будет вся наша память
+	TNode* same_level; //указатель на следующий элемент текста
+	TNode* next_level; //указатель на внутренний элемент в текущем элементе текста
+	char letter; //буква
+	int level; //текущий уровень
 
+	static char* memory;
+	static TNode* start;
+	static TNode* end;
+	static TNode* cur_free; //указатель на текущий элемент в ОБЩЕЙ памяти
+	static int node_size; //максимально доступное число элементов
+	static int busy_node_size; //число занятых элементов
 public:
-	TNode(char c);
-	TNode(TString s);
-	TNode(int _level);
-	TNode(TNode& other);
+	TNode(const int _level);
+	TNode(const char* word);
+	TNode(const char _letter = 0);
+	TNode(const TNode& node);
+	~TNode();
 
-	TNode& operator=(const TNode& a);
-	TNode& operator+=(TNode& a);
-	TNode& operator+=(char c);
-	TNode& operator+=(char* c);
+	TNode& operator=(const TNode& node);
+	TNode& operator+=(const TNode& node);
+	TNode& operator+=(const char _letter);
+	TNode& operator+=(const char* word);
 
-	char* ToStr();
-	TNode* Clone();
+	void* operator new (const size_t size);
+	void operator delete (void* node);
 
-	int GetLevel();
-	void SetLevel(int lev);
+	void SetSameLevel(TNode* _same_level);
+	void SetNextLevel(TNode* _next_level);
+	void SetLetter(const char _letter);
+	void SetLevel(const int _level);
+	static void SetNodeSize(const int size);
 
+	TNode* GetSameLevel();
 	TNode* GetNextLevel();
-	void SetNextLevel(TNode* _nextLevel);
+	char GetLetter();
+	int GetLevel();
+	static int GetNodeSize();
+	static int GetNodeBusySize();
 
-	TNode* GetSosed();
-	void SetSosed(TNode* _sosed);
+	void Initialization(const int size = 100);
+	void GarbageCollector();
+	static void ClearMemory(void);
 
-	char GetData();
-	void SetData(char c);
-
-	void Init(int size); // инициализация статических полей
-
-	void* operator new (size_t n);
-	void operator delete (void* a);
-	static void GarbageCollector(); //сборщик мусора
+	TNode* Clone();
+	char* ToString();
+	void Output();
+	friend ostream& operator<<(ostream& os, TNode& text);
 };
 

@@ -1,42 +1,52 @@
 #include "../TextLib/NodeIter.h"
 
-TNodeIter::TNodeIter(TNode *r)
+TNodeIter::TNodeIter(TNode* _root)
 {
-	root = cur = r;
-	st.Put(root);
+	root = _root;
+	current = root;
+	stack.Put(root);
 }
 
-TNodeIter& TNodeIter::GoNext()
+TNode* TNodeIter::GoNext()
 {
-	cur = st.Get();
-	if (cur->GetSosed() != 0)
-	{
-		st.Put(cur->GetSosed());
-	}
-	if (cur->GetNextLevel() != 0)
-		st.Put(cur->GetNextLevel());
-	return *this;
+	TNode* tmp;
+	if (stack.IsEmpty() == false)
+		tmp = stack.Get();
+	if (tmp->GetSameLevel() != NULL)
+		stack.Put(tmp->GetSameLevel());
+	if (tmp->GetNextLevel() != NULL)
+		stack.Put(tmp->GetNextLevel());
+	current = tmp;
+	return current;
 }
 
 void TNodeIter::Reset()
 {
-	cur = root;
-	while (!(st.IsEmpty()))
-		st.Get();
-	st.Put(cur);
+	stack.Clear();
+	stack.Put(root);
+	current = root;
 }
 
 bool TNodeIter::IsEnd()
 {
-	return st.IsEmpty();
+	if (stack.IsEmpty() == true)
+		return true;
+	else
+		return false;
+}
+
+void TNodeIter::PutInStack(TNode* node)
+{
+	stack.Put(node);
 }
 
 TNode* TNodeIter::operator()()
 {
-	return cur;
+	return current;
 }
 
 TNodeIter& TNodeIter::operator++()
 {
-	return TNodeIter::GoNext();
+	TNodeIter tmp(root);
+	return tmp;
 }
