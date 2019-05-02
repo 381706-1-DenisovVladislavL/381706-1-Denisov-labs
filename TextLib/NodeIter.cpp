@@ -47,6 +47,7 @@ TNode* TNodeIter::operator()()
 
 TNodeIter& TNodeIter::operator++()
 {
-	TNodeIter tmp(root);
-	return tmp;
+	//TNodeIter tmp(root);
+	//return tmp;
+	return *this
 }
