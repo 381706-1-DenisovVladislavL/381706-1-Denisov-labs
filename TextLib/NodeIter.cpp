@@ -10,7 +10,7 @@ TNodeIter::TNodeIter(TNode* _root)
 TNode* TNodeIter::GoNext()
 {
 	TNode* tmp;
-	if (stack.IsEmpty() == false)
+	if (!(stack.IsEmpty()))
 		tmp = stack.Get();
 	if (tmp->GetSameLevel() != NULL)
 		stack.Put(tmp->GetSameLevel());

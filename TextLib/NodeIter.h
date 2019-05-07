@@ -14,7 +14,7 @@ public:
 	TNodeIter(TNode* _root);
 	TNode* GoNext(); //перейти к следующему
 	void Reset(); //вернуться к корню
-	void PutInStack(TNode* node);
+	void PutInStack(TNode* node); //положить в стек
 	bool IsEnd();
 	TNode* operator()();
 	TNodeIter& operator++();

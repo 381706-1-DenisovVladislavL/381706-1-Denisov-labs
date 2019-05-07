@@ -9,7 +9,7 @@ TText::TText(const char* string)
 	int len = strlen(string);
 	int space_pos[100]; //позиции пробелов в тексте
 	int space_count = 0; //число пробелов
-	int iter = 0;
+	int iter = 0; //итератор по отдельно взятому слову
 	for (int i = 0; i < len; i++)
 		if (string[i] == ' ')
 		{
@@ -23,29 +23,29 @@ TText::TText(const char* string)
 	space_count = 0;
 	for (int i = 0; i <= len; i++)
 	{
-		if (string[i] != ' ' && i != len)
+		if (string[i] != ' ' && i != len) //заполняем слово
 		{
 			word[iter] = string[i];
 			iter++;
 		}
-		else if (string[i] == ' ' || i == len)
+		else if (string[i] == ' ' || i == len) //если слово или строка закончились
 		{
-			word[iter] = 0;
-			if (i == iter)
+			word[iter] = 0; //разделитель
+			if (i == iter) //выполнится только для 1го слова
 			{
-				tmp->SetNextLevel(new TNode(word));
-				tmp = tmp->GetNextLevel();
+				tmp->SetNextLevel(new TNode(word));  //создаем первое слово в строке
+				tmp = tmp->GetNextLevel();  //переходим к этому слову
 			}
 			else
 			{
-				tmp->SetSameLevel(new TNode(word));
-				tmp = tmp->GetSameLevel();
+				tmp->SetSameLevel(new TNode(word)); //создаем очередное слово в строке (со 2го и дальше)
+				tmp = tmp->GetSameLevel(); //переходим к этому слову
 			}
 			delete[] word;
-			iter = 0;
-			if (i == len)
+			iter = 0; //подготовка к обработке следующего слова
+			if (i == len) //строка закончилась - завершаем обработку в целом
 				break;
-			word = new char[space_pos[space_count + 1] - space_pos[space_count]];
+			word = new char[space_pos[space_count + 1] - space_pos[space_count]]; //память под следующее слово
 		}
 	}
 }
@@ -106,17 +106,19 @@ void TText::Insert(const int pos, const char* string)
 	}
 }
 
+//вставка после start
 void TText::Insert(TNode* start, TNode* string)
 {
 	TNode* tmp1 = string;
+//	TNode* tmp1 = new TNode(*string); //вроде так правильно
 	TNode* tmp2 = root;
 	TNodeIter iter(root);
 	while (tmp2 != start)
 	{
 		tmp2 = iter.GoNext();
 	}
-	tmp1->SetSameLevel(tmp2->GetSameLevel());
-	tmp2->SetSameLevel(tmp1);
+	tmp1->SetSameLevel(tmp2->GetSameLevel()); //после вставляемой строки должно стоять то, что стояло после start в исходном тексте
+	tmp2->SetSameLevel(tmp1); //после start теперь будет стоять полученная строка string
 }
 
 int TText::Find(const char* string)
