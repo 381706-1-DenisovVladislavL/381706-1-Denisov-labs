@@ -205,22 +205,21 @@ TEST(Node, can_create_and_delete_node_element)
 	TNode::ClearMemory();
 }
 
-TEST(Node, throw_when_memory_is_end)
-{
-	try
-	{
-		while (1)
-			TNode node("test_memory_is_end"); //пока память есть - создаем
-	}
-	catch (...)
-	{
-		ASSERT_ANY_THROW(TNode node("test_memory_is_end")); //ловим исключение
-	}
-}
+//TEST(Node, throw_when_memory_is_end)
+//{
+//	try
+//	{
+//		while (1)
+//			TNode node("test_memory_is_end"); //пока память есть - создаем
+//	}
+//	catch (...)
+//	{
+//		ASSERT_ANY_THROW(TNode node("test_memory_is_end")); //ловим исключение
+//	}
+//}
 
 TEST(Node, can_set_letter_without_throws)
 {
-	TNode::ClearMemory();
 	TNode node('a');
 	ASSERT_NO_THROW(node.SetLetter('b'));
 }
