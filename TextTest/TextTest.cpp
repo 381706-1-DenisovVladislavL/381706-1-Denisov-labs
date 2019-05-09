@@ -128,7 +128,7 @@ TEST(Text, can_delete_element_1_correct)
 
 TEST(Text, can_delete_element_2_without_throws)
 {
-	TText text("My text");
+	TText text("Mytext");
 	TNode* tmp = text.GetRoot()->GetNextLevel()->GetNextLevel()->GetNextLevel();
 	ASSERT_NO_THROW(text.Delete(tmp, 2));
 }
@@ -139,6 +139,7 @@ TEST(Text, can_delete_element_2_correct)
 	TText text("Mytext");
 	TNode* tmp = text.GetRoot()->GetNextLevel()->GetNextLevel()->GetNextLevel();
 	text.Delete(tmp, 2);
+	text.GarbageCollector();
 	EXPECT_EQ(text.GetRoot()->ToString()[0], 't');
 	EXPECT_EQ(text.GetRoot()->ToString()[1], 'e');
 	EXPECT_EQ(text.GetRoot()->ToString()[2], 'x');
