@@ -1,181 +1,212 @@
 ﻿#include "Plex.h"
+
 TPlex::TPlex()
 {
-  first = NULL;
-  last = NULL;
+	right = NULL;
+	left = NULL;
 }
-//............................................
-TPlex::TPlex(TPoint *_first, TPoint *_last)
+
+TPlex::TPlex(TPoint *_right, TPoint *_left)
 {
-  first = _first;
-  last = _last;
+	right = _right;
+	left = _left;
 }
-//............................................
-TPlex::TPlex(TPlex &A)
+
+TPlex::TPlex(TPlex& plex)
 {
-  TPlex *l, *r;
-  l = dynamic_cast <TPlex*> (A.last);
-  r = dynamic_cast <TPlex*> (A.first);
-  if (l != 0)//в данном случае, А.last указывает на плекс, его требуется создать
-    last = new TPlex(*l);
-  else
-    last = new TPoint(*A.last);
-  if (r != 0)//это плекс, его требуется создать
-    first = new TPlex(*r);
-  else
-    first = new TPoint(*A.first);
+	TPlex *tmp1, *tmp2;
+	tmp1 = dynamic_cast <TPlex*> (plex.left);
+	tmp2 = dynamic_cast <TPlex*> (plex.right);
+	if (tmp1 != 0) //создаем плекс
+		left = new TPlex(*tmp1);
+	else
+		left = new TPoint(*plex.left);
+	if (tmp2 != 0) //создаем плекс
+		right = new TPlex(*tmp2);
+	else
+		right = new TPoint(*plex.right);
 }
-//............................................
-void TPlex::Add(TPoint *_first, TPoint *_last)
+
+void TPlex::Add(TPoint *_right, TPoint *_left)
 {
-  if (first == 0 && last == 0)//только создали плекс
-  {
-    first = _first;
-    last = _last;
-  }
-  else
-  {
-    TStack <TPoint*> point;
-    TStack <TPlex*> plex;
-    point.Put(first);
-    point.Put(last);
-    plex.Put(this);
-    plex.Put(this);
-    bool flag = true;
-    while (flag && (!point.IsEmpty() || !plex.IsEmpty()))
-    {
-      TPoint *t = point.Get();
-      TPlex *p = dynamic_cast <TPlex*> (t);
-      TPlex *par = plex.Get();
-      if (t->GetX() == _first->GetX() && t->GetY() == _first->GetY())
-      {
-        if (par->last == t)
-          par->last = new TPlex(_last, _first);
-        else
-          par->first = new TPlex(_last, _first);
-        flag = false;
-      }
-      else if (t->GetX() == _last->GetX() && t->GetY() == _last->GetY())
-      {
-        if (par->last == t)
-          par->last = new TPlex(_first, _last);
-        else
-          par->first = new TPlex(_first, _last);
-        flag = false;
-      }
-      else if (p != 0)
-      {
-        point.Put(p->last);
-        point.Put(p->first);
-        plex.Put(p);
-        plex.Put(p);
-      }
-    }
-    if (flag)
-      throw TException("Error line");
-  }
+	if (right == 0 && left == 0) //если плекс пустой
+	{
+		right = _right;
+		left = _left;
+	}
+	else //если уже что-то содержит
+	{
+		TStackList <TPoint*> point;
+		TStackList <TPlex*> plex;
+		point.Put(right);
+		point.Put(left);
+		plex.Put(this);
+		plex.Put(this);
+		bool flag = true;
+		while (flag && (!point.IsEmpty() || !plex.IsEmpty()))
+		{
+			TPoint *t = point.Get();
+			TPlex *p = dynamic_cast <TPlex*> (t);
+			TPlex *par = plex.Get();
+			if (t->GetX() == _right->GetX() && t->GetY() == _right->GetY())
+			{
+				if (par->left == t)
+					par->left = new TPlex(_left, _right);
+				else
+					par->right = new TPlex(_left, _right);
+				flag = false;
+			}
+			else if (t->GetX() == _left->GetX() && t->GetY() == _left->GetY())
+			{
+				if (par->left == t)
+					par->left = new TPlex(_right, _left);
+				else
+					par->right = new TPlex(_right, _left);
+				flag = false;
+			}
+			else if (p != 0)
+			{
+				point.Put(p->left);
+				point.Put(p->right);
+				plex.Put(p);
+				plex.Put(p);
+			}
+		}
+		if (flag)
+			throw TException("Error line");
+	}
 }
-//............................................
-TPoint* TPlex::GetFirst()
+
+TPoint* TPlex::GetRight()
 {
-  return first;
+	return right;
 }
-//............................................
-TPoint* TPlex::GetLast()
+
+TPoint* TPlex::GetLeft()
 {
-  return last;
+	return left;
 }
-//............................................
-void TPlex::SetFirst(TPoint *_first)
+
+void TPlex::SetRight(TPoint *_right)
 {
-  first = _first;
+	right = _right;
 }
-//............................................
-void TPlex::SetLast(TPoint *_last)
+
+void TPlex::SetLeft(TPoint *_left)
 {
-  last = _last;
+	left = _left;
 }
-//............................................
+
 TPoint* TPlex::Show(TPlex *p)
 {
-  TPlex *pl, *pr;
-  TPoint *tl, *tr;
-  TPoint *pp = NULL;
-  pl = dynamic_cast<TPlex*>(p->last);
-  pr = dynamic_cast<TPlex*>(p->first);
-  if (pl != 0)//Плекс
-    tl = Show(pl);
-  else
-    tl = p->last;
-  if (pr != 0)
-    tr = Show(pr);
-  else
-    tr = p->first;
-  TLine A(*tl, *tr);
-  A.Show();
-  return tl;
+	if (p->right == 0 && p->left == 0)
+		throw TException("Plex is empty");
+	TPlex *pl, *pr;
+	TPoint *tl, *tr;
+	TPoint *pp = NULL;
+	pl = dynamic_cast<TPlex*>(p->left);
+	pr = dynamic_cast<TPlex*>(p->right);
+	if (pl != 0) //если не дошли до точки, то имеем дело с плексом
+		tl = Show(pl);
+	else
+		tl = p->left;
+	if (pr != 0)
+		tr = Show(pr);
+	else
+		tr = p->right;
+	TLine A(tl, tr);
+	A.Show();
+	return tl;
 }
-//............................................
+
 void TPlex::Show()
 {
-  TStack<TPlex*> St;
-  TPlex *pl, *pr;
-  TPlex *p = this;
-  TPoint *tl = NULL, *tr = NULL;
-  St.Put(p);
-  while (!St.IsEmpty())
-  {
-    p = St.Get();
-    while (tr == NULL)
-    {
-      pr = dynamic_cast<TPlex*>(p->first);
-      if (pr != NULL) //плекс, помещаем в стек
-      {
-        St.Put(p);
-        p = dynamic_cast<TPlex*>(pr);
-      }
-      else
-      {
-        tr = p->first;
-      }
-    }
+	if (right == 0 && left == 0)
+		throw TException("Plex is empty");
+	TStackList<TPlex*> stack;
+	TStackList<TPoint*> point;
+	TPlex *pl, *pr;
+	TPlex *p = this;
+	TPoint *tl = NULL, *tr = NULL;
+	stack.Put(p);
+	while (!stack.IsEmpty())
+	{
+		p = stack.Get();
+		while (tr == NULL)
+		{
+			pr = dynamic_cast<TPlex*>(p->right);
+			pl = dynamic_cast<TPlex*>(p->left);
+			if (pr != 0 && pl != 0)
+			{
+				if (point.GetTop() % 2 == 0)
+					p = stack.Get();
+				else if (point.GetTop() == 1)
+				{
+					tr = point.Get();
+					tl = point.Get();
+				}
+				else
+				{
+					stack.Put(p);
+					stack.Put(pr);
+					stack.Put(p);
+					p = dynamic_cast<TPlex*>(pl);
+				}
+			}
+			else if (pr != NULL) //плекс, помещаем в стек
+			{
+				stack.Put(p);
+				p = dynamic_cast<TPlex*>(pr);
+			}
+			else
+			{
+				tr = p->right;
+			}
+		}
+		if (tl == NULL)
+		{
+			pl = dynamic_cast<TPlex*>(p->left);
+			if (pl != NULL) //снова плекс, помещаем стек и переходим к новому плексу
+			{
+				stack.Put(p);
+				p = dynamic_cast<TPlex*>(pl);
+				tr = NULL;
+				stack.Put(p);
+			}
+			else
+			{
+				tl = p->left;
+			}
+		}
+		if (tr != NULL && tl != NULL)
+		{
 
-    if (tl == NULL)
-    {
-      pl = dynamic_cast<TPlex*>(p->last);
-      if (pl != NULL) //снова плекс, помещаем стек и переходим к новому плексу
-      {
-        St.Put(p);
-        p = dynamic_cast<TPlex*>(pl);
-        tr = NULL;
-        St.Put(p);
-      }
-      else
-      {
-        tl = p->last;
-      }
-    }
-    if (tr != NULL && tl != NULL)
-    {
-      TLine A(*tl, *tr);
-      A.Show();
-      if (!St.IsEmpty())
-      {
-        p = St.Get();
-        pr = dynamic_cast<TPlex*>(p->first);
-        TPoint *pp = tl;
-        if (pr != 0)
-        {
-          tr = pp;
-          tl = NULL;
-        }
-        else
-        {
-          tl = pp;
-          tr = NULL;
-        }
-        St.Put(p);
-      }
-    }
-  }
+			TLine A(tl, tr);
+			A.Show();
+			if (!stack.IsEmpty())
+			{
+				p = stack.Get();
+				pr = dynamic_cast<TPlex*>(p->right);
+				pl = dynamic_cast<TPlex*>(p->left);
+				TPoint *pp = tl;
+				if (pr != 0 && pl != 0)
+				{
+					point.Put(pp);
+					tl = NULL;
+					tr = NULL;
+				}
+				else if (pr != 0)
+				{
+					tr = pp;
+					tl = NULL;
+				}
+				else
+				{
+					tl = pp;
+					tr = NULL;
+				}
+				stack.Put(p);
+			}
+		}
+	}
 }

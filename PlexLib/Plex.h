@@ -1,24 +1,24 @@
 #pragma once
 #include "../ExceptionLib/Exception.h"
-#include "../PlexLib/Point.h"
-#include "../StackLib/Stack.h"
-
+#include "../StackListLib/StackList.h"
+#include "../PlexLib/Line.h"
 
 class TPlex :public TPoint
 {
 protected:
-  TPoint *first, *last;
+  TPoint *right, *left;
 public:
-  TPlex();
-  TPlex(TPoint *_first, TPoint *_last);
-  TPlex(TPlex &A);
+  TPlex(); //конструктор по умолчанию
+  TPlex(TPoint *_right, TPoint *_left); //конструктор от двух точек
+  TPlex(TPlex& plex); //конструктор копирования
 
-  void Add(TPoint *_first, TPoint *_last);
-  TPoint* GetFirst();
-  TPoint* GetLast();
-  void SetFirst(TPoint *_first);
-  void SetLast(TPoint *_last);
+  TPoint* GetRight(); //получить правую сторону плекса
+  TPoint* GetLeft(); //получить левую сторону плекса
 
-  void Show();
-  TPoint* Show(TPlex *p);
+  void Add(TPoint *_right, TPoint *_left); //добавить линию к плексу
+  void SetRight(TPoint *_right); //установить правую сторону плекса
+  void SetLeft(TPoint *_left); //установить левую сторону плекса
+
+  void Show(); //итеративный вывод плекса на консоль
+  TPoint* Show(TPlex *plex); //рекурсивный вывод плекса на консоль
 };

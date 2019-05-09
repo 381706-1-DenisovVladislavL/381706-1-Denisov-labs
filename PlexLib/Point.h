@@ -4,30 +4,14 @@
 class TPoint
 {
 protected:
-  double x, y;
+  double x, y; //координаты точки
 public:
-  TPoint(double _x=0, double _y=0);
+  TPoint(double _x=0, double _y=0); //конструктор инициализатор
 
-  double GetX();
-  double GetY();
-  void SetX(double _x);
-  void SetY(double _y);
+  double GetX(); //получение X
+  double GetY(); //получение Y
+  void SetX(double _x); //установка X
+  void SetY(double _y); //установка Y
 
-  virtual void Show();
-};
-
-class TLine
-{
-protected:
-  TPoint A, B;
-public:
-  TLine(TPoint _A, TPoint _B);
-  TLine(TLine &D);
-
-  TPoint GetA();
-  TPoint GetB();
-  void SetA(TPoint _A);
-  void SetB(TPoint _B);
-
-  virtual void Show();
+  virtual void Show(); //вывод точки на консоль
 };

@@ -18,6 +18,7 @@ public:
   T TopView();
 
   int GetSize();
+  int GetTop();
 
   void Print();
 
@@ -102,6 +103,12 @@ template <class T>
 int TStack<T>::GetSize()
 {
   return size;
+}
+
+template <class T>
+int TStack<T>::GetTop()
+{
+	return top;
 }
 
 template <class T>

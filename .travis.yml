@@ -28,5 +28,6 @@ script:
   - ./PolynomTest/PolynomTest
   - ./Polish/Polish
   - ./PolishTest/PolishTest
+  - ./PlexTest/PlexTest
 notifications:
   email: false
