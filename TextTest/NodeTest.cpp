@@ -214,13 +214,13 @@ TEST(Node, throw_when_memory_is_end)
 	}
 	catch (...)
 	{
-		EXPECT_ANY_THROW(TNode node("test_memory_is_end")); //ловим исключение
+		ASSERT_ANY_THROW(TNode node("test_memory_is_end")); //ловим исключение
 	}
-	TNode::ClearMemory();
 }
 
 TEST(Node, can_set_letter_without_throws)
 {
+	TNode::ClearMemory();
 	TNode node('a');
 	ASSERT_NO_THROW(node.SetLetter('b'));
 }
