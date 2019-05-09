@@ -135,6 +135,7 @@ TEST(Text, can_delete_element_2_without_throws)
 
 TEST(Text, can_delete_element_2_correct)
 {
+	TNode::ClearMemory();
 	TText text("Mytext");
 	TNode* tmp = text.GetRoot()->GetNextLevel()->GetNextLevel()->GetNextLevel();
 	text.Delete(tmp, 2);
