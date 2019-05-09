@@ -2,7 +2,7 @@
 #include "../TextLib/Text.h"
 
 //Uncomment to use the stack I/O example.
-#define __USE_EXAMPLE_IO__
+//#define __USE_EXAMPLE_IO__
 
 using namespace std;
 
