@@ -70,47 +70,46 @@ TNode* TText::GetRoot()
 void TText::Insert(const int pos, const char* string)
 {
 	int string_len = strlen(string);
-	TNode* str = new TNode(string[0]);
-	TNode* start_str = str;
+	TNode* str = new TNode(string[0]); //создаем первую букву вставляемого слова
+	TNode* start_str = str; //указатель на начало вставляемого слова, под которое уже выделена память
 	int i = 1;
-	for (i; i < string_len; i++)
+	for (i; i < string_len; i++) //выполняем создание последующих букв вставляемого слова
 	{
-		str->SetSameLevel(new TNode(string[i]));
-		str = str->GetSameLevel();
+		str->SetSameLevel(new TNode(string[i])); 
+		str = str->GetSameLevel(); //используем str в качестве итератора по вставляемому слову
 	}
 	TNodeIter iter(root);
 	int len = 0;
 	while (iter.IsEnd() != true)
 	{
 		TNode* tmp = iter.GoNext();
-		if (tmp->GetLevel() == 2 && pos == 0)
+		if (tmp->GetLevel() == 2 && pos == 0) //если вставка в начало
 		{
-			iter.PutInStack(tmp);
+			iter.PutInStack(tmp); //делаем так, чтобы при выполнении перехода к следующему мы оказались на бывшем начале текста
 			break;
 		}
-		if (tmp->GetLevel() == 3)
+		if (tmp->GetLevel() == 3) //если находимся на уровне буквы, то увеличиваем число пройденных букв на 1
 			len++;
-		if (len == pos - 1)
+		if (len == pos - 1) //если находимся на предыдущей от вставляемой позиции, выходим из цикла
 			break;
 	}
-	TNode* point = iter.GoNext();
+	TNode* point = iter.GoNext(); //переходим к вставляемой позиции
 	if (pos == 0)
 	{
-		str->SetSameLevel(point->GetNextLevel());
-		point->SetNextLevel(start_str);
+		str->SetSameLevel(point->GetNextLevel()); //после последней буквы вставляемой строки будет идти первая буква бывшей первой строки
+		point->SetNextLevel(start_str); //изменяем начало
 	}
 	else
 	{
-		str->SetSameLevel(point->GetSameLevel());
-		point->SetSameLevel(start_str);
+		str->SetSameLevel(point->GetSameLevel()); //после последней буквы вставляемой буквы будет идти буква с места вставки
+		point->SetSameLevel(start_str); //с позиции, в которую производилась вставка теперь начинается вставляемое слово
 	}
 }
 
 //вставка после start
 void TText::Insert(TNode* start, TNode* string)
 {
-	TNode* tmp1 = string;
-//	TNode* tmp1 = new TNode(*string); //вроде так правильно
+	TNode* tmp1 = new TNode(*string);
 	TNode* tmp2 = root;
 	TNodeIter iter(root);
 	while (tmp2 != start)
@@ -130,20 +129,20 @@ int TText::Find(const char* string)
 	while (iter.IsEnd() != true)
 	{
 		TNode* tmp = iter.GoNext();
-		if (tmp->GetLevel() == 3 && tmp->GetLetter() == string[i])
+		if (tmp->GetLevel() == 3 && tmp->GetLetter() == string[i]) //если наткнулись на первую букву, то сравниваем остальные
 			i++;
-		else if (tmp->GetLevel() == 3 && tmp->GetLetter() != string[i])
+		else if (tmp->GetLevel() == 3 && tmp->GetLetter() != string[i]) //если на какой-то прервались
 		{
-			if (i != 0)
+			if (i != 0) //если хоть немного успели пройти
 			{
-				iter.PutInStack(tmp);
-				pos += i;
-				i = 0;
+				iter.PutInStack(tmp); //предыдущее начало поиска в стек, чтобы потом продолжить со следующего после него
+				pos += i; //искомая позиция сдвигается на число уже пройденных букв
+				i = 0; //для удобства работы со строкой при сравнении букв
 			}
 			else
-				pos++;
+				pos++; //идем до первой подходящей позиции для начала поиска
 		}
-		if (i == len)
+		if (i == len) //если прошли весь искомый текст
 			break;
 	}
 	return pos;
