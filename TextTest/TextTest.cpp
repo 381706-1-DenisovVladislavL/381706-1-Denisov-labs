@@ -142,5 +142,4 @@ TEST(Text, can_delete_element_2_correct)
 	EXPECT_EQ(text.GetRoot()->ToString()[1], 'e');
 	EXPECT_EQ(text.GetRoot()->ToString()[2], 'x');
 	EXPECT_EQ(text.GetRoot()->ToString()[3], 't');
-	TNode::ClearMemory();
 }
