@@ -1,4 +1,5 @@
 #pragma once
+#include "../ExceptionLib/Exception.h"
 #include <string>
 
 using namespace std;
@@ -22,6 +23,13 @@ public:
 	TElem<T>& operator=(TElem &elem);
 	bool operator==(TElem &elem);
 	bool operator!=(TElem<T> &elem);
+
+	friend ostream& operator<<(ostream& out, TElem<T>& elem)
+	{
+		out << "Key: " << elem.GetKey() << "\t";
+		out << "Data: " << elem.GetData();
+		return out;
+	}
 };
 
 template <class T>
