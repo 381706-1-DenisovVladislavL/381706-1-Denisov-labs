@@ -28,5 +28,7 @@ script:
   - ./PolynomTest/PolynomTest
   - ./Polish/Polish
   - ./PolishTest/PolishTest
+  - ./ScanTable/ScanTable
+  - ./ScanTableTest/ScanTableTest
 notifications:
   email: false
