@@ -26,7 +26,13 @@ public:
 	T& operator[](string _key);
 
 	friend class TSortTable<T>;
-	friend ostream& operator<<(ostream& out, TTable<T>& table);
+	friend ostream& operator<<(ostream& out, TTable<T>& table) 
+	{
+		out << "Print Table [" << table.count << "/" << table.size << "] \n";
+		for (int i = 0; i < table.count; i++)
+			out << table.mas[i] << endl;
+		return out;
+	}
 };
 
 template <class T>
@@ -128,13 +134,4 @@ TElem<T> TTable<T>::GetElem(int index)
 		return mas[index];
 	else
 		throw TException("Out-of-range");
-}
-
-template <class T>
-ostream& operator<<(ostream& out, TTable<T>& table)
-{
-	out << "Print Table [" << table.count << "/" << table.size << "] \n";
-	for (int i = 0; i < table.count; i++)
-		out << table.mas[i] << endl;
-	return out;
 }
