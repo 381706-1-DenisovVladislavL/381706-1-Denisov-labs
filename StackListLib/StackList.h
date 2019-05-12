@@ -13,6 +13,9 @@ public:
   void Put(T a);
   T Get();
 
+  bool IsEmpty();
+
+  void Clear();
   void Print();
 };
 
@@ -41,6 +44,12 @@ T TStackList<T>::Get()
   return TList<T>::GetBegin();
 }
 
+template<class T>
+bool TStackList<T>::IsEmpty()
+{
+	return TList<T>::IsEmpty();
+}
+
 template <class T>
 void TStackList<T>::Print() 
 {
@@ -53,4 +62,17 @@ void TStackList<T>::Print()
     temp = temp->GetNext();
   } while (temp != 0);
   std::cout << std::endl;
+}
+
+template <class T>
+void TStackList<T>::Clear()
+{
+	while (IsEmpty() == false)
+	{
+		Get();
+		/*TElem<T>* tmp = TList<T>::begin;
+		TList<T>::begin = tmp->GetNext();
+		delete tmp;
+		TList<T>count--;*/
+	}
 }
