@@ -29,33 +29,37 @@ int main()
 
   cout << "Create a sorted table using 'Insert sorting'..." << endl;
   TSortTable<int> tableInsert(keys, data, 5, 0);
-  cout << tableInsert << endl;
+  tableInsert.Print();
+  cout << endl;
 
   cout << "Create a sorted table using 'Shell sorting'..." << endl;
   TSortTable<int> tableShell(keys, data, 5, 1);
-  cout << tableShell << endl;
+  tableShell.Print();
+  cout << endl;
 
   cout << "Create a sorted table using 'Quick sorting'..." << endl;
   TSortTable<int> tableQuick(keys, data, 5, 2);
-  cout << tableQuick << endl;
+  tableQuick.Print();
+  cout << endl;
 
   cout << "Create an empty sorted table..." << endl;
   TSortTable<int> table(1);
-  cout << table << endl;
+  table.Print(); 
+  cout << endl;
 
   cout << "Added to the table element with Key: 'One1', Data: '1'" << endl;
   table.Put("One1", 1);
-  cout << table << endl;
-
+  table.Print();
+  cout << endl;
 
   cout << "Added to the table element with Key: 'Two2', Data: '3'" << endl;
   table.Put("Two2", 3);
-  cout << table << endl;
-
+  table.Print();
+  cout << endl;
 
   cout << "Added to the table element with Key: 'Three3', Data: '5'" << endl;
   table.Put("Three3", 5);
-  cout << table << endl;
+  table.Print();
 
   TElem<int> elem;
   cout << "Searching element with Key: 'Two2'...\n";
@@ -64,7 +68,7 @@ int main()
 
   std::cout << "\nDeleting element with key: 'Two2'...\n\n";
   table.Del("Two2");
-  cout << table;
+  table.Print();
 
   cout << "\nSearching element with key: 'Two2'...\n";
   elem = table.Search("Two2");

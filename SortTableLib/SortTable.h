@@ -28,13 +28,7 @@ public:
 	TElem<T>& Search(string _key);
 	T& operator[](string _key);
 
-	friend std::ostream& operator<<(std::ostream& out, TSortTable<T>& sorttable) 
-	{
-		out << "Print Table [" << sorttable.count << "/" << sorttable.size << "] \n";
-		for (int i = 0; i < sorttable.count; i++)
-			out << sorttable.mas[i] << endl;
-		return out;
-	}
+	void Print();
 
 	void InsertSort(TTable<T>& table);
 	void ShellSort(TTable<T>& table);
@@ -233,6 +227,14 @@ T& TSortTable<T>::operator[](string _key)
 		return mas[count - 1].GetDataAddress();
 	}
 	return tmp.GetDataAddress();
+}
+
+template <class T>
+void TSortTable<T>::Print()
+{
+	cout << "Print Table [" << count << "/" << size << "] \n";
+	for (int i = 0; i < count; i++)
+		cout << mas[i] << endl;
 }
 
 template <class T>
