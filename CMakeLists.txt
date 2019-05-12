@@ -50,6 +50,10 @@ set(Text Text)
 set(TextLib TextLib)
 set(TextTest TextTest)
 
+set(Plex Plex)
+set(PlexLib PlexLib)
+set(PlexTest PlexTest)
+
 set(ScanTable ScanTable)
 set(ScanTableLib ScanTableLib)
 set(ScanTableTest ScanTableTest)
@@ -126,6 +130,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TextLib)
 add_subdirectory(Text)
 add_subdirectory(TextLib)
 add_subdirectory(TextTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PlexLib)
+add_subdirectory(Plex)
+add_subdirectory(PlexLib)
+add_subdirectory(PlexTest)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ScanTableLib)
 add_subdirectory(ScanTable)

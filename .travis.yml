@@ -30,6 +30,7 @@ script:
   - ./PolishTest/PolishTest
   - ./Text/Text
   - ./TextTest/TextTest
+  - ./PlexTest/PlexTest
   - ./ScanTable/ScanTable
   - ./ScanTableTest/ScanTableTest
 notifications:

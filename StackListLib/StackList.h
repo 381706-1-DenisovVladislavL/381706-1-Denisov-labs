@@ -12,7 +12,8 @@ public:
 
   void Put(T a);
   T Get();
-
+  int GetTop();
+  
   bool IsEmpty();
 
   void Clear();
@@ -48,6 +49,11 @@ template<class T>
 bool TStackList<T>::IsEmpty()
 {
 	return TList<T>::IsEmpty();
+}
+
+template<class T>
+int TStackList<T>::GetTop(){
+	return TList<T>::count;
 }
 
 template <class T>
