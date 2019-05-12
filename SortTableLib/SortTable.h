@@ -28,7 +28,7 @@ public:
 	TElem<T>& Search(string _key);
 	T& operator[](string _key);
 
-	friend ostream& operator<<(ostream& out, TSortTable<T>& sorttable) 
+	friend std::ostream& operator<<(std::ostream& out, TSortTable<T>& sorttable) 
 	{
 		out << "Print Table [" << sorttable.count << "/" << sorttable.size << "] \n";
 		for (int i = 0; i < sorttable.count; i++)
