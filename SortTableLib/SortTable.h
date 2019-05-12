@@ -33,6 +33,14 @@ public:
 	void InsertSort(TTable<T>& table);
 	void ShellSort(TTable<T>& table);
 	void QuickSort(TTable<T>& table, const int low, const int high);
+
+	friend ostream& operator<<(ostream& out, TSortTable<T>& sorttable)
+	{
+		out << "Print Table [" << sorttable.count << "/" << sorttable.size << "] \n";
+		for (int i = 0; i < sorttable.count; i++)
+			out << sorttable.mas[i] << endl;
+		return out;
+	}
 };
 
 template<class T>
