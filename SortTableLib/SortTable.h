@@ -87,7 +87,7 @@ TSortTable<T>::TSortTable(TSortTable<T> &sorttable)
 {
 	size = sorttable.size;
 	count = sorttable.count;
-	mas = new TSortElem<T>[size];
+	mas = new TElem<T>[size];
 	for (int i = 0; i < size; i++)
 		mas[i] = sorttable.mas[i];
 }
