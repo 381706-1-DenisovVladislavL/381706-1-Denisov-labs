@@ -1,6 +1,5 @@
 #pragma once
 #include "../HashTableLib/HashElem.h"
-#include <string>
 
 using namespace std;
 
