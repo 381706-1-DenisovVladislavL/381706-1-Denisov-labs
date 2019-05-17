@@ -87,31 +87,31 @@ TEST(HashTable, can_delete_element_from_hash_table_correct_1)
 //	table.Put(elem);
 //	table.Del(key);
 ////	TElem<int> find = table.Search(key);
-//	bool res = (table.Search(key) == table.GetNotFound());
-//	EXPECT_EQ(res, true);
+//	EXPECT_EQ(table.Search(key) == table.GetNotFound(), true);
 //}
 //
-//TEST(HashTable, can_overcome_the_conflict)
-//{
-//	THashTable<int> table(5);
-//	string key1 = "aa";
-//	string key2 = "Iy";
-//	table.Put(key1, 15);
-//	table.Put(key2, 20);
-//	ASSERT_NO_THROW(table.Search(key2));
-//}
-//
-//TEST(HashTable, can_overcome_the_conflict_correct)
-//{
-//	THashTable<int> table(5);
-//	string key1 = "aa";
-//	string key2 = "Iy";	
-//	table.Put(key1, 15);	
-//	table.Put(key2, 20);
-//	TElem<int> elem(key2, 20);
-//	bool res = (table.Search(key2) == elem);
-//	EXPECT_EQ(res, true);
-//}
+TEST(HashTable, can_overcome_the_conflict)
+{
+	THashTable<int> table(5);
+	string key1 = "aa";
+	string key2 = "Iy";
+	table.Put(key1, 15);
+	table.Put(key2, 20);
+	ASSERT_NO_THROW(table.Search(key2));
+}
+
+TEST(HashTable, can_overcome_the_conflict_correct)
+{
+	THashTable<int> table(5);
+	string key1 = "aa";
+	string key2 = "Iy";	
+	table.Put(key1, 15);	
+	table.Put(key2, 20);
+	TElem<int> elem1(key1, 15);
+	TElem<int> elem2(key2, 20);
+	EXPECT_EQ(table.Search(key1) == elem1, true);
+	EXPECT_EQ(table.Search(key2) == elem2, true);
+}
 
 TEST(HashTable, can_return_false_if_nomber_is_simple)
 {
