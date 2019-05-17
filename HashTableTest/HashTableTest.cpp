@@ -24,7 +24,7 @@ TEST(HashTable, can_add_element_to_hash_table_correct_1)
 	THashTable<int> table(10);
 	TElem<int> elem("key", 10);
 	table.Put(elem);
-	EXPECT_TRUE(table.Search("key") == elem);
+	EXPECT_EQ(table.Search("key") == elem, true);
 }
 
 TEST(HashTable, can_add_element_to_hash_table_without_throws_2)
@@ -40,7 +40,7 @@ TEST(HashTable, can_add_element_to_hash_table_correct_2)
 	string key = "key";
 	table.Put(key, 10);
 	TElem<int> elem("key", 10);
-	EXPECT_TRUE(table.Search(key) == elem);
+	EXPECT_EQ(table.Search(key) == elem, true);
 }
 
 TEST(HashTable, can_return_current_count_correct_0)
@@ -84,7 +84,7 @@ TEST(HashTable, can_delete_element_from_hash_table_correct_0)
 	table.Put(elem);
 	table.Del(key);
 //	TElem<int> find = table.Search(key);
-	EXPECT_TRUE(table.Search(key) == table.GetNotFound());
+	EXPECT_EQ(table.Search(key) == table.GetNotFound(), true);
 }
 
 TEST(HashTable, can_overcome_the_conflict)
@@ -105,7 +105,7 @@ TEST(HashTable, can_overcome_the_conflict_correct)
 	table.Put(key1, 15);	
 	table.Put(key2, 20);
 	TElem<int> elem(key2, 20);
-	EXPECT_TRUE(table.Search(key2) == elem);
+	EXPECT_EQ(table.Search(key2) == elem, true);
 }
 
 TEST(HashTable, can_return_false_if_nomber_is_simple)
