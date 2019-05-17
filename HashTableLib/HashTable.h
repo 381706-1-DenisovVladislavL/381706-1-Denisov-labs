@@ -14,11 +14,9 @@ protected:
 	int count;
 	const int m;
 
-	
+	int Hash(string _key);
 	void Resize(int _size);
 public:
-	int Hash(string _key);
-
 	THashTable(int _size = 5);
 	THashTable(THashTable<T> &hashtable);
 	~THashTable();
