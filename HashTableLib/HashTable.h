@@ -47,6 +47,8 @@ THashTable<T>::THashTable(int _size):m(2)
 		throw TException("Error size");
 	count = 0;
 	size = _size;
+	notFound.SetKey("NOT_FOUND");
+	notFound.SetData(404);
 	mas = new TElem<T>[size];
 	for (int i = 0; i < size; i++)
 		mas[i] = notFound;
