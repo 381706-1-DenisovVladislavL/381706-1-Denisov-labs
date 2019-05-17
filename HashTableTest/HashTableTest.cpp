@@ -69,27 +69,16 @@ TEST(HashTable, can_delete_element_from_hash_table_correct_1)
 	EXPECT_EQ(table.Del(key), true);
 }
 
-//TEST(HashTable, can_delete_element_from_hash_table_correct_2)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	string key1 = "key1";
-//	TElem<int> elem(key, 10);
-//	table.Put(elem);
-//	ASSERT_ANY_THROW(table.Del(key1));
-//}
-//
-//TEST(HashTable, can_delete_element_from_hash_table_correct_0)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	table.Put(elem);
-//	table.Del(key);
-////	TElem<int> find = table.Search(key);
-//	EXPECT_EQ(table.Search(key) == table.GetNotFound(), true);
-//}
-//
+TEST(HashTable, can_delete_element_from_hash_table_correct)
+{
+	THashTable<int> table(10);
+	string key = "key";
+	TElem<int> elem(key, 10);
+	table.Put(elem);
+	table.Del(key);
+	EXPECT_EQ(table.Search(key) == table.GetNotFound(), true);
+}
+
 TEST(HashTable, can_overcome_the_conflict)
 {
 	THashTable<int> table(5);
