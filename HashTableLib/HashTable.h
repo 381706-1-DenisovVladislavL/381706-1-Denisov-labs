@@ -151,9 +151,9 @@ TElem<T>& THashTable<T>::Search(string key)
 template <class T>
 int THashTable<T>::Hash(string _key)
 {
-	unsigned int hashvalue = 0;
-	for (unsigned int i = 0; i < _key.length(); i++)
-		hashvalue += unsigned int(_key[i]);
+	int hashvalue = 0;
+	for (int i = 0; i < _key.length(); i++)
+		hashvalue += (int)(_key[i]);
 	return hashvalue;
 }
 
