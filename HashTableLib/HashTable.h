@@ -14,7 +14,7 @@ protected:
 	int count;
 	const int m;
 
-	int Hash(string _key);
+	unsigned Hash(string _key);
 	void Resize(int _size);
 public:
 	THashTable(int _size = 5);
@@ -147,11 +147,11 @@ TElem<T>& THashTable<T>::Search(string key)
 }
 
 template <class T>
-int THashTable<T>::Hash(string _key)
+unsigned THashTable<T>::Hash(string _key)
 {
-	int hashvalue = 0;
-	for (int i = 0; i < _key.length(); i++)
-		hashvalue += (int)(_key[i]);
+	unsigned int hashvalue = 0;
+	for (unsigned i = 0; i < _key.length(); i++)
+		hashvalue += (unsigned)(_key[i]);
 	return hashvalue;
 }
 

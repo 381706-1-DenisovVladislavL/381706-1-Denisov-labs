@@ -15,16 +15,18 @@ TEST(HashTable, can_create_hash_table_without_throws_2)
 TEST(HashTable, can_add_element_to_hash_table_without_throws_1)
 {
 	THashTable<int> table(10);
-	TElem<int> elem("key", 10);
+	string key = "key";
+	TElem<int> elem(key, 10);
 	ASSERT_NO_THROW(table.Put(elem));
 }
 
 TEST(HashTable, can_add_element_to_hash_table_correct_1)
 {
 	THashTable<int> table(10);
-	TElem<int> elem("key", 10);
+	string key = "key";
+	TElem<int> elem(key, 10);
 	table.Put(elem);
-	bool res = (table.Search("key") == elem);
+	bool res = (table.Search(key) == elem);
 	EXPECT_EQ(res, true);
 }
 
@@ -40,7 +42,7 @@ TEST(HashTable, can_add_element_to_hash_table_correct_2)
 	THashTable<int> table(10);
 	string key = "key";
 	table.Put(key, 10);
-	TElem<int> elem("key", 10);
+	TElem<int> elem(key, 10);
 	bool res = (table.Search(key) == elem);
 	EXPECT_EQ(res, true);
 }
@@ -63,7 +65,7 @@ TEST(HashTable, can_delete_element_from_hash_table_without_throws)
 TEST(HashTable, can_delete_element_from_hash_table_correct_1)
 {
 	THashTable<int> table(10);
-	string key("key");
+	string key = "key";
 	TElem<int> elem(key, 10);
 	table.Put(elem);
 	EXPECT_TRUE(table.Del(key));
@@ -73,9 +75,10 @@ TEST(HashTable, can_delete_element_from_hash_table_correct_2)
 {
 	THashTable<int> table(10);
 	string key = "key";
+	string key1 = "key1";
 	TElem<int> elem(key, 10);
 	table.Put(elem);
-	ASSERT_ANY_THROW(table.Del("key1"));
+	ASSERT_ANY_THROW(table.Del(key1));
 }
 
 TEST(HashTable, can_delete_element_from_hash_table_correct_0)
