@@ -23,8 +23,6 @@ public:
 	TElem<T>& operator=(TElem &elem);
 	bool operator==(TElem &elem);
 	bool operator!=(TElem<T> &elem);
-	bool operator>(TElem &elem);
-	bool operator<(TElem &elem);
 
 	friend ostream& operator<<(ostream& out, TElem<T>& elem)
 	{
@@ -93,30 +91,12 @@ template <class T>
 bool TElem<T>::operator==(TElem &elem)
 {
 	if (key != elem.key)
-		return 0;
-	if (data != elem.data)
-		return 0;
-	return 1;
+		return false;
+	return true;
 }
 
 template <class T>
 bool TElem<T>::operator!=(TElem<T> &elem)
 {
 	return !(*this == elem);
-}
-
-template <class T>
-bool TElem<T>::operator>(TElem &elem)
-{
-	if (key > elem.key)
-		return true;
-	return false;
-}
-
-template <class T>
-bool TElem<T>::operator<(TElem &elem)
-{
-	if (key < elem.key)
-		return true;
-	return false;
 }

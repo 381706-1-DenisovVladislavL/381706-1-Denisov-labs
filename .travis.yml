@@ -33,5 +33,7 @@ script:
   - ./PlexTest/PlexTest
   - ./ScanTable/ScanTable
   - ./ScanTableTest/ScanTableTest
+  - ./SortTable/SortTable
+  - ./SortTableTest/SortTableTest
 notifications:
   email: false

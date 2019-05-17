@@ -2,6 +2,9 @@
 #include "../ScanTableLib/ScanElem.h"
 
 template <class T>
+class TSortTable;
+
+template <class T>
 class TTable
 {
 protected:
@@ -14,6 +17,7 @@ public:
 
 	int GetSize();
 	int GetCount();
+	TElem<T> GetElem(int index);
 
 	void Put(string _key, T _data);
 	void Del(string _key);
@@ -21,9 +25,10 @@ public:
 
 	T& operator[](string _key);
 
-	friend ostream& operator<<(ostream& out, TTable<T>& table)
+	friend class TSortTable<T>;
+	friend ostream& operator<<(ostream& out, TTable<T>& table) 
 	{
-		out << "Print Table [" << table.count << "/" << table.size <<  "] \n";
+		out << "Print Table [" << table.count << "/" << table.size << "] \n";
 		for (int i = 0; i < table.count; i++)
 			out << table.mas[i] << endl;
 		return out;
@@ -120,4 +125,13 @@ template <class T>
 int TTable<T>::GetCount()
 {
 	return count;
+}
+
+template <class T>
+TElem<T> TTable<T>::GetElem(int index) 
+{
+	if ((index >= 0) && (index < count))
+		return mas[index];
+	else
+		throw TException("Out-of-range");
 }
