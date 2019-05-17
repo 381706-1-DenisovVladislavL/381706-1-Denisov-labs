@@ -112,15 +112,15 @@ TEST(HashTable, can_delete_element_from_hash_table_correct_1)
 //	bool res = (table.Search(key2) == elem);
 //	EXPECT_EQ(res, true);
 //}
-//
-//TEST(HashTable, can_return_false_if_nomber_is_simple)
-//{
-//	THashTable<int> table(10);
-//	EXPECT_EQ(table.IsSimple(15), false);
-//}
-//
-//TEST(HashTable, can_return_true_if_nomber_is_simple)
-//{
-//	THashTable<int> table(10);
-//	EXPECT_EQ(table.IsSimple(7), true);
-//}
+
+TEST(HashTable, can_return_false_if_nomber_is_simple)
+{
+	THashTable<int> table(10);
+	EXPECT_EQ(table.IsSimple(15), false);
+}
+
+TEST(HashTable, can_return_true_if_nomber_is_simple)
+{
+	THashTable<int> table(10);
+	EXPECT_EQ(table.IsSimple(7), true);
+}
