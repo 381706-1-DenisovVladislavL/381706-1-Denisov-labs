@@ -45,30 +45,30 @@ TEST(HashTable, can_add_element_to_hash_table_correct_2)
 	EXPECT_EQ(table.Search(key) == elem, true);
 }
 
-//TEST(HashTable, can_return_current_count_correct_0)
-//{
-//	THashTable<int> table(10);
-//	EXPECT_EQ(table.GetCount(), 0);
-//}
-//
-//TEST(HashTable, can_delete_element_from_hash_table_without_throws)
-//{
-//	THashTable<int> table(100);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	table.Put(elem);
-//	ASSERT_NO_THROW(table.Del(key));
-//}
-//
-//TEST(HashTable, can_delete_element_from_hash_table_correct_1)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	table.Put(elem);
-//	EXPECT_TRUE(table.Del(key));
-//}
-//
+TEST(HashTable, can_return_current_count_correct_0)
+{
+	THashTable<int> table(10);
+	EXPECT_EQ(table.GetCount(), 0);
+}
+
+TEST(HashTable, can_delete_element_from_hash_table_without_throws)
+{
+	THashTable<int> table(100);
+	string key = "key";
+	TElem<int> elem(key, 10);
+	table.Put(elem);
+	ASSERT_NO_THROW(table.Del(key));
+}
+
+TEST(HashTable, can_delete_element_from_hash_table_correct_1)
+{
+	THashTable<int> table(10);
+	string key = "key";
+	TElem<int> elem(key, 10);
+	table.Put(elem);
+	EXPECT_EQ(table.Del(key), true);
+}
+
 //TEST(HashTable, can_delete_element_from_hash_table_correct_2)
 //{
 //	THashTable<int> table(10);
