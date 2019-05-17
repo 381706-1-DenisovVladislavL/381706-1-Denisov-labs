@@ -20,16 +20,15 @@ TEST(HashTable, can_add_element_to_hash_table_without_throws_1)
 	ASSERT_NO_THROW(table.Put(elem));
 }
 
-//TEST(HashTable, can_add_element_to_hash_table_correct_1)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	table.Put(elem);
-//	bool res = (table.Search(key) == elem);
-//	EXPECT_EQ(res, true);
-//}
-//
+TEST(HashTable, can_add_element_to_hash_table_correct_1)
+{
+	THashTable<int> table(10);
+	string key = "key";
+	TElem<int> elem(key, 10);
+	table.Put(elem);
+	EXPECT_EQ(table.Search(key) == elem, 1);
+}
+
 //TEST(HashTable, can_add_element_to_hash_table_without_throws_2)
 //{
 //	THashTable<int> table(10);
