@@ -12,14 +12,14 @@ TEST(HashTable, can_create_hash_table_without_throws_2)
 	ASSERT_NO_THROW(THashTable<int> table(10));
 }
 
-//TEST(HashTable, can_add_element_to_hash_table_without_throws_1)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	ASSERT_NO_THROW(table.Put(elem));
-//}
-//
+TEST(HashTable, can_add_element_to_hash_table_without_throws_1)
+{
+	THashTable<int> table(10);
+	string key = "key";
+	TElem<int> elem(key, 10);
+	ASSERT_NO_THROW(table.Put(elem));
+}
+
 //TEST(HashTable, can_add_element_to_hash_table_correct_1)
 //{
 //	THashTable<int> table(10);
