@@ -14,6 +14,7 @@ protected:
 public:
 	TElemL(string _key = "", T _data = 0, TElemL<T> *_next = NULL);
 	TElemL(TElemL &copy);
+	~TElemL();
 
 	void SetKey(string _key);
 	string GetKey();
@@ -29,9 +30,9 @@ public:
 
 	friend ostream& operator<<(ostream& out, TElemL<T>& elem)
 	{
-		out << "Key: " << elem.GetKey() << "\t";
-		out << "Data: " << elem.GetData() << "\t";
-		out << "Adress: " << &elem << "\t";
+		out << "Key: " << elem.GetKey() << "\t| ";
+		out << "Data: " << elem.GetData() << "\t| ";
+		out << "Adress: " << &elem << "\t| ";
 		out << "AdressNext: " << elem.GetNext();
 		return out;
 	}
@@ -51,6 +52,12 @@ TElemL<T>::TElemL(TElemL &elem)
 	key = elem.key;
 	data = elem.data;
 	next = elem.next;
+}
+
+template <class T>
+TElemL<T>::~TElemL() 
+{
+	next = NULL;
 }
 
 template <class T>

@@ -26,7 +26,7 @@ public:
 
 	friend ostream& operator<<(ostream& out, TElem<T>& elem)
 	{
-		out << "Key: " << elem.GetKey() << "\t";
+		out << "Key: " << elem.GetKey() << "\t| ";
 		out << "Data: " << elem.GetData();
 		return out;
 	}

@@ -29,21 +29,21 @@ TEST(HashTableList, can_add_element_to_hash_table_list_correct_1)
 	EXPECT_EQ(table.Search(key) == elem, true);
 }
 
-//TEST(HashTable, can_add_element_to_hash_table_without_throws_2)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	ASSERT_NO_THROW(table.Put(key, 10));
-//}
-//
-//TEST(HashTable, can_add_element_to_hash_table_correct_2)
-//{
-//	THashTable<int> table(10);
-//	string key = "key";
-//	TElem<int> elem(key, 10);
-//	table.Put(key, 10);
-//	EXPECT_EQ(table.Search(key) == elem, true);
-//}
+TEST(HashTableList, can_add_element_to_hash_table_list_without_throws_2)
+{
+	THashTableList<int> table(10);
+	string key = "key";
+	ASSERT_NO_THROW(table.Put(key, 10, NULL));
+}
+
+TEST(HashTableList, can_add_element_to_hash_table_list_correct_2)
+{
+	THashTableList<int> table(10);
+	string key = "key";
+	TElemL<int> elem(key, 10);
+	table.Put(key, 10, NULL);
+	EXPECT_EQ(table.Search(key) == elem, true);
+}
 
 TEST(HashTableList, can_return_current_count_correct_0)
 {
@@ -60,7 +60,7 @@ TEST(HashTableList, can_delete_element_from_hash_table_list_without_throws)
 	ASSERT_NO_THROW(table.Del(key));
 }
 
-TEST(HashTableList, can_delete_element_from_hash_table_correct_1)
+TEST(HashTableList, can_delete_element_from_hash_table_list_correct_1)
 {
 	THashTableList<int> table(10);
 	string key = "key";

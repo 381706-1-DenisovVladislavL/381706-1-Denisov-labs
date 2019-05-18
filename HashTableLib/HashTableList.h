@@ -22,7 +22,7 @@ public:
 	int GetSize();
 	int GetCount();
 
-	//void Put(string _key, T _data, TElemL<T> *_next);
+	void Put(string _key, T _data, TElemL<T> *_next = NULL);
 	void Put(TElemL<T>& elem);
 	bool Del(string _key);
 	TElemL<T>& Search(string _key);
@@ -89,7 +89,20 @@ THashTableList<T>::THashTableList(THashTableList<T> &hashtable)
 template <class T>
 THashTableList<T>::~THashTableList() 
 {
-
+	for (int i = 0; i < size; i++)
+	{
+		if (mas[i] != &notFound)
+		{
+			TElemL<T> *iter = mas[i];
+			do 
+			{
+				TElemL<T> *tmp = iter->GetNext();
+				delete iter;
+				iter = tmp;
+			} while (iter != NULL);
+		}
+	}
+	delete[] mas;
 }
  
 template <class T>
@@ -137,6 +150,29 @@ template <class T>
 int THashTableList<T>::GetCount()
 {
 	return count;
+}
+
+template <class T>
+void THashTableList<T>::Put(string _key, T _data, TElemL<T> *_next)
+{
+	if (count == size)
+		Resize(count * 2);
+	unsigned hashvalue = Hash(_key);
+	if (hashvalue > size)
+		Resize(hashvalue + 10);
+	if (mas[hashvalue] == &notFound)
+	{
+		mas[hashvalue] = new TElemL<T>(_key, _data, _next);
+		count++;
+	}
+	else
+	{
+		TElemL<T> *tmp = new TElemL<T>(_key, _data, _next);
+		tmp->SetNext(mas[hashvalue]);
+		mas[hashvalue] = tmp;
+		count++;
+	}
+
 }
 
 template <class T>

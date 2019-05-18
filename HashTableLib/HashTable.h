@@ -34,8 +34,9 @@ public:
 	friend ostream& operator<<(ostream& out, THashTable<T>& hashtable)
 	{
 		out << "Print Table [" << hashtable.count << "/" << hashtable.size << "] \n";
-		for (int i = 0; i < hashtable.count; i++)
-			out << hashtable.mas[i] << endl;
+		for (int i = 0; i < hashtable.size; i++)
+			if (hashtable.mas[i] != hashtable.notFound)
+				out << hashtable.mas[i] << endl;
 		return out;
 	}
 };
@@ -131,6 +132,7 @@ bool THashTable<T>::Del(string _key)
 		i = (i + m) % size;
 	}
 	mas[i] = notFound;
+	count--;
 	return true;
 }
 
