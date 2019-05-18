@@ -1,5 +1,6 @@
 #include <iostream>
 #include "HashTable.h"
+#include "HashTableList.h"
 
 using namespace std;
 
@@ -73,6 +74,32 @@ int main()
   cout << "\nSearching element with key: 'Two2'...\n";
   elem = table.Search("Two2");
   cout << "Found elem: " << elem << endl;*/
+
+  cout << "====================================="
+	  << endl << "An example of working with HashTableList." << endl << endl;
+
+  THashTableList<int> table(5);
+  cout << table << endl;
+  cout << "Added to the table element with Key: 'aa', Data: '11'" << endl;
+  TElemL<int> elem0("aa", 11);
+  cout << elem0 << endl;
+  table.Put(elem0);
+  cout << table << endl;
+
+  cout << "Added to the table element with Key: 'bb', Data: '22'" << endl;
+  TElemL<int> elem1("bb", 22);
+  cout << elem1 << endl;
+  table.Put(elem1);
+  cout << table << endl;
+
+  cout << "Added to the table element with Key: 'Iy', Data: '33'" << endl;
+  TElemL<int> elem2("Iy", 33);
+  cout << elem2 << endl;
+  table.Put(elem2);
+  cout << table << endl;
+
+  table.Del("aa");
+  cout << table << endl;
 
   return 0;
 }
