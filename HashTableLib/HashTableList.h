@@ -47,7 +47,7 @@ public:
 };
 
 template <class T>
-THashTableList<T>::THashTableList(int _size = 5) 
+THashTableList<T>::THashTableList(int _size) 
 {
 	if (_size <= 0)
 		throw TException("Error size");
