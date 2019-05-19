@@ -38,7 +38,7 @@ public:
 				TElemL<T> *temp = hashtable.mas[i];
 				do
 				{
-					out << (*temp) << "\n";
+					out << "Hash: " << hashtable.Hash(temp->GetKey()) << "\t| "<< (*temp) << "\n";
 					temp = temp->GetNext();
 				} while (temp != NULL);
 			}
@@ -172,7 +172,6 @@ void THashTableList<T>::Put(string _key, T _data, TElemL<T> *_next)
 		mas[hashvalue] = tmp;
 		count++;
 	}
-
 }
 
 template <class T>
@@ -181,7 +180,7 @@ void THashTableList<T>::Put(TElemL<T>& elem)
 	unsigned hashvalue = Hash(elem.GetKey());
 	if (count == size)
 		Resize(count * 2);
-	if (hashvalue > size)
+	if (hashvalue > (unsigned)size)
 		Resize(hashvalue + 10);
 	if (mas[hashvalue] == &notFound)
 	{
@@ -201,8 +200,8 @@ template <class T>
 bool THashTableList<T>::Del(string _key)
 {
 	unsigned hashvalue = Hash(_key);
-	if (hashvalue > size)
-		throw TException("Error");
+	if (hashvalue > (unsigned)size)
+		return false;
 	TElemL<T> *iter = mas[hashvalue];
 	TElemL<T> *par = NULL;
 	if (mas[hashvalue] == &notFound)
@@ -241,6 +240,8 @@ template <class T >
 TElemL<T>& THashTableList<T>::Search(string _key) 
 {
 	unsigned hashvalue = Hash(_key);
+	if (hashvalue > (unsigned)size)
+		return notFound;
 	if (mas[hashvalue]->GetKey() == _key)
 	{
 		return (*mas[hashvalue]);

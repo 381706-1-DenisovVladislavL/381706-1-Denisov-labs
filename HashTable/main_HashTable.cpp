@@ -12,12 +12,18 @@ int main()
   string key1 = "aa", key2 = "cb", key3 = "Iy";
   int data1 = 11, data2 = 22, data3 = 33;
 
+  string key0 = "Yi";
+  int data0 = 0;
+
   cout << "Create an empty hash table (conflict resolution by mixing)..." << endl;
   THashTable<int> tableArr;
   cout << tableArr << endl;
 
   cout << "Added to the table element with Key: 'aa', Data: '11'" << endl;
   tableArr.Put(key1, data1);
+  cout << tableArr << endl;
+
+  tableArr.Put(key0, data0);
   cout << tableArr << endl;
 
   cout << "Added to the table element with Key: 'cb', Data: '22'" << endl;

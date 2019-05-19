@@ -12,7 +12,7 @@ protected:
 	T data;
 public:
 	TElem(string _key = "", T _data = 0);
-	TElem(TElem &copy);
+	TElem(TElem<T> &copy);
 	
 	void SetKey(string _key);
 	string GetKey();
@@ -20,8 +20,8 @@ public:
 	T GetData();
 	T& GetDataAddress();
 
-	TElem<T>& operator=(TElem &elem);
-	bool operator==(TElem &elem);
+	TElem<T>& operator=(TElem<T> &elem);
+	bool operator==(TElem<T> &elem);
 	bool operator!=(TElem<T> &elem);
 
 	friend ostream& operator<<(ostream& out, TElem<T>& elem)
@@ -40,7 +40,7 @@ TElem<T>::TElem(string _key, T _data)
 }
 
 template <class T>
-TElem<T>::TElem(TElem &elem)
+TElem<T>::TElem(TElem<T> &elem)
 {
 	key = elem.key;
 	data = elem.data;
@@ -77,7 +77,7 @@ T& TElem<T>::GetDataAddress()
 }
 
 template <class T>
-TElem<T>& TElem<T>::operator=(TElem &elem)
+TElem<T>& TElem<T>::operator=(TElem<T> &elem)
 {
 	if (this != &elem)
 	{
@@ -88,7 +88,7 @@ TElem<T>& TElem<T>::operator=(TElem &elem)
 }
 
 template <class T>
-bool TElem<T>::operator==(TElem &elem)
+bool TElem<T>::operator==(TElem<T> &elem)
 {
 	if (key != elem.key)
 		return false;

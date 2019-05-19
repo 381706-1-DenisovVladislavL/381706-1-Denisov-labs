@@ -22,7 +22,6 @@ public:
 
 	int GetSize();
 	int GetCount();
-	TElem<T> GetNotFound();
 
 	void Put(string _key, T _data);
 	void Put(TElem<T>& elem);
@@ -36,7 +35,7 @@ public:
 		out << "Print Table [" << hashtable.count << "/" << hashtable.size << "] \n";
 		for (int i = 0; i < hashtable.size; i++)
 			if (hashtable.mas[i] != hashtable.notFound)
-				out << hashtable.mas[i] << endl;
+				out << "Hash: " << hashtable.Hash(hashtable.mas[i].GetKey()) << "\t| " << hashtable.mas[i] << endl;
 		return out;
 	}
 };
@@ -85,23 +84,17 @@ int THashTable<T>::GetCount()
 }
 
 template <class T>
-TElem<T> THashTable<T>::GetNotFound() 
-{
-	return notFound;
-}
-
-template <class T>
 void THashTable<T>::Put(string _key, T data)
 {
 	if (count == size)
 		Resize(count * 2);
-	int i = Hash(_key);
-	if (i > size)
-		Resize(i + 10);
-	while (mas[i] != notFound)
-		i = (i + m) % size;
-	mas[i].SetKey(_key);
-	mas[i].SetData(data);
+	unsigned hashvalue = Hash(_key);
+	if (hashvalue > (unsigned)size)
+		Resize(hashvalue + 10);
+	while (mas[hashvalue] != notFound)
+		hashvalue = (hashvalue + m) % size;
+	mas[hashvalue].SetKey(_key);
+	mas[hashvalue].SetData(data);
 	count++;
 }
 
@@ -110,43 +103,53 @@ void THashTable<T>::Put(TElem<T>& elem)
 {
 	if (count == size)
 		Resize(count * 2);
-	int i = Hash(elem.GetKey());
-	if (i > size)
-		Resize(i + 10);
-	while (mas[i] != notFound)
-		i = (i + m) % size;
-	mas[i] = elem;
+	unsigned hashvalue = Hash(elem.GetKey());
+	if (hashvalue > (unsigned)size)
+		Resize(hashvalue + 10);
+	while (mas[hashvalue] != notFound)
+		hashvalue = (hashvalue + m) % size;
+	mas[hashvalue] = elem;
 	count++;
 }
 
 template <class T>
 bool THashTable<T>::Del(string _key)
 {
-	int i = Hash(_key);
-	if (i > size)
-		throw TException("Error");
-	while (mas[i].GetKey() != _key)
+	unsigned hashvalue = Hash(_key);
+	unsigned start = hashvalue;
+	if (hashvalue > (unsigned)size)
+		return false;
+	do 
 	{
-		if (mas[i] == notFound)
-			return false;
-		i = (i + m) % size;
+		hashvalue = (hashvalue + m) % size;
+	} while ((mas[hashvalue].GetKey() != _key) && (hashvalue != start));
+	if (mas[hashvalue] != notFound)
+	{
+		mas[hashvalue] = notFound;
+		count--;
+		return true;
 	}
-	mas[i] = notFound;
-	count--;
-	return true;
+	else
+		return false;
 }
 
 template <class T>
-TElem<T>& THashTable<T>::Search(string key)
+TElem<T>& THashTable<T>::Search(string _key)
 {
-	int i = Hash(key);
-	while (mas[i].GetKey() != key)
+	unsigned hashvalue = Hash(_key);
+	unsigned start = hashvalue;
+	if (hashvalue > (unsigned)size)
+		return notFound;
+	do 
 	{
-		i = (i + m) % size;
-		if (mas[i] == notFound)
-			break;
+		hashvalue = (hashvalue + m) % size;
+	} while ((mas[hashvalue].GetKey() != _key) && (hashvalue != start));
+	if (mas[hashvalue] != notFound)
+	{
+		return mas[hashvalue];
 	}
-	return mas[i];
+	else
+		return notFound;
 }
 
 template <class T>

@@ -13,7 +13,7 @@ protected:
 	TElemL<T>* next;
 public:
 	TElemL(string _key = "", T _data = 0, TElemL<T> *_next = NULL);
-	TElemL(TElemL &copy);
+	TElemL(TElemL<T> &copy);
 	~TElemL();
 
 	void SetKey(string _key);
@@ -24,8 +24,8 @@ public:
 	void SetNext(TElemL<T> *elem);
 	TElemL<T>* GetNext();
 
-	TElemL<T>& operator=(TElemL &elem);
-	bool operator==(TElemL &elem);
+	TElemL<T>& operator=(TElemL<T> &elem);
+	bool operator==(TElemL<T> &elem);
 	bool operator!=(TElemL<T> &elem);
 
 	friend ostream& operator<<(ostream& out, TElemL<T>& elem)
@@ -47,7 +47,7 @@ TElemL<T>::TElemL(string _key, T _data, TElemL<T> *_next)
 }
 
 template <class T>
-TElemL<T>::TElemL(TElemL &elem)
+TElemL<T>::TElemL(TElemL<T> &elem)
 {
 	key = elem.key;
 	data = elem.data;
@@ -105,7 +105,7 @@ TElemL<T>* TElemL<T>::GetNext()
 }
 
 template <class T>
-TElemL<T>& TElemL<T>::operator=(TElemL &elem)
+TElemL<T>& TElemL<T>::operator=(TElemL<T> &elem)
 {
 	if (this != &elem)
 	{
@@ -117,7 +117,7 @@ TElemL<T>& TElemL<T>::operator=(TElemL &elem)
 }
 
 template <class T>
-bool TElemL<T>::operator==(TElemL &elem)
+bool TElemL<T>::operator==(TElemL<T> &elem)
 {
 	if (key != elem.key)
 		return false;
