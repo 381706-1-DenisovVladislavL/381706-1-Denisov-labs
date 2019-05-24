@@ -35,5 +35,7 @@ script:
   - ./ScanTableTest/ScanTableTest
   - ./SortTable/SortTable
   - ./SortTableTest/SortTableTest
+  - ./HashTable/HashTable
+  - ./HashTableTest/HashTableTest
 notifications:
   email: false
